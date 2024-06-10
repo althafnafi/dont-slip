@@ -15,6 +15,10 @@ enum CollisionMask : UInt32 {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var spawnInterval: TimeInterval = 2.0
+    var lastSpawnTime: TimeInterval = 0
+    var lebarPlatform = UIScreen.main.bounds.width * 0.8
+    
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
@@ -29,18 +33,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let dampingTorqueMult : CGFloat = 0.5
     /* Constants */
     
+    private var greenCube: SKSpriteNode? // the cube (penguin)
+    private var isGreenCubeOnGround = false // Flag to track if the green cube is on the ground
+        
+    
     override func sceneDidLoad() {
         // Setup
         
         self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
-        
         spawnGround()
+        startSpawning()
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
         print("touchDown")
+        makeGreenCubeJump() // call function
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -48,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         print("touchUp \(pos)")
-        spawnPhysicsObject(posClicked: pos)
+        //spawnPhysicsObject(posClicked: pos)
     }
     
     
@@ -121,6 +130,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         // Add the cube to the scene
         self.addChild(greenCube)
+        
+        // Store reference to the greenCube
+        self.greenCube = greenCube
+    }
+    
+    // function to make the cube jump
+    func makeGreenCubeJump() {
+        guard isGreenCubeOnGround, let greenCube = greenCube, let physicsBody = greenCube.physicsBody else {
+            return
+        }
+        
+        // Apply an upward impulse to the green cube
+        let jumpImpulse = CGVector(dx: 0, dy: 25)
+        physicsBody.applyImpulse(jumpImpulse)
+        
+        // Set the flag to false since the cube is now in the air
+        isGreenCubeOnGround = false
     }
     
     func spawnPhysicsObject(posClicked: CGPoint) {
@@ -153,6 +179,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("A: \(contact.bodyA.categoryBitMask), B: \(contact.bodyB.categoryBitMask)")
         print("Contact")
         print("A: \(contact.bodyA.contactTestBitMask), B: \(contact.bodyB.contactTestBitMask)")
+        
+        // Check if the green cube is in contact with the ground
+        if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == groundCategory) ||
+           (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == groundCategory) {
+            isGreenCubeOnGround = true
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        // Check if the green cube is no longer in contact with the ground
+        if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == groundCategory) ||
+           (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == groundCategory) {
+            isGreenCubeOnGround = false
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -169,6 +209,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    }
+    
+    // start to spawn falling obstacles
+    func startSpawning() {
+        let wait = SKAction.wait(forDuration: spawnInterval)
+        let spawn = SKAction.run { [weak self] in
+            self?.spawnObject()
+        }
+        let sequence = SKAction.sequence([wait, spawn])
+        let repeatForever = SKAction.repeatForever(sequence)
+        run(repeatForever)
+    }
+
+    // spawn falling obstacles on random position
+    func spawnObject() {
+        let object = SKSpriteNode(color: .red, size: CGSize(width: 30, height: 30))
+        let xPosition = CGFloat.random(in: -320...lebarPlatform)
+        object.position = CGPoint(x: xPosition, y: self.size.height)
+        object.physicsBody = SKPhysicsBody(rectangleOf: object.size)
+        object.physicsBody?.isDynamic = true
+        object.physicsBody?.categoryBitMask = 0x1 << 0
+        object.physicsBody?.contactTestBitMask = 0x1 << 1
+        addChild(object)
+
+        // Reduce the spawn interval to increase difficulty over time
+        spawnInterval = max(spawnInterval * 0.95, 0.5)
     }
     
     
@@ -189,5 +255,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         self.lastUpdateTime = currentTime
+        
+        // update time for falling obstacles
+        if currentTime - lastSpawnTime > spawnInterval {
+            lastSpawnTime = currentTime
+            spawnObject()
+        }
     }
 }
