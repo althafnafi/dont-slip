@@ -1,6 +1,6 @@
 //
 //  GameScene.swift
-//  dont-slip
+//  nyoba-mini2
 //
 //  Created by Althaf Nafi Anwar on 10/06/24.
 //
@@ -8,7 +8,12 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+enum CollisionMask : UInt32 {
+    case ground = 1
+    case ball   = 2
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -17,61 +22,140 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    /* Constants */
+    private var groundCategory : UInt32 = 0b1 << 0 // 1
+    private var ballCategory : UInt32 = 0b1 << 1 // 2
+    private let restoringTorqueMult : CGFloat = 10.0
+    private let dampingTorqueMult : CGFloat = 0.5
+    /* Constants */
+    
     override func sceneDidLoad() {
-
-        self.lastUpdateTime = 0
+        // Setup
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        self.physicsWorld.contactDelegate = self
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+        spawnGround()
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
+        print("touchDown")
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+        print("touchUp \(pos)")
+        spawnPhysicsObject(posClicked: pos)
+    }
+    
+    
+    func spawnGround() {
+        // Define the anchor node
+        let anchorNode = SKNode()
+        
+        anchorNode.position = CGPoint(x: 0, y: 0)
+        anchorNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height: 1))
+        anchorNode.physicsBody?.isDynamic = false // Anchor node is static
+        
+        // Define the ground node
+        let ground = SKSpriteNode(color: .white, size: CGSize(width: UIScreen.main.bounds.width * 0.8, height: 35))
+        ground.position = CGPoint(x: 0, y: 0) // Middle of the screen
+        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
+        
+        // Set up the physics body properties
+        ground.physicsBody?.isDynamic = true // Allows the ground to move
+        ground.physicsBody?.affectedByGravity = true // Allow the ground to be affected by gravity
+        ground.physicsBody?.allowsRotation = true // Allows the ground to rotate
+        
+        // Set up the category and contact bitmasks
+        ground.physicsBody?.categoryBitMask = groundCategory
+        ground.physicsBody?.contactTestBitMask = ballCategory
+        
+        // Set the restitution (bounciness)
+        ground.physicsBody?.restitution = 0.2
+        ground.physicsBody?.friction = 0
+        
+        // Create a spring joint to allow vertical movement and rotation
+        let springJoint = SKPhysicsJointSpring.joint(withBodyA: anchorNode.physicsBody!, bodyB: ground.physicsBody!, anchorA: anchorNode.position, anchorB: ground.position)
+        springJoint.frequency = 1.8 // Spring frequency
+        springJoint.damping = 0.1 // Spring damping
+        
+        // Add the nodes to the scene
+        self.addChild(anchorNode)
+        self.addChild(ground)
+        
+        // Add the spring joint to the physics world
+        self.physicsWorld.add(springJoint)
+        
+        // Add an action to the ground to apply restoring torque with damping
+        let groundAction = SKAction.repeatForever(SKAction.customAction(withDuration: 0.1) { node, _ in
+            if let physicsBody = node.physicsBody {
+                let currentAngle = physicsBody.node?.zRotation ?? 0
+                let angularVelocity = physicsBody.angularVelocity
+                let restoringTorque = -currentAngle * self.restoringTorqueMult // Increased factor for faster restoration
+                let dampingTorque = -angularVelocity * self.dampingTorqueMult // Damping factor to reduce oscillation
+                physicsBody.applyTorque(restoringTorque + dampingTorque)
+            }
+        })
+        
+        ground.run(groundAction)
+        spawnTestCube(ground: ground)
+    }
+    
+    func spawnTestCube(ground: SKSpriteNode) {
+        // Add a green cube on top of the middle of the ground
+        let cubeSize = CGSize(width: 30, height: 30)
+        let greenCube = SKSpriteNode(color: .green, size: cubeSize)
+        greenCube.position = CGPoint(x: 0, y: ground.position.y + ground.size.height / 2 + cubeSize.height / 2)
+        greenCube.physicsBody = SKPhysicsBody(rectangleOf: cubeSize)
+
+        // Set up the cube's physics body properties
+        greenCube.physicsBody?.isDynamic = true
+        greenCube.physicsBody?.affectedByGravity = true
+        greenCube.physicsBody?.allowsRotation = true
+        
+        greenCube.physicsBody?.collisionBitMask = groundCategory
+
+        // Add the cube to the scene
+        self.addChild(greenCube)
+    }
+    
+    func spawnPhysicsObject(posClicked: CGPoint) {
+        // Define the objec
+        let cubeSize = CGSize(width: 30, height: 30)
+//        let ballRadius : CGFloat = 20
+        let newObject = SKSpriteNode(color: .red, size: cubeSize)
+//        newObject.fillColor = .red
+        newObject.position = posClicked
+        
+        // Add physics properties to the object
+        newObject.physicsBody = SKPhysicsBody(rectangleOf: cubeSize)
+        newObject.physicsBody?.collisionBitMask = groundCategory
+//        newObject.physicsBody?.categoryBitMask = ballCategory
+        
+        // Add object to scene
+        self.addChild(newObject)
+        
+        print("Added a new object")
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        // Will only be triggered if any of below returns a non-zero
+        // bodyA.category AND bodyB.contact
+        // bodyA.contact AND bodyB.category
+        print("---")
+        print("Collision")
+        print("A: \(contact.bodyA.collisionBitMask), B: \(contact.bodyB.collisionBitMask)")
+        print("Category")
+        print("A: \(contact.bodyA.categoryBitMask), B: \(contact.bodyB.categoryBitMask)")
+        print("Contact")
+        print("A: \(contact.bodyA.contactTestBitMask), B: \(contact.bodyB.contactTestBitMask)")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
