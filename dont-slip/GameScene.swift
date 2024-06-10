@@ -36,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var greenCube: SKSpriteNode? // the cube (penguin)
     private var isGreenCubeOnGround = false // Flag to track if the green cube is on the ground
         
+    private var gameOver: Bool = false
     
     override func sceneDidLoad() {
         // Setup
@@ -196,7 +197,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        if gameOver {
+            for t in touches {
+                let location = t.location(in: self)
+                let nodes = self.nodes(at: location)
+                if nodes.contains(where: { $0.name == "restartButton" }) {
+                    restartGame()
+                    return
+                }
+            }
+        } else {
+            for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -224,6 +236,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // spawn falling obstacles on random position
     func spawnObject() {
+        if gameOver {
+            return  // Stop spawning new objects
+        }
+        
         let object = SKSpriteNode(color: .red, size: CGSize(width: 30, height: 30))
         let xPosition = CGFloat.random(in: -320...lebarPlatform)
         object.position = CGPoint(x: xPosition, y: self.size.height)
@@ -237,29 +253,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spawnInterval = max(spawnInterval * 0.95, 0.5)
     }
     
+    func checkGameOver() {
+        guard let greenCube = greenCube else { return }
+        if greenCube.position.y < -self.size.height / 2 { // Check if cube is below the visible screen
+            gameOver = true
+            showRestartButton()
+        }
+    }
+
+    func showRestartButton() {
+        if let symbolImage = UIImage(systemName: "arrow.counterclockwise.circle") {
+                let texture = SKTexture(image: symbolImage)
+                let restartButton = SKSpriteNode(texture: texture)
+                restartButton.color = SKColor.label  // Optional: if you want to apply tint color
+                restartButton.size = CGSize(width: 60, height: 60)  // Adjust size as needed
+                restartButton.position = CGPoint(x: 0, y: 0)
+                restartButton.name = "restartButton"
+                self.addChild(restartButton)
+            } else {
+                print("Failed to create the SF Symbol image")
+            }
+    }
+
+    
+    func restartGame() {
+        self.removeAllChildren()
+        self.removeAllActions()
+        gameOver = false
+        sceneDidLoad() // Reinitialize the scene setup
+    }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        // Check game over state before running update logic
+        if gameOver {
+            return
+        }
         
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
+        if self.lastUpdateTime == 0 {
             self.lastUpdateTime = currentTime
         }
         
-        // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
-        
-        // Update entities
         for entity in self.entities {
             entity.update(deltaTime: dt)
         }
         
         self.lastUpdateTime = currentTime
         
-        // update time for falling obstacles
         if currentTime - lastSpawnTime > spawnInterval {
             lastSpawnTime = currentTime
             spawnObject()
         }
+        
+        checkGameOver()
     }
 }
