@@ -11,6 +11,7 @@ import GameplayKit
 enum CollisionMask : UInt32 {
     case ground = 1
     case ball   = 2
+    case coin = 4
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -26,17 +27,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    private var currentActiveCoins: Int = 0
+    
     /* Constants */
-    private var groundCategory : UInt32 = 0b1 << 0 // 1
-    private var ballCategory : UInt32 = 0b1 << 1 // 2
-    private let restoringTorqueMult : CGFloat = 10.0
-    private let dampingTorqueMult : CGFloat = 0.5
+    private var groundCategory: UInt32 = 0b1 << 0 // 1
+    private var ballCategory: UInt32 = 0b1 << 1 // 2
+    private var coinCategory: UInt32 = 0b1 << 2 // 4
+
+    private let restoringTorqueMult: CGFloat = 10.0
+    private let dampingTorqueMult: CGFloat = 0.5
+    private var gravMult: CGFloat = 1
     /* Constants */
     
     private var accelerometerManager: AccelerometerManager?
     private var greenCube: SKSpriteNode? // the cube (penguin)
     private var isGreenCubeOnGround = false // Flag to track if the green cube is on the ground
     
+    private var pointsLabel: SKLabelNode! // Label to display points
+    private var points: Int = 0
+
+    private var coinsLabel : SKLabelNode!
+    private var coinsCollected: Int = 0
+
         
     private var gameOver: Bool = false
     
@@ -47,6 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         spawnGround()
         startSpawning()
+        setupPointsLabel()
     }
     
     
@@ -192,6 +205,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
            (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == groundCategory) {
             isGreenCubeOnGround = true
         }
+        
+        // Check if the green cube is in contact with a coin
+        if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == coinCategory) ||
+           (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == coinCategory) {
+            if let coin = contact.bodyA.node == greenCube ? contact.bodyB.node : contact.bodyA.node {
+                coin.removeFromParent() // Remove the coin from the scene
+                currentActiveCoins -= 1
+                coinsCollected += 1
+                print("Coin collected!")
+                updatePointsLabel()
+            }
+        }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
@@ -234,6 +259,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let wait = SKAction.wait(forDuration: spawnInterval)
         let spawn = SKAction.run { [weak self] in
             self?.spawnObject()
+            self?.spawnCoin()
         }
         let sequence = SKAction.sequence([wait, spawn])
         let repeatForever = SKAction.repeatForever(sequence)
@@ -263,22 +289,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let greenCube = greenCube else { return }
         if greenCube.position.y < -self.size.height / 2 { // Check if cube is below the visible screen
             gameOver = true
+            currentActiveCoins = 0
+            coinsCollected = 0
             showRestartButton()
         }
     }
 
     func showRestartButton() {
         if let symbolImage = UIImage(systemName: "arrow.counterclockwise.circle") {
-                let texture = SKTexture(image: symbolImage)
-                let restartButton = SKSpriteNode(texture: texture)
-                restartButton.color = SKColor.label  // Optional: if you want to apply tint color
-                restartButton.size = CGSize(width: 60, height: 60)  // Adjust size as needed
-                restartButton.position = CGPoint(x: 0, y: 0)
-                restartButton.name = "restartButton"
-                self.addChild(restartButton)
-            } else {
-                print("Failed to create the SF Symbol image")
-            }
+            let texture = SKTexture(image: symbolImage)
+            let restartButton = SKSpriteNode(texture: texture)
+            restartButton.color = .red // Optional: if you want to apply tint color
+            restartButton.size = CGSize(width: 60, height: 60) // Adjust size as needed
+            restartButton.position = CGPoint(x: 0, y: 0)
+            restartButton.name = "restartButton"
+            self.addChild(restartButton)
+        } else {
+            print("Failed to create the SF Symbol image")
+        }
     }
 
     
@@ -309,9 +337,53 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if currentTime - lastSpawnTime > spawnInterval {
             lastSpawnTime = currentTime
             spawnObject()
+            spawnCoin() // Add this line to ensure coins spawn during the update cycle
         }
         
         checkGameOver()
+    }
+    
+    // Function to spawn a coin (gold box)
+    func spawnCoin() {
+        if gameOver || currentActiveCoins >= 2 {
+            return // Stop spawning new objects
+        }
+
+        let coin = SKSpriteNode(color: .yellow, size: CGSize(width: 20, height: 20))
+        let xPosition = CGFloat.random(in: -lebarPlatform / 2.5...lebarPlatform/2.5)
+        let yPosition = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
+        coin.position = CGPoint(x: xPosition, y: yPosition)
+
+        coin.physicsBody = SKPhysicsBody(rectangleOf: coin.size)
+        coin.physicsBody?.isDynamic = false
+        coin.physicsBody?.affectedByGravity = false // Coin will float
+        coin.physicsBody?.categoryBitMask = coinCategory
+        coin.physicsBody?.contactTestBitMask = ballCategory
+
+        addChild(coin)
+        currentActiveCoins += 1
+
+        // Add "breathing" animation
+        let scaleUp = SKAction.scale(to: 1.5, duration: 1)
+        let scaleDown = SKAction.scale(to: 1.0, duration: 1.5)
+        let breathingAnimation = SKAction.repeatForever(SKAction.sequence([scaleUp, scaleDown]))
+        coin.run(breathingAnimation)
+    }
+    
+    func setupPointsLabel() {
+        pointsLabel = SKLabelNode(text: "Coins: \(self.coinsCollected)")
+        pointsLabel.fontSize = 48
+        pointsLabel.fontColor = .white
+        pointsLabel.horizontalAlignmentMode = .center
+        pointsLabel.verticalAlignmentMode = .top
+        pointsLabel.position = CGPoint(x: 0, y: -100)
+        pointsLabel.zPosition = 100
+
+        addChild(pointsLabel)
+    }
+
+    func updatePointsLabel() {
+        pointsLabel.text = "Coins: \(self.coinsCollected)"
     }
 }
 
