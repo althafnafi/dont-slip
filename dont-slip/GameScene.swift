@@ -12,6 +12,7 @@ enum CollisionMask : UInt32 {
     case ground = 1
     case ball   = 2
     case coin = 4
+    case obstacle = 8
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -19,6 +20,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spawnInterval: TimeInterval = 2.0
     var lastSpawnTime: TimeInterval = 0
     var lebarPlatform = UIScreen.main.bounds.width * 0.8
+    
+    private var curTime : TimeInterval = 0
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -28,6 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var spinnyNode : SKShapeNode?
     
     private var currentActiveCoins: Int = 0
+    private var startTime : TimeInterval = 0
     
     /* Constants */
     private var groundCategory: UInt32 = 0b1 << 0 // 1
@@ -59,6 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         spawnGround()
         startSpawning()
+        setupCoinsLabel()
         setupPointsLabel()
     }
     
@@ -150,8 +155,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Store reference to the greenCube
         self.greenCube = greenCube
         
-        self.accelerometerManager = AccelerometerManager(node: greenCube, sensitivity: 200)
-        self.accelerometerManager?.startAccelerometerUpdates()
+        self.accelerometerManager = AccelerometerManager(node: greenCube, sensitivity: 500)
+//        self.accelerometerManager?.startAccelerometerUpdates() 
     }
     
     // function to make the cube jump
@@ -192,19 +197,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Will only be triggered if any of below returns a non-zero
         // bodyA.category AND bodyB.contact
         // bodyA.contact AND bodyB.category
-        print("---")
-        print("Collision")
-        print("A: \(contact.bodyA.collisionBitMask), B: \(contact.bodyB.collisionBitMask)")
-        print("Category")
-        print("A: \(contact.bodyA.categoryBitMask), B: \(contact.bodyB.categoryBitMask)")
-        print("Contact")
-        print("A: \(contact.bodyA.contactTestBitMask), B: \(contact.bodyB.contactTestBitMask)")
+//        print("---")
+//        print("Collision")
+//        print("A: \(contact.bodyA.collisionBitMask), B: \(contact.bodyB.collisionBitMask)")
+//        print("Category")
+//        print("A: \(contact.bodyA.categoryBitMask), B: \(contact.bodyB.categoryBitMask)")
+//        print("Contact")
+//        print("A: \(contact.bodyA.contactTestBitMask), B: \(contact.bodyB.contactTestBitMask)")
         
         // Check if the green cube is in contact with the ground
         if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == groundCategory) ||
            (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == groundCategory) {
+            print("col 1")
             isGreenCubeOnGround = true
+//            accelerometerManager?.startAccelerometerUpdates()
         }
+        
+        if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == groundCategory) ||
+           (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == groundCategory) {
+//            isGreenCubeOnGround = true
+            accelerometerManager?.startAccelerometerUpdates()
+        }
+//        
+//        if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == groundCategory) ||
+//           (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == groundCategory) {
+//            
+//        }
         
         // Check if the green cube is in contact with a coin
         if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == coinCategory) ||
@@ -214,10 +232,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 currentActiveCoins -= 1
                 coinsCollected += 1
                 print("Coin collected!")
-                updatePointsLabel()
+                updateCoinsLabel()
             }
         }
     }
+
     
     func didEnd(_ contact: SKPhysicsContact) {
         // Check if the green cube is no longer in contact with the ground
@@ -233,6 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let location = t.location(in: self)
                 let nodes = self.nodes(at: location)
                 if nodes.contains(where: { $0.name == "restartButton" }) {
+                    startTime = curTime
                     restartGame()
                     return
                 }
@@ -277,12 +297,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         object.position = CGPoint(x: xPosition, y: self.size.height)
         object.physicsBody = SKPhysicsBody(rectangleOf: object.size)
         object.physicsBody?.isDynamic = true
-        object.physicsBody?.categoryBitMask = 0x1 << 0
-        object.physicsBody?.contactTestBitMask = 0x1 << 1
+//        object.physicsBody?.collisionBitMask =
+        object.physicsBody?.collisionBitMask = groundCategory
+//        object.physicsBody?.contactTestBitMask =
         addChild(object)
 
         // Reduce the spawn interval to increase difficulty over time
-        spawnInterval = max(spawnInterval * 0.95, 0.5)
+        spawnInterval = max(spawnInterval * 0.70, 0.5)
     }
     
     func checkGameOver() {
@@ -291,6 +312,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver = true
             currentActiveCoins = 0
             coinsCollected = 0
+            
             showRestartButton()
         }
     }
@@ -318,6 +340,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        curTime = currentTime
         // Check game over state before running update logic
         if gameOver {
             return
@@ -334,11 +357,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = currentTime
         
+        points = Int(currentTime - startTime)
+        updatePointsLabel()
+        
         if currentTime - lastSpawnTime > spawnInterval {
             lastSpawnTime = currentTime
             spawnObject()
             spawnCoin() // Add this line to ensure coins spawn during the update cycle
         }
+        
         
         checkGameOver()
     }
@@ -370,20 +397,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         coin.run(breathingAnimation)
     }
     
+    func setupCoinsLabel() {
+        coinsLabel = SKLabelNode(text: "Coins: \(self.coinsCollected)")
+        coinsLabel.fontSize = 48
+        coinsLabel.fontColor = .white
+        coinsLabel.horizontalAlignmentMode = .center
+        coinsLabel.verticalAlignmentMode = .top
+        coinsLabel.position = CGPoint(x: 0, y: -100)
+        coinsLabel.zPosition = 100
+
+        addChild(coinsLabel)
+    }
+
+    func updateCoinsLabel() {
+        coinsLabel.text = "Coins: \(self.coinsCollected)"
+    }
+    
     func setupPointsLabel() {
-        pointsLabel = SKLabelNode(text: "Coins: \(self.coinsCollected)")
+        pointsLabel = SKLabelNode(text: "Points: \(self.points)")
         pointsLabel.fontSize = 48
         pointsLabel.fontColor = .white
         pointsLabel.horizontalAlignmentMode = .center
         pointsLabel.verticalAlignmentMode = .top
-        pointsLabel.position = CGPoint(x: 0, y: -100)
-        pointsLabel.zPosition = 100
+        pointsLabel.position = CGPoint(x: 0, y: 200)
+        pointsLabel.zPosition = 110
 
         addChild(pointsLabel)
     }
 
     func updatePointsLabel() {
-        pointsLabel.text = "Coins: \(self.coinsCollected)"
+        pointsLabel.text = "Points: \(self.points)"
     }
 }
 

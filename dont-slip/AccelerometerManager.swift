@@ -23,37 +23,46 @@ class AccelerometerManager {
         self.motionManager = CMMotionManager()
     }
 
-    func startAccelerometerUpdates() {
+    func startAccelerometerUpdates(multiplier: CGFloat = 1) {
         if motionManager.isAccelerometerAvailable {
             motionManager.accelerometerUpdateInterval = 0.1
             motionManager.startAccelerometerUpdates(to: .main) { [weak self] (data, error) in
                 guard let self = self, let data = data else { return }
-                self.handleAccelerometerData(data)
+                self.handleAccelerometerData(data, multiplier: multiplier)
             }
         }
     }
 
-    private func handleAccelerometerData(_ data: CMAccelerometerData) {
-        var updatedAcceleration: CMAcceleration
+    private func handleAccelerometerData(_ data: CMAccelerometerData, multiplier: CGFloat = 1) {
+//        var updatedAcceleration: CMAcceleration
         
         // Determine device orientation
-        let deviceOrientation = UIDevice.current.orientation
+//        let deviceOrientation = UIDevice.current.orientation
         
         // Adjust or negate acceleration based on orientation
-        switch deviceOrientation {
-        case .landscapeLeft:
-            updatedAcceleration = CMAcceleration(x: -data.acceleration.y, y: data.acceleration.x, z: data.acceleration.z)
-        case .landscapeRight:
-            updatedAcceleration = CMAcceleration(x: data.acceleration.y, y: -data.acceleration.x, z: data.acceleration.z)
-        default:
-            updatedAcceleration = data.acceleration
-        }
+//        switch deviceOrientation {
+//        case .landscapeLeft:
+//            print("lright")
+//            updatedAcceleration = CMAcceleration(x: -data.acceleration.y, y: data.acceleration.x, z: data.acceleration.z)
+//        case .landscapeRight:
+//            print("lleft")
+//            updatedAcceleration = CMAcceleration(x: data.acceleration.y, y: -data.acceleration.x, z: data.acceleration.z)
+//        default:
+//            print("selain")
+//            updatedAcceleration = data.acceleration
+//        }
+        
+        let updatedAcceleration = CMAcceleration(x: -data.acceleration.y, y: data.acceleration.x, z: data.acceleration.z)
         
         self.acceleration = updatedAcceleration
+//        print("update accelero")
         
         // Apply force to the green cube based on the adjusted or negated accelerometer data
         if let greenCube = node {
-            greenCube.physicsBody?.applyForce(CGVector(dx: CGFloat(updatedAcceleration.x) * sensitivity, dy: 0))
+//            print(greenCube.physicsBody?.velocity)
+            
+            greenCube.physicsBody?.applyForce(CGVector(dx: CGFloat(updatedAcceleration.x) * multiplier * sensitivity, dy: 0))
+            greenCube.physicsBody?.velocity.dx = CGFloat(updatedAcceleration.x) * sensitivity * multiplier  // Adjust the multiplier to change sensitivity
         }
     }
 
