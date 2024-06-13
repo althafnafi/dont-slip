@@ -13,12 +13,10 @@ import CoreMotion
 class AccelerometerManager {
     private var motionManager: CMMotionManager
     private var sensitivity: CGFloat
-    weak var node: SKSpriteNode?
     
     var acceleration: CMAcceleration? // Store the latest accelerometer data
     
-    init(node: SKSpriteNode?, sensitivity: CGFloat = 250.0) {
-        self.node = node
+    init(sensitivity: CGFloat = 250.0) {
         self.sensitivity = sensitivity
         self.motionManager = CMMotionManager()
     }
@@ -26,14 +24,26 @@ class AccelerometerManager {
     func startAccelerometerUpdates(multiplier: CGFloat = 1) {
         if motionManager.isAccelerometerAvailable {
             motionManager.accelerometerUpdateInterval = 0.1
+            
             motionManager.startAccelerometerUpdates(to: .main) { [weak self] (data, error) in
                 guard let self = self, let data = data else { return }
                 self.handleAccelerometerData(data, multiplier: multiplier)
             }
         }
     }
+    
+    func getAdjustedAccelData() -> CMAcceleration? {
+        guard let accel = acceleration else {
+            print("getAdjustedAccelData: error getting acceleration")
+            return nil
+            
+        }
+        return CMAcceleration(x: accel.x * sensitivity, y: accel.y * sensitivity, z: accel.z * sensitivity)
+    }
+    
 
     private func handleAccelerometerData(_ data: CMAccelerometerData, multiplier: CGFloat = 1) {
+        sensitivity = sensitivity * multiplier
 //        var updatedAcceleration: CMAcceleration
         
         // Determine device orientation
@@ -53,17 +63,7 @@ class AccelerometerManager {
 //        }
         
         let updatedAcceleration = CMAcceleration(x: -data.acceleration.y, y: data.acceleration.x, z: data.acceleration.z)
-        
         self.acceleration = updatedAcceleration
-//        print("update accelero")
-        
-        // Apply force to the green cube based on the adjusted or negated accelerometer data
-        if let greenCube = node {
-//            print(greenCube.physicsBody?.velocity)
-            
-            greenCube.physicsBody?.applyForce(CGVector(dx: CGFloat(updatedAcceleration.x) * multiplier * sensitivity, dy: 0))
-            greenCube.physicsBody?.velocity.dx = CGFloat(updatedAcceleration.x) * sensitivity * multiplier  // Adjust the multiplier to change sensitivity
-        }
     }
 
 }
