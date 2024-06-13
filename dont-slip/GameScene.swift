@@ -11,6 +11,7 @@ enum CollisionMask: UInt32 {
     case ground = 1
     case ball = 2
     case coin = 4
+    case object = 8
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -49,15 +50,84 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     private var gameOver: Bool = false
     
+    // Scoring
+    private var score: Int = 0
+    private var highScore: Int = 0
+    private var scoreLabel: SKLabelNode!
+    private var highScoreLabel: SKLabelNode!
+    
+    private var totalCoins: Int = 0
+    private var totalCoinsLabel: SKLabelNode!
+    
+    func saveHighScore() {
+        UserDefaults.standard.set(highScore, forKey: "HighScore")
+    }
+
+    func loadHighScore() {
+        highScore = UserDefaults.standard.integer(forKey: "HighScore")
+    }
+    
+    func saveCoins(){
+        UserDefaults.standard.set(totalCoins, forKey: "TotalCoins")
+    }
+    
+    func loadCoins(){
+        totalCoins = UserDefaults.standard.integer(forKey: "TotalCoins")
+    }
+
+    func setupScoreLabels() {
+        // Setup Score Label
+        scoreLabel = SKLabelNode(text: "Score: \(score)")
+        scoreLabel.fontSize = 48
+        scoreLabel.fontColor = .white
+        scoreLabel.horizontalAlignmentMode = .center
+        scoreLabel.verticalAlignmentMode = .top
+        scoreLabel.position = CGPoint(x: 0, y: self.size.height / 2 - 100)
+        scoreLabel.zPosition = 100
+        addChild(scoreLabel)
+        
+        // Setup High Score Label
+        highScoreLabel = SKLabelNode(text: "High Score: \(highScore)")
+        highScoreLabel.fontSize = 48
+        highScoreLabel.fontColor = .yellow
+        highScoreLabel.horizontalAlignmentMode = .center
+        highScoreLabel.verticalAlignmentMode = .top
+        highScoreLabel.position = CGPoint(x: 0, y: self.size.height / 2 - 150)
+        highScoreLabel.zPosition = 100
+        addChild(highScoreLabel)
+    }
+    
+    func incrementScore() {
+        score += 1
+        scoreLabel.text = "Score: \(score)"
+    }
+
+    
+    func startScoreTimer() {
+        let wait = SKAction.wait(forDuration: 1.0)
+        let incrementScore = SKAction.run { [weak self] in
+            self?.incrementScore()
+        }
+        let sequence = SKAction.sequence([wait, incrementScore])
+        let repeatForever = SKAction.repeatForever(sequence)
+        run(repeatForever, withKey: "scoreTimer")
+    }
+
+
+    
     override func sceneDidLoad() {
         // Setup
-        
         self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8 * gravMult)
-        spawnGround()
-        startSpawning()
+        loadHighScore() // Load high score
+        loadCoins()
         setupPointsLabel()
+        setupScoreLabels() // Setup score labels
+        startSpawning()
+        startScoreTimer() // Start the score timer
+        spawnGround()
     }
+
     
     
     func touchDown(atPoint pos: CGPoint) {
@@ -95,6 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Set up the category and contact bitmasks
         ground.physicsBody?.categoryBitMask = groundCategory
         ground.physicsBody?.contactTestBitMask = ballCategory
+        ground.physicsBody?.collisionBitMask = ballCategory | CollisionMask.object.rawValue
         
         // Set the restitution (bounciness)
         ground.physicsBody?.restitution = 0.2
@@ -140,6 +211,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         greenCube.physicsBody?.allowsRotation = false
         
         greenCube.physicsBody?.collisionBitMask = groundCategory
+        greenCube.physicsBody?.categoryBitMask = ballCategory
+        greenCube.physicsBody?.contactTestBitMask = groundCategory
 
         // Add the cube to the scene
         self.addChild(greenCube)
@@ -162,21 +235,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isGreenCubeOnGround = false
     }
     
-    func spawnPhysicsObject(posClicked: CGPoint) {
-        // Define the objec
-        let cubeSize = CGSize(width: 30, height: 30)
-        let newObject = SKSpriteNode(color: .red, size: cubeSize)
-        newObject.position = posClicked
-        
-        // Add physics properties to the object
-        newObject.physicsBody = SKPhysicsBody(rectangleOf: cubeSize)
-        newObject.physicsBody?.collisionBitMask = groundCategory
-        
-        // Add object to scene
-        self.addChild(newObject)
-        
-        print("Added a new object")
-    }
+//    func spawnPhysicsObject(posClicked: CGPoint) {
+//        // Define the objec
+//        let cubeSize = CGSize(width: 30, height: 30)
+//        let newObject = SKSpriteNode(color: .red, size: cubeSize)
+//        newObject.position = posClicked
+//        
+//        // Add physics properties to the object
+//        newObject.physicsBody = SKPhysicsBody(rectangleOf: cubeSize)
+//        newObject.physicsBody?.collisionBitMask = groundCategory
+//        
+//        // Add object to scene
+//        self.addChild(newObject)
+//        
+//        print("Added a new object")
+//    }
     
     func didBegin(_ contact: SKPhysicsContact) {
         // Will only be triggered if any of below returns a non-zero
@@ -267,8 +340,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         object.position = CGPoint(x: xPosition, y: self.size.height)
         object.physicsBody = SKPhysicsBody(rectangleOf: object.size)
         object.physicsBody?.isDynamic = true
-        object.physicsBody?.categoryBitMask = 0x1 << 0
-        object.physicsBody?.contactTestBitMask = 0x1 << 1
+        object.physicsBody?.categoryBitMask = CollisionMask.object.rawValue
+        object.physicsBody?.contactTestBitMask = CollisionMask.ball.rawValue
+        object.physicsBody?.collisionBitMask = groundCategory | ballCategory | CollisionMask.object.rawValue
         addChild(object)
 
         // Reduce the spawn interval to increase difficulty over time
@@ -291,6 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         coin.physicsBody?.affectedByGravity = false // Coin will float
         coin.physicsBody?.categoryBitMask = coinCategory
         coin.physicsBody?.contactTestBitMask = ballCategory
+        coin.physicsBody?.collisionBitMask = 0
         
         addChild(coin)
         currentActiveCoins += 1
@@ -307,11 +382,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let greenCube = greenCube else { return }
         if greenCube.position.y < -self.size.height / 2 { // Check if cube is below the visible screen
             gameOver = true
+            totalCoins += coinsCollected
+            saveCoins()
             currentActiveCoins = 0
             coinsCollected = 0
+            
+            // Stop the score timer
+            removeAction(forKey: "scoreTimer")
+            
+            // Check and update high score
+            if score > highScore {
+                highScore = score
+                saveHighScore()
+            }
             showRestartButton()
         }
     }
+
 
     func showRestartButton() {
         if let symbolImage = UIImage(systemName: "arrow.counterclockwise.circle") {
@@ -332,6 +419,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeAllChildren()
         self.removeAllActions()
         gameOver = false
+        score = 0
         sceneDidLoad() // Reinitialize the scene setup
     }
     
@@ -372,6 +460,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pointsLabel.zPosition = 100
         
         addChild(pointsLabel)
+        
+        // Setup Total Coin Label
+        totalCoinsLabel = SKLabelNode(text: "Total Coins: \(totalCoins)")
+        totalCoinsLabel.fontSize = 48
+        totalCoinsLabel.fontColor = .yellow
+        totalCoinsLabel.horizontalAlignmentMode = .center
+        totalCoinsLabel.verticalAlignmentMode = .top
+        totalCoinsLabel.position = CGPoint(x: 0, y: -150)
+        totalCoinsLabel.zPosition = 100
+        
+        addChild(totalCoinsLabel)
     }
     
     func updatePointsLabel() {
