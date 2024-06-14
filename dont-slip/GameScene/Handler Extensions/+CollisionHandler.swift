@@ -30,10 +30,10 @@ extension GameScene {
         if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == CollisionMask.coin.rawValue) ||
             (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == CollisionMask.coin.rawValue) {
             if let coin = contact.bodyA.node == greenCube ? contact.bodyB.node : contact.bodyA.node {
+                
                 coin.removeFromParent() // Remove the coin from the scene
                 currentActiveCoins -= 1
                 coinsCollected += 1
-//                print("Coin collected!")
                 updatePointsLabel()
             }
         }

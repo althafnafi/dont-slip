@@ -64,6 +64,7 @@ extension GameScene {
         
         currentActiveCoins += 1
         
+        // TODO: Add breathing animation
         // Add "breathing" animation
         //        let scaleUp = SKAction.scale(to: 1.5, duration: 1)
         //        let scaleDown = SKAction.scale(to: 1.0, duration: 1.5)

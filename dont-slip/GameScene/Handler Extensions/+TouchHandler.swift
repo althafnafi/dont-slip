@@ -37,6 +37,7 @@ extension GameScene {
                 let location = t.location(in: self)
                 let nodes = self.nodes(at: location)
                 if nodes.contains(where: { $0.name == "restartButton" }) {
+                    resetTimers()
                     startTime = curTime
                     restartGame()
                     return

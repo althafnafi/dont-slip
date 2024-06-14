@@ -75,7 +75,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var totalCoins: Int = 0
     var totalCoinsLabel: SKLabelNode!
-    
 
     var greenCube: SKSpriteNode? // the cube (penguin)
     
@@ -90,22 +89,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        setupEntities()
         
         loadHighScore() // Load high score
+        
         loadCoins()
+        
         setupPointsLabel()
+        
         setupScoreLabels() // Setup score labels
+        
         startScoreTimer() // Start the score timer
-        spawnGround()
+        
+//        spawnGround()
+        setupEntities()
         
 
     }
-     
+    
     // MARK: Setting up entities
-    func setupEntities(ground: SKSpriteNode) {
+    func setupEntities() {
         // Define EntityManager
         entityManager = EntityManager(scene: self)
         
+        /* Iceberg setup */
+        // Define the iceberg entity
+        let iceberg = Iceberg(imageName: "iceberg",  entityManager: entityManager)
+        // Add with entity manager
+        entityManager.add(iceberg)
+        
         /* Penguin: Pinjing Setup */
-        let penguin = Penguin(imageName: "penguin", accelerometerManager: accelerometerManager, groundNode: ground)
+        let penguin = Penguin(
+            imageName: "penguin",
+            accelerometerManager: accelerometerManager,
+            groundNode: iceberg.component(ofType: SpriteComponent.self)?.node
+        )
+        
         if let spriteComponent = penguin.component(ofType: SpriteComponent.self) {
             self.greenCube = spriteComponent.node
         }
@@ -135,60 +151,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return nil
     }
     
-    
-    func spawnGround() {
-        // Define the anchor node
-        let anchorNode = SKNode()
-        
-        anchorNode.position = CGPoint(x: 0, y: 0)
-        anchorNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height: 1))
-        anchorNode.physicsBody?.isDynamic = false // Anchor node is static
-        
-        // Define the ground node
-        let ground = SKSpriteNode(color: .white, size: CGSize(width: UIScreen.main.bounds.width * 0.9, height: 35))
-        ground.position = CGPoint(x: 0, y: 0) // Middle of the screen
-        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
-        
-        // Set up the physics body properties
-        ground.physicsBody?.isDynamic = true // Allows the ground to move
-        ground.physicsBody?.affectedByGravity = true // Allow the ground to be affected by gravity
-        ground.physicsBody?.allowsRotation = true // Allows the ground to rotate
-        
-        // Set up the category and contact bitmasks
-        ground.physicsBody?.categoryBitMask = CollisionMask.ground.rawValue
-        ground.physicsBody?.contactTestBitMask = CollisionMask.coin.rawValue
-        ground.physicsBody?.collisionBitMask = CollisionMask.ball.rawValue | CollisionMask.object.rawValue
-        
-        // Set the restitution (bounciness)
-        ground.physicsBody?.restitution = 0.2
-        ground.physicsBody?.friction = 0
-        
-        // Create a spring joint to allow vertical movement and rotation
-        let springJoint = SKPhysicsJointSpring.joint(withBodyA: anchorNode.physicsBody!, bodyB: ground.physicsBody!, anchorA: anchorNode.position, anchorB: ground.position)
-        springJoint.frequency = 1.8 // Spring frequency
-        springJoint.damping = 0.1 // Spring damping
-        
-        // Add the nodes to the scene
-        self.addChild(anchorNode)
-        self.addChild(ground)
-        
-        // Add the spring joint to the physics world
-        self.physicsWorld.add(springJoint)
-        
-        // Add an action to the ground to apply restoring torque with damping
-        let groundAction = SKAction.repeatForever(SKAction.customAction(withDuration: 0.1) { node, _ in
-            if let physicsBody = node.physicsBody {
-                let currentAngle = physicsBody.node?.zRotation ?? 0
-                let angularVelocity = physicsBody.angularVelocity
-                let restoringTorque = -currentAngle * self.restoringTorqueMult // Increased factor for faster restoration
-                let dampingTorque = -angularVelocity * self.dampingTorqueMult // Damping factor to reduce oscillation
-                physicsBody.applyTorque(restoringTorque + dampingTorque)
-            }
-        })
-        
-        ground.run(groundAction)
-        setupEntities(ground: ground)
-    }
+//    
+//    func spawnGround() {
+//        // Define the anchor node
+//        let anchorNode = SKNode()
+//        
+//        anchorNode.position = CGPoint(x: 0, y: 0)
+//        anchorNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height: 1))
+//        anchorNode.physicsBody?.isDynamic = false // Anchor node is static
+//        
+//        // Define the ground node
+//        let ground = SKSpriteNode(color: .white, size: CGSize(width: UIScreen.main.bounds.width * 0.9, height: 35))
+//        ground.position = CGPoint(x: 0, y: 0) // Middle of the screen
+//        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
+//        
+//        // Set up the physics body properties
+//        ground.physicsBody?.isDynamic = true // Allows the ground to move
+//        ground.physicsBody?.affectedByGravity = true // Allow the ground to be affected by gravity
+//        ground.physicsBody?.allowsRotation = true // Allows the ground to rotate
+//        
+//        // Set up the category and contact bitmasks
+//        ground.physicsBody?.categoryBitMask = CollisionMask.ground.rawValue
+//        ground.physicsBody?.contactTestBitMask = CollisionMask.coin.rawValue
+//        ground.physicsBody?.collisionBitMask = CollisionMask.ball.rawValue | CollisionMask.object.rawValue
+//        
+//        // Set the restitution (bounciness)
+//        ground.physicsBody?.restitution = 0.2
+//        ground.physicsBody?.friction = 0
+//        
+//        // Create a spring joint to allow vertical movement and rotation
+//        let springJoint = SKPhysicsJointSpring.joint(withBodyA: anchorNode.physicsBody!, bodyB: ground.physicsBody!, anchorA: anchorNode.position, anchorB: ground.position)
+//        springJoint.frequency = 1.8 // Spring frequency
+//        springJoint.damping = 0.1 // Spring damping
+//        
+//        // Add the nodes to the scene
+//        self.addChild(anchorNode)
+//        self.addChild(ground)
+//        
+//        // Add the spring joint to the physics world
+//        self.physicsWorld.add(springJoint)
+//        
+//        // Add an action to the ground to apply restoring torque with damping
+//        let groundAction = SKAction.repeatForever(SKAction.customAction(withDuration: 0.1) { node, _ in
+//            if let physicsBody = node.physicsBody {
+//                let currentAngle = physicsBody.node?.zRotation ?? 0
+//                let angularVelocity = physicsBody.angularVelocity
+//                let restoringTorque = -currentAngle * self.restoringTorqueMult // Increased factor for faster restoration
+//                let dampingTorque = -angularVelocity * self.dampingTorqueMult // Damping factor to reduce oscillation
+//                physicsBody.applyTorque(restoringTorque + dampingTorque)
+//            }
+//        })
+//        
+//        ground.run(groundAction)
+//        setupEntities()
+//    }
 
     func checkGameOver() {
         guard let greenCube = greenCube else { return }
@@ -261,5 +277,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         checkGameOver()
     }
     
-    
+   func resetTimers() {
+       spawnInterval = 2.0
+       obstacleSpawnInterval = 2.0
+       coinSpawnInterval = 2.0
+       }
 }

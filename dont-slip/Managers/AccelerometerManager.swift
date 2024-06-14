@@ -44,6 +44,7 @@ class AccelerometerManager {
 
     private func handleAccelerometerData(_ data: CMAccelerometerData, multiplier: CGFloat = 1) {
         sensitivity = sensitivity * multiplier
+        // TODO: Handle device orientation (landscape)
 //        var updatedAcceleration: CMAcceleration
         
         // Determine device orientation

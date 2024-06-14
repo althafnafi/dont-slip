@@ -34,27 +34,31 @@ class Obstacle: GKEntity {
         self.type = type
         super.init()
         
-        // Add sprite/texture component
+        // 1. Add sprite/texture component
         // TODO: Ganti jadi make gambar
         let spriteComponent = SpriteComponent(node: SKSpriteNode(color: .red, size: CGSize(width: 30, height: 30)))
 //        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: type.imageName))
         spriteComponent.setPos(pos: spawnPos)
         addComponent(spriteComponent)
         
-        // Add physics component
+        // 2. Add physics component
         // based on obstacle type
         addComponent(PhysicsComponent(node: spriteComponent.node, body: getObstaclePhysics(size: spriteComponent.node.size)))
     }
 
-    func getObstaclePhysics(size: CGSize) -> SKPhysicsBody {
+    private func getObstaclePhysics(size: CGSize) -> SKPhysicsBody {
+        
         var pBody = SKPhysicsBody()
+        
         switch self.type {
+            
             case .barrel:
                 pBody = SKPhysicsBody(rectangleOf: size)
                 pBody.isDynamic = true
                 pBody.collisionBitMask = CollisionMask.ground.rawValue | CollisionMask.ball.rawValue | CollisionMask.object.rawValue
                 pBody.contactTestBitMask = CollisionMask.ball.rawValue
                 pBody.categoryBitMask = CollisionMask.object.rawValue
+            
             case .box:
                 pBody = SKPhysicsBody(rectangleOf: size)
                 pBody.isDynamic = true

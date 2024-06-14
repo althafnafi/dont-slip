@@ -24,10 +24,11 @@ class EntityManager {
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
             scene.addChild(spriteNode)
         }
-    }
-    
-    func addJointToPhysicsWorld(_ joint: SKPhysicsJoint) {
-        scene.physicsWorld.add(joint)
+        
+        if let springComponent = entity.component(ofType: SpringComponent.self) {
+            scene.addChild(springComponent.anchorNode)
+            scene.physicsWorld.add(springComponent.getSpringJoint())
+        }
     }
     
     

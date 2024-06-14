@@ -27,7 +27,7 @@ class Penguin: GKEntity {
         self.ground = groundGuarded
         super.init()
         
-        // Add sprite
+        // 1. Add sprite
         let spriteComponent = SpriteComponent(node: getGreenBox())
         // Set position of penguin
         if let groundY = ground?.position.y,
@@ -40,17 +40,17 @@ class Penguin: GKEntity {
         }
         addComponent(spriteComponent)
         
-        // Add physics
+        // 2. Add physics
         let physicsBody = getGreenBoxPhysicsBody()
         addComponent(PhysicsComponent(node: spriteComponent.node, body: physicsBody))
         
         if let accelManager = accelerometerManager {
-            // Add control for players
+            // 3. Add control for players
             addComponent(PlayerControlComponent(accelManager: accelManager, spriteComponent: spriteComponent))
         }
     }
        
-
+    // Update functions (called every frame)
     override func update(deltaTime seconds: TimeInterval) {
         for component in components {
             component.update(deltaTime: seconds)
@@ -58,7 +58,7 @@ class Penguin: GKEntity {
     }
     
     // MARK: Penguin functions
-    func getPhysicsBody() -> SKPhysicsBody {
+    private func getPhysicsBody() -> SKPhysicsBody {
         
         let pBody = SKPhysicsBody()
         
@@ -66,7 +66,7 @@ class Penguin: GKEntity {
     }
     
     // MARK: Green box functions
-    func getGreenBoxPhysicsBody() -> SKPhysicsBody {
+    private func getGreenBoxPhysicsBody() -> SKPhysicsBody {
         // Size, shape
         let cubeSize = CGSize(width: 30, height: 30)
         let pBody = SKPhysicsBody(rectangleOf: cubeSize)
@@ -84,7 +84,7 @@ class Penguin: GKEntity {
         return pBody
     }
     
-    func getGreenBox() -> SKSpriteNode {
+    private func getGreenBox() -> SKSpriteNode {
         let cubeSize = CGSize(width: 30, height: 30)
         let greenCube = SKSpriteNode(color: .green, size: cubeSize)
         

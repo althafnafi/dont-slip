@@ -45,7 +45,7 @@ class Coin: GKEntity {
         addComponent(PhysicsComponent(node: spriteComponent.node, body: getCoinPhysics(size: spriteComponent.node.size)))
     }
 
-    func getCoinPhysics(size: CGSize) -> SKPhysicsBody {
+    private func getCoinPhysics(size: CGSize) -> SKPhysicsBody {
         var pBody = SKPhysicsBody()
         
         switch self.type {
