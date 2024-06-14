@@ -210,9 +210,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         greenCube.physicsBody?.affectedByGravity = true
         greenCube.physicsBody?.allowsRotation = false
         
-        greenCube.physicsBody?.collisionBitMask = groundCategory
+        // bug fixed (probably)
         greenCube.physicsBody?.categoryBitMask = ballCategory
-        greenCube.physicsBody?.contactTestBitMask = groundCategory
+        greenCube.physicsBody?.collisionBitMask = groundCategory | CollisionMask.object.rawValue
+        greenCube.physicsBody?.contactTestBitMask = coinCategory
 
         // Add the cube to the scene
         self.addChild(greenCube)
