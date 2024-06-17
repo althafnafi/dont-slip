@@ -59,6 +59,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var totalCoins: Int = 0
     private var totalCoinsLabel: SKLabelNode!
     
+    // Modality game over
+    private var modalBackground: SKSpriteNode!
+    private var modalContainer: SKSpriteNode!
+    private var gameOverScoreLabel: SKLabelNode!
+    private var gameOverCoinsLabel: SKLabelNode!
+    private var restartButton: SKSpriteNode!
+    
     func saveHighScore() {
         UserDefaults.standard.set(highScore, forKey: "HighScore")
     }
@@ -112,8 +119,55 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let repeatForever = SKAction.repeatForever(sequence)
         run(repeatForever, withKey: "scoreTimer")
     }
-
-
+    
+    // Modality Game Over
+    func showGameOverModal() {
+        // Create background node to darken the screen
+        modalBackground = SKSpriteNode(color: UIColor.black.withAlphaComponent(0.4), size: self.size)
+        //modalBackground.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        modalBackground.position = CGPoint(x: 0, y: 0)
+        modalBackground.zPosition = 200
+        addChild(modalBackground)
+        
+        // Create modal container
+        modalContainer = SKSpriteNode(color: UIColor.darkGray, size: CGSize(width: self.size.width * 0.8, height: self.size.height * 0.4))
+        //modalContainer.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        modalContainer.position = CGPoint(x: 0, y: 0)
+        modalContainer.zPosition = 201
+        addChild(modalContainer)
+        
+        // Create and configure score label
+        gameOverScoreLabel = SKLabelNode(text: "Score: \(score)")
+        gameOverScoreLabel.fontSize = 36
+        gameOverScoreLabel.fontColor = .white
+        gameOverScoreLabel.position = CGPoint(x: 0, y: modalContainer.size.height / 4)
+        gameOverScoreLabel.zPosition = 202
+        modalContainer.addChild(gameOverScoreLabel)
+        
+        // Create and configure coins label
+        gameOverCoinsLabel = SKLabelNode(text: "Coins Collected: \(coinsCollected)")
+        gameOverCoinsLabel.fontSize = 36
+        gameOverCoinsLabel.fontColor = .white
+        gameOverCoinsLabel.position = CGPoint(x: 0, y: 0)
+        gameOverCoinsLabel.zPosition = 202
+        modalContainer.addChild(gameOverCoinsLabel)
+        
+        // Create restart button
+        restartButton = SKSpriteNode(color: .red, size: CGSize(width: 100, height: 50))
+        restartButton.position = CGPoint(x: 0, y: -modalContainer.size.height / 4)
+        restartButton.zPosition = 202
+        restartButton.name = "restartButton"
+        
+        // Add a label to the button
+        let restartLabel = SKLabelNode(text: "Restart")
+        restartLabel.fontSize = 24
+        restartLabel.fontColor = .white
+        restartLabel.position = CGPoint(x: 0, y: -restartLabel.frame.size.height / 2)
+        restartLabel.zPosition = 203
+        restartButton.addChild(restartLabel)
+        
+        modalContainer.addChild(restartButton)
+    }
     
     override func sceneDidLoad() {
         // Setup
@@ -386,8 +440,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             totalCoins += coinsCollected
             saveCoins()
             currentActiveCoins = 0
-            coinsCollected = 0
-            
+        
             // Stop the score timer
             removeAction(forKey: "scoreTimer")
             
@@ -396,7 +449,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 highScore = score
                 saveHighScore()
             }
-            showRestartButton()
+            //showRestartButton()
+            showGameOverModal()
+            coinsCollected = 0
         }
     }
 
