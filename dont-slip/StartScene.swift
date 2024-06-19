@@ -55,7 +55,7 @@ class StartScene: SKScene {
                         // Set the scale mode to scale to fit the window
                         sceneNode.scaleMode = .aspectFill
                         
-                        // Present the scene
+                      
                         if let view = self.view {
                             view.presentScene(sceneNode)
                             
