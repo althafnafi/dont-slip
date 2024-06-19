@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
 		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
 		A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F12C1AF33E00B6CC8D /* Iceberg.swift */; };
 		A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */; };
@@ -34,10 +35,12 @@
 		A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8B62C1A98D9003165D5 /* Obstacle.swift */; };
 		A47CD8BB2C1AA9FA003165D5 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */; };
 		A47CD8BE2C1ABB64003165D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */; };
-		A488FEF52C227B580068C07B /* +HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488FEF42C227B580068C07B /* +HomeScreen.swift */; };
+		A488FEF52C227B580068C07B /* EndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488FEF42C227B580068C07B /* EndScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		165736B92C2286A50099A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
 		99280C372C17705C00E5B76A /* AccelerometerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
 		A40284F12C1AF33E00B6CC8D /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoringTorqueComponent.swift; sourceTree = "<group>"; };
@@ -66,7 +69,7 @@
 		A47CD8B62C1A98D9003165D5 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
 		A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		A488FEF42C227B580068C07B /* +HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+HomeScreen.swift"; sourceTree = "<group>"; };
+		A488FEF42C227B580068C07B /* EndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,7 @@
 		A47CD8832C16E595003165D5 = {
 			isa = PBXGroup;
 			children = (
+				165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */,
 				A47CD88E2C16E595003165D5 /* dont-slip */,
 				A47CD88D2C16E595003165D5 /* Products */,
 			);
@@ -119,6 +123,7 @@
 		A47CD88E2C16E595003165D5 /* dont-slip */ = {
 			isa = PBXGroup;
 			children = (
+				165736B92C2286A50099A5A0 /* Info.plist */,
 				A47CD8B92C1AA840003165D5 /* GameScene */,
 				A47CD8BC2C1AB750003165D5 /* Actions */,
 				A47CD8A62C1A9038003165D5 /* Entities */,
@@ -190,7 +195,7 @@
 		A488FEF32C227B4A0068C07B /* Modality */ = {
 			isa = PBXGroup;
 			children = (
-				A488FEF42C227B580068C07B /* +HomeScreen.swift */,
+				A488FEF42C227B580068C07B /* EndScreen.swift */,
 			);
 			path = Modality;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A47CD8922C16E595003165D5 /* GameScene.sks in Resources */,
+				165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */,
 				A47CD89B2C16E595003165D5 /* Base in Resources */,
 				A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */,
 				A47CD8942C16E595003165D5 /* Actions.sks in Resources */,
@@ -288,7 +294,7 @@
 				A47CD8AB2C1A9087003165D5 /* SpriteComponent.swift in Sources */,
 				A47CD8B52C1A9771003165D5 /* PlayerControlComponent.swift in Sources */,
 				A40285102C1B285700B6CC8D /* +ScoreCoinHandler.swift in Sources */,
-				A488FEF52C227B580068C07B /* +HomeScreen.swift in Sources */,
+				A488FEF52C227B580068C07B /* EndScreen.swift in Sources */,
 				99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */,
 				A47CD8B32C1A9669003165D5 /* PowerUp.swift in Sources */,
 			);
@@ -442,8 +448,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTWBVW7W5F;
+				DEVELOPMENT_TEAM = UXFMYR2DJ9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -470,8 +477,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTWBVW7W5F;
+				DEVELOPMENT_TEAM = UXFMYR2DJ9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

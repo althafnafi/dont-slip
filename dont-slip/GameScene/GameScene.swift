@@ -81,6 +81,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var greenCube: SKSpriteNode? // the cube (penguin)
     
+    // Modality game over
+    var modalBackground: SKSpriteNode!
+    var bigContainer: SKSpriteNode!
+    var modalContainer: SKSpriteNode!
+    var buttonContainer: SKSpriteNode!
+    var scoreCoinContainer: SKSpriteNode!
+    var scoreContainer: SKSpriteNode!
+    var coinContainer: SKSpriteNode!
+    var highScoreContainer: SKSpriteNode!
+    var totalCoinContainer: SKSpriteNode!
+        
+    var gameOverScoreLabel: SKLabelNode!
+    var gameOverCoinsLabel: SKLabelNode!
+    var gameOverLabel: SKLabelNode!
+    var restartButton: SKSpriteNode!
+    var homeButton: SKSpriteNode!
+    var scoreGameOverLabel: SKLabelNode!
+    var highScoreGameOverLabel: SKLabelNode!
+    var totalHighScoreLabel: SKLabelNode!
+    var coinGameOverLabel: SKLabelNode!
+    var totalLabel: SKLabelNode!
+    var totalCoinsGameOverLabel: SKLabelNode!
+    
     override func sceneDidLoad() {
         // Setup physicsWorld bases
         self.physicsWorld.contactDelegate = self

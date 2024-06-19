@@ -113,9 +113,9 @@ class Penguin: GKEntity {
         pBody.allowsRotation = true
         
         // BitMask
-        pBody.collisionBitMask = CollisionMask.ground.rawValue
+        pBody.collisionBitMask = CollisionMask.ground.rawValue | CollisionMask.object.rawValue
         pBody.categoryBitMask = CollisionMask.ball.rawValue
-        pBody.contactTestBitMask = CollisionMask.ground.rawValue
+        pBody.contactTestBitMask = CollisionMask.coin.rawValue
         
         return pBody
     }

@@ -79,6 +79,7 @@ class Iceberg: GKEntity {
         
         pBody.categoryBitMask = CollisionMask.ground.rawValue
         pBody.contactTestBitMask = CollisionMask.ball.rawValue
+        pBody.collisionBitMask = CollisionMask.ball.rawValue | CollisionMask.object.rawValue
         
         return pBody
         
