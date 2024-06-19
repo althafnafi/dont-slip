@@ -61,10 +61,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Modality game over
     private var modalBackground: SKSpriteNode!
+    private var bigContainer: SKSpriteNode!
     private var modalContainer: SKSpriteNode!
+    private var buttonContainer: SKSpriteNode!
+    private var scoreCoinContainer: SKSpriteNode!
+    private var scoreContainer: SKSpriteNode!
+    private var coinContainer: SKSpriteNode!
+    private var highScoreContainer: SKSpriteNode!
+    private var totalCoinContainer: SKSpriteNode!
+    
     private var gameOverScoreLabel: SKLabelNode!
     private var gameOverCoinsLabel: SKLabelNode!
+    private var gameOverLabel: SKLabelNode!
     private var restartButton: SKSpriteNode!
+    private var homeButton: SKSpriteNode!
+    private var scoreGameOverLabel: SKLabelNode!
+    private var highScoreGameOverLabel: SKLabelNode!
+    private var totalHighScoreLabel: SKLabelNode!
+    private var coinGameOverLabel: SKLabelNode!
+    private var totalLabel: SKLabelNode!
+    private var totalCoinsGameOverLabel: SKLabelNode!
     
     func saveHighScore() {
         UserDefaults.standard.set(highScore, forKey: "HighScore")
@@ -122,51 +138,153 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Modality Game Over
     func showGameOverModal() {
+        
         // Create background node to darken the screen
         modalBackground = SKSpriteNode(color: UIColor.black.withAlphaComponent(0.4), size: self.size)
-        //modalBackground.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         modalBackground.position = CGPoint(x: 0, y: 0)
         modalBackground.zPosition = 200
         addChild(modalBackground)
         
-        // Create modal container
-        modalContainer = SKSpriteNode(color: UIColor.darkGray, size: CGSize(width: self.size.width * 0.8, height: self.size.height * 0.4))
-        //modalContainer.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
-        modalContainer.position = CGPoint(x: 0, y: 0)
+        // Biggest Container
+        bigContainer = SKSpriteNode(color: UIColor.gray, size: CGSize(width: self.size.width * 0.5, height: self.size.height * 0.65))
+        bigContainer.position = CGPoint(x: 0, y: 0)
+        bigContainer.zPosition = 200
+        addChild(bigContainer)
+        
+        // Create modal main content container
+        modalContainer = SKSpriteNode(color: UIColor.brownn, size: CGSize(width: self.size.width * 0.5, height: self.size.height * 0.5))
+        modalContainer.position = CGPoint(x: 0, y: (bigContainer.size.height - self.size.height * 0.5) / 2)
         modalContainer.zPosition = 201
-        addChild(modalContainer)
+        bigContainer.addChild(modalContainer)
+        
+        // Create button Container
+        buttonContainer = SKSpriteNode(color: UIColor.purple, size: CGSize(width: bigContainer.self.size.width, height: self.size.height * 0.1))
+        buttonContainer.position = CGPoint(x: 0, y: -(bigContainer.size.height - self.size.height * 0.1) / 2)
+        buttonContainer.zPosition = 201
+        bigContainer.addChild(buttonContainer)
+        
+        // "Game Over" label
+        gameOverLabel = SKLabelNode(text: "GAME OVER")
+        gameOverLabel.fontSize = 70
+        gameOverLabel.fontColor = .white
+        gameOverLabel.fontName = "Madness Hyperactive"
+        gameOverLabel.position = CGPoint(x: 0, y: modalContainer.size.height / 4)
+        gameOverLabel.zPosition = 202
+        modalContainer.addChild(gameOverLabel)
+        
+        scoreCoinContainer = SKSpriteNode(color: UIColor.red, size: CGSize(width: modalContainer.size.width * 0.7, height: modalContainer.size.height * 0.6))
+        scoreCoinContainer.position = CGPoint(x: 0, y: -50)
+        scoreCoinContainer.zPosition = 202
+        modalContainer.addChild(scoreCoinContainer)
+        
+        scoreContainer = SKSpriteNode(color: UIColor.blue, size: CGSize(width: scoreCoinContainer.size.width * 0.4, height: scoreCoinContainer.size.height * 0.9))
+        scoreContainer.position = CGPoint(x: -125, y: 0)
+        scoreContainer.zPosition = 203
+        scoreCoinContainer.addChild(scoreContainer)
         
         // Create and configure score label
-        gameOverScoreLabel = SKLabelNode(text: "Score: \(score)")
+        gameOverScoreLabel = SKLabelNode(text: "Score")
         gameOverScoreLabel.fontSize = 36
         gameOverScoreLabel.fontColor = .white
-        gameOverScoreLabel.position = CGPoint(x: 0, y: modalContainer.size.height / 4)
-        gameOverScoreLabel.zPosition = 202
-        modalContainer.addChild(gameOverScoreLabel)
+        gameOverScoreLabel.fontName = "AlegreyaSansSC-Medium"
+        gameOverScoreLabel.position = CGPoint(x: 0, y: 60)
+        gameOverScoreLabel.zPosition = 204
+        scoreContainer.addChild(gameOverScoreLabel)
+        
+        scoreGameOverLabel = SKLabelNode(text: "\(score)")
+        scoreGameOverLabel.fontSize = 50
+        scoreGameOverLabel.fontColor = .white
+        scoreGameOverLabel.fontName = "AlegreyaSansSC-Bold"
+        scoreGameOverLabel.position = CGPoint(x: 0, y: -10)
+        scoreGameOverLabel.zPosition = 204
+        scoreContainer.addChild(scoreGameOverLabel)
+        
+        highScoreGameOverLabel = SKLabelNode(text: "HIGHSCORE")
+        highScoreGameOverLabel.fontName = "AlegreyaSansSC-Medium"
+        highScoreGameOverLabel.fontSize = 20
+        highScoreGameOverLabel.fontColor = .white
+        highScoreGameOverLabel.position = CGPoint(x: 0, y: -50)
+        highScoreGameOverLabel.zPosition = 204
+        scoreContainer.addChild(highScoreGameOverLabel)
+        
+        totalHighScoreLabel = SKLabelNode(text: "\(highScore)")
+        totalHighScoreLabel.fontName = "AlegreyaSansSC-ExtraBold"
+        totalHighScoreLabel.fontSize = 20
+        totalHighScoreLabel.fontColor = .white
+        totalHighScoreLabel.position = CGPoint(x: 0, y: -80)
+        totalHighScoreLabel.zPosition = 204
+        scoreContainer.addChild(totalHighScoreLabel)
+        
+        
+        // ----------------------------asdfasfsasafsafsafsafsa------------------------------------
+        
+        coinContainer = SKSpriteNode(color: UIColor.blue, size: CGSize(width: scoreCoinContainer.size.width * 0.4, height: scoreCoinContainer.size.height * 0.9))
+        coinContainer.position = CGPoint(x: 125, y: 0)
+        coinContainer.zPosition = 203
+        scoreCoinContainer.addChild(coinContainer)
         
         // Create and configure coins label
-        gameOverCoinsLabel = SKLabelNode(text: "Coins Collected: \(coinsCollected)")
+        gameOverCoinsLabel = SKLabelNode(text: "Coin")
+        gameOverCoinsLabel.fontName = "AlegreyaSansSC-Medium"
         gameOverCoinsLabel.fontSize = 36
         gameOverCoinsLabel.fontColor = .white
-        gameOverCoinsLabel.position = CGPoint(x: 0, y: 0)
-        gameOverCoinsLabel.zPosition = 202
-        modalContainer.addChild(gameOverCoinsLabel)
+        gameOverCoinsLabel.position = CGPoint(x: 0, y: 60)
+        gameOverCoinsLabel.zPosition = 204
+        coinContainer.addChild(gameOverCoinsLabel)
+        
+        coinGameOverLabel = SKLabelNode(text: "+ \(coinsCollected)")
+        coinGameOverLabel.fontName = "AlegreyaSansSC-Bold"
+        coinGameOverLabel.fontSize = 50
+        coinGameOverLabel.fontColor = .white
+        coinGameOverLabel.position = CGPoint(x: 0, y: -10)
+        coinGameOverLabel.zPosition = 204
+        coinContainer.addChild(coinGameOverLabel)
+        
+        totalLabel = SKLabelNode(text: "TOTAL")
+        totalLabel.fontName = "AlegreyaSansSC-Medium"
+        totalLabel.fontSize = 20
+        totalLabel.fontColor = .white
+        totalLabel.position = CGPoint(x: 0, y: -50)
+        totalLabel.zPosition = 204
+        coinContainer.addChild(totalLabel)
+        
+        totalCoinsGameOverLabel = SKLabelNode(text: "\(totalCoins)")
+        totalCoinsGameOverLabel.fontName = "AlegreyaSansSC-ExtraBold"
+        totalCoinsGameOverLabel.fontSize = 20
+        totalCoinsGameOverLabel.fontColor = .white
+        totalCoinsGameOverLabel.position = CGPoint(x: 0, y: -80)
+        totalCoinsGameOverLabel.zPosition = 204
+        coinContainer.addChild(totalCoinsGameOverLabel)
         
         // Create restart button
-        restartButton = SKSpriteNode(color: .red, size: CGSize(width: 100, height: 50))
-        restartButton.position = CGPoint(x: 0, y: -modalContainer.size.height / 4)
-        restartButton.zPosition = 202
+        restartButton = SKSpriteNode(color: .red, size: CGSize(width: 300, height: buttonContainer.size.height))
+        restartButton.position = CGPoint(x: buttonContainer.size.width / 2 - restartButton.size.width / 2, y: 0)
+        restartButton.zPosition = 201
         restartButton.name = "restartButton"
+        buttonContainer.addChild(restartButton)
         
-        // Add a label to the button
+        // Add a restart label to the button
         let restartLabel = SKLabelNode(text: "Restart")
         restartLabel.fontSize = 24
         restartLabel.fontColor = .white
         restartLabel.position = CGPoint(x: 0, y: -restartLabel.frame.size.height / 2)
-        restartLabel.zPosition = 203
+        restartLabel.zPosition = 202
         restartButton.addChild(restartLabel)
         
-        modalContainer.addChild(restartButton)
+        // Create home button (belom bisa ke home page)
+        homeButton = SKSpriteNode(color: .red, size: CGSize(width: 300, height: buttonContainer.size.height))
+        homeButton.position = CGPoint(x: -buttonContainer.size.width / 2 + restartButton.size.width / 2, y: 0)
+        homeButton.zPosition = 201
+        homeButton.name = "homeButton"
+        buttonContainer.addChild(homeButton)
+        
+        // Add a home label to the button
+        let homeLabel = SKLabelNode(text: "Home")
+        homeLabel.fontSize = 24
+        homeLabel.fontColor = .white
+        homeLabel.position = CGPoint(x: 0, y: -restartLabel.frame.size.height / 2)
+        homeLabel.zPosition = 202
+        homeButton.addChild(homeLabel)
     }
     
     override func sceneDidLoad() {
@@ -181,8 +299,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startScoreTimer() // Start the score timer
         spawnGround()
     }
-
-    
     
     func touchDown(atPoint pos: CGPoint) {
         print("touchDown")
@@ -290,33 +406,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isGreenCubeOnGround = false
     }
     
-//    func spawnPhysicsObject(posClicked: CGPoint) {
-//        // Define the objec
-//        let cubeSize = CGSize(width: 30, height: 30)
-//        let newObject = SKSpriteNode(color: .red, size: cubeSize)
-//        newObject.position = posClicked
-//        
-//        // Add physics properties to the object
-//        newObject.physicsBody = SKPhysicsBody(rectangleOf: cubeSize)
-//        newObject.physicsBody?.collisionBitMask = groundCategory
-//        
-//        // Add object to scene
-//        self.addChild(newObject)
-//        
-//        print("Added a new object")
-//    }
-    
     func didBegin(_ contact: SKPhysicsContact) {
-        // Will only be triggered if any of below returns a non-zero
-        // bodyA.category AND bodyB.contact
-        // bodyA.contact AND bodyB.category
-//        print("---")
-//        print("Collision")
-//        print("A: \(contact.bodyA.collisionBitMask), B: \(contact.bodyB.collisionBitMask)")
-//        print("Category")
-//        print("A: \(contact.bodyA.categoryBitMask), B: \(contact.bodyB.categoryBitMask)")
-//        print("Contact")
-//        print("A: \(contact.bodyA.contactTestBitMask), B: \(contact.bodyB.contactTestBitMask)")
         
         // Check if the green cube is in contact with the ground
         if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == groundCategory) ||
@@ -351,6 +441,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let location = t.location(in: self)
                 let nodes = self.nodes(at: location)
                 if nodes.contains(where: { $0.name == "restartButton" }) {
+                    restartGame()
+                    return
+                }
+                // belom bisa balik ke home
+                if nodes.contains(where: { $0.name == "homeButton" }) {
+                    print("Home Button CLICKED")
                     restartGame()
                     return
                 }
@@ -456,19 +552,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
 
-    func showRestartButton() {
-        if let symbolImage = UIImage(systemName: "arrow.counterclockwise.circle") {
-            let texture = SKTexture(image: symbolImage)
-            let restartButton = SKSpriteNode(texture: texture)
-            restartButton.color = .red // Optional: if you want to apply tint color
-            restartButton.size = CGSize(width: 60, height: 60) // Adjust size as needed
-            restartButton.position = CGPoint(x: 0, y: 0)
-            restartButton.name = "restartButton"
-            self.addChild(restartButton)
-        } else {
-            print("Failed to create the SF Symbol image")
-        }
-    }
+//    func showRestartButton() {
+//        if let symbolImage = UIImage(systemName: "arrow.counterclockwise.circle") {
+//            let texture = SKTexture(image: symbolImage)
+//            let restartButton = SKSpriteNode(texture: texture)
+//            restartButton.color = .red // Optional: if you want to apply tint color
+//            restartButton.size = CGSize(width: 60, height: 60) // Adjust size as needed
+//            restartButton.position = CGPoint(x: 0, y: 0)
+//            restartButton.name = "restartButton"
+//            self.addChild(restartButton)
+//        } else {
+//            print("Failed to create the SF Symbol image")
+//        }
+//    }
 
     
     func restartGame() {

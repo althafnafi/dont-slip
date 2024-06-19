@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16D3EA962C21B6A500BA4DE6 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 16D3EA952C21B6A400BA4DE6 /* Madness Hyperactive.otf */; };
+		16D3EA992C21B9C300BA4DE6 /* AlegreyaSansSC-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16D3EA982C21B9C300BA4DE6 /* AlegreyaSansSC-Bold.ttf */; };
+		16D3EA9B2C21B9D000BA4DE6 /* AlegreyaSansSC-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16D3EA9A2C21B9D000BA4DE6 /* AlegreyaSansSC-ExtraBold.ttf */; };
+		16D3EA9D2C21B9F500BA4DE6 /* AlegreyaSansSC-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16D3EA9C2C21B9F500BA4DE6 /* AlegreyaSansSC-Medium.ttf */; };
 		A47CD8902C16E595003165D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD88F2C16E595003165D5 /* AppDelegate.swift */; };
 		A47CD8922C16E595003165D5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A47CD8912C16E595003165D5 /* GameScene.sks */; };
 		A47CD8942C16E595003165D5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A47CD8932C16E595003165D5 /* Actions.sks */; };
@@ -18,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16D3EA952C21B6A400BA4DE6 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
+		16D3EA972C21B77F00BA4DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		16D3EA982C21B9C300BA4DE6 /* AlegreyaSansSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-Bold.ttf"; sourceTree = "<group>"; };
+		16D3EA9A2C21B9D000BA4DE6 /* AlegreyaSansSC-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-ExtraBold.ttf"; sourceTree = "<group>"; };
+		16D3EA9C2C21B9F500BA4DE6 /* AlegreyaSansSC-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-Medium.ttf"; sourceTree = "<group>"; };
 		A47CD88C2C16E595003165D5 /* dont-slip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dont-slip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47CD88F2C16E595003165D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A47CD8912C16E595003165D5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -43,6 +52,10 @@
 		A47CD8832C16E595003165D5 = {
 			isa = PBXGroup;
 			children = (
+				16D3EA9A2C21B9D000BA4DE6 /* AlegreyaSansSC-ExtraBold.ttf */,
+				16D3EA982C21B9C300BA4DE6 /* AlegreyaSansSC-Bold.ttf */,
+				16D3EA952C21B6A400BA4DE6 /* Madness Hyperactive.otf */,
+				16D3EA9C2C21B9F500BA4DE6 /* AlegreyaSansSC-Medium.ttf */,
 				A47CD88E2C16E595003165D5 /* dont-slip */,
 				A47CD88D2C16E595003165D5 /* Products */,
 			);
@@ -59,6 +72,7 @@
 		A47CD88E2C16E595003165D5 /* dont-slip */ = {
 			isa = PBXGroup;
 			children = (
+				16D3EA972C21B77F00BA4DE6 /* Info.plist */,
 				A47CD88F2C16E595003165D5 /* AppDelegate.swift */,
 				A47CD8912C16E595003165D5 /* GameScene.sks */,
 				A47CD8932C16E595003165D5 /* Actions.sks */,
@@ -130,10 +144,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A47CD8922C16E595003165D5 /* GameScene.sks in Resources */,
+				16D3EA962C21B6A500BA4DE6 /* Madness Hyperactive.otf in Resources */,
+				16D3EA992C21B9C300BA4DE6 /* AlegreyaSansSC-Bold.ttf in Resources */,
 				A47CD89B2C16E595003165D5 /* Base in Resources */,
 				A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */,
 				A47CD8942C16E595003165D5 /* Actions.sks in Resources */,
 				A47CD8A02C16E597003165D5 /* Base in Resources */,
+				16D3EA9D2C21B9F500BA4DE6 /* AlegreyaSansSC-Medium.ttf in Resources */,
+				16D3EA9B2C21B9D000BA4DE6 /* AlegreyaSansSC-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,12 +318,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UXFMYR2DJ9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -329,12 +348,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UXFMYR2DJ9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
