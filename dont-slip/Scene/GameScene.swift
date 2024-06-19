@@ -188,7 +188,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             totalCoins += coinsCollected
             saveCoins()
             currentActiveCoins = 0
-            coinsCollected = 0
 
             // Stop the score timer
             removeAction(forKey: "scoreTimer")
@@ -198,24 +197,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 highScore = score
                 saveHighScore()
             }
-            showRestartButton()
+            // showRestartButton()
+            showGameOverModal()
+            coinsCollected = 0
         }
     }
-
-    func showRestartButton() {
-        if let symbolImage = UIImage(systemName: "arrow.counterclockwise.circle") {
-            let texture = SKTexture(image: symbolImage)
-            let restartButton = SKSpriteNode(texture: texture)
-            restartButton.color = .red // Optional: if you want to apply tint color
-            restartButton.size = CGSize(width: 60, height: 60) // Adjust size as needed
-            restartButton.position = CGPoint(x: 0, y: 0)
-            restartButton.name = "restartButton"
-            self.addChild(restartButton)
-        } else {
-            print("Failed to create the SF Symbol image")
-        }
-    }
-
     
     func restartGame() {
         self.removeAllChildren()

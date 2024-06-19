@@ -18,7 +18,7 @@ class StartScene: SKScene {
         startTilting(node: penguin)
         
         // Set up iceberg image
-        let iceberg = SKSpriteNode(imageNamed: "iceberg.png")
+        let iceberg = SKSpriteNode(imageNamed: "Iceberg.png")
         iceberg.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 100)
         iceberg.zPosition = 0 // Behind waveNode1
         addChild(iceberg)

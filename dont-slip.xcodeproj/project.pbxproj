@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
 		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
-
 		8105C6922C2286D100701330 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C6912C2286D100701330 /* StartScene.swift */; };
-
 		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
 		A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F12C1AF33E00B6CC8D /* Iceberg.swift */; };
 		A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */; };
@@ -43,7 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-
 		165736B92C2286A50099A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
 		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
@@ -130,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				165736B92C2286A50099A5A0 /* Info.plist */,
-				A47CD8B92C1AA840003165D5 /* GameScene */,
+				A47CD8B92C1AA840003165D5 /* Scene */,
 				A47CD8BC2C1AB750003165D5 /* Actions */,
 				A47CD8A62C1A9038003165D5 /* Entities */,
 				A47CD8A92C1A9067003165D5 /* Components */,
@@ -140,7 +136,6 @@
 				A47CD8992C16E595003165D5 /* Main.storyboard */,
 				A47CD89E2C16E597003165D5 /* LaunchScreen.storyboard */,
 				A47CD89C2C16E597003165D5 /* Assets.xcassets */,
-				8105C6912C2286D100701330 /* StartScene.swift */,
 			);
 			path = "dont-slip";
 			sourceTree = "<group>";
@@ -180,15 +175,16 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		A47CD8B92C1AA840003165D5 /* GameScene */ = {
+		A47CD8B92C1AA840003165D5 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				A488FEF32C227B4A0068C07B /* Modality */,
 				A40284FF2C1B01E900B6CC8D /* Handler Extensions */,
 				A47CD8952C16E595003165D5 /* GameScene.swift */,
+				8105C6912C2286D100701330 /* StartScene.swift */,
 				A47CD8912C16E595003165D5 /* GameScene.sks */,
 			);
-			path = GameScene;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		A47CD8BC2C1AB750003165D5 /* Actions */ = {

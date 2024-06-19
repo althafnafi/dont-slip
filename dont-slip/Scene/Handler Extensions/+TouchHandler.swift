@@ -42,6 +42,26 @@ extension GameScene {
                     restartGame()
                     return
                 }
+                if nodes.contains(where: { $0.name == "homeButton" }) {
+                    resetTimers()
+                    startTime = curTime
+            
+                    if let view = self.view {
+                        
+                        let sceneNode = StartScene(size: view.bounds.size)
+                        sceneNode.scaleMode = .aspectFill
+                        
+                        print("Masuk home 4")
+                        view.presentScene(sceneNode)
+                        
+                        view.ignoresSiblingOrder = true
+                        
+                        view.showsFPS = true
+                        view.showsNodeCount = true
+                    }
+                    
+                    return
+                }
             }
         } else {
             for t in touches { self.touchDown(atPoint: t.location(in: self)) }
