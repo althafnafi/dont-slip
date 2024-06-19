@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class EntityManager {
-    
+
     var entities = Set<GKEntity>()
     let scene: SKScene
     

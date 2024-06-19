@@ -19,6 +19,13 @@ enum ObstacleType : UInt8, CaseIterable {
         case .barrel: return "barrel"
         }
     }
+    
+    var obstacleMass: CGFloat {
+        switch self {
+        case .box: return 0.08
+        case .barrel: return 0.08
+        }
+    }
 
 }
 
@@ -43,7 +50,7 @@ class Obstacle: GKEntity {
         
         // 2. Add physics component
         // based on obstacle type
-        addComponent(PhysicsComponent(node: spriteComponent.node, body: getObstaclePhysics(size: spriteComponent.node.size)))
+        addComponent(PhysicsComponent(node: spriteComponent.node, body: getObstaclePhysics(size: spriteComponent.node.size), mass: type.obstacleMass))
     }
 
     private func getObstaclePhysics(size: CGSize) -> SKPhysicsBody {

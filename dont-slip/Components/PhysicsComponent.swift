@@ -20,6 +20,11 @@ class PhysicsComponent: GKComponent {
         super.init()
     }
     
+    init(node: SKSpriteNode, body: SKPhysicsBody, mass: CGFloat) {
+        body.mass = mass
+        node.physicsBody = body
+        super.init()
+    }
     
     init(node: SKNode, body: SKPhysicsBody) {
         node.physicsBody = body

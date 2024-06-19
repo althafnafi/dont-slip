@@ -53,6 +53,17 @@ class Iceberg: GKEntity {
         percentage = 100
     }
     
+    func setFriction(friction: CGFloat) {
+        if friction < 0, friction >= 1 {
+            print("Error setting friction: outside of range")
+            return
+        }
+//        
+//        for e in entityManager.entities {
+//            if 
+//        }
+    }
+    
     
     private func getPhysicsBody(size: CGSize, restitution: CGFloat = 0.2, friction: CGFloat = 0) -> SKPhysicsBody {
         
@@ -64,7 +75,7 @@ class Iceberg: GKEntity {
         pBody.allowsRotation = true
         
         pBody.restitution = 0.2
-        pBody.friction = 0
+        pBody.friction = 1
         
         pBody.categoryBitMask = CollisionMask.ground.rawValue
         pBody.contactTestBitMask = CollisionMask.ball.rawValue

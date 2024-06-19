@@ -15,13 +15,13 @@ class PlayerControlComponent: GKComponent {
     let accelManager: AccelerometerManager
     let spriteComponent: SpriteComponent
     
-    
     // MARK: Initializers
     init(accelManager: AccelerometerManager, spriteComponent: SpriteComponent) {
         self.accelManager = accelManager
         self.spriteComponent = spriteComponent
         super.init()
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -29,7 +29,6 @@ class PlayerControlComponent: GKComponent {
     override func update(deltaTime seconds: TimeInterval) {
         moveBasedOnAccelerometer()
     }
-    
     
     // MARK: Movement functions
     func jump() {

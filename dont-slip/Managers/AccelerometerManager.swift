@@ -32,6 +32,18 @@ class AccelerometerManager {
         }
     }
     
+    func startAccelerometerUpdates(sensitivity: CGFloat, multiplier: CGFloat = 1) {
+        self.sensitivity = sensitivity
+        if motionManager.isAccelerometerAvailable {
+            motionManager.accelerometerUpdateInterval = 0.1
+            
+            motionManager.startAccelerometerUpdates(to: .main) { [weak self] (data, error) in
+                guard let self = self, let data = data else { return }
+                self.handleAccelerometerData(data, multiplier: multiplier)
+            }
+        }
+    }
+    
     func getAdjustedAccelData() -> CMAcceleration? {
         guard let accel = acceleration else {
             print("getAdjustedAccelData: error getting acceleration")

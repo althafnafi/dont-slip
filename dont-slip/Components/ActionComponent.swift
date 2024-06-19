@@ -19,7 +19,6 @@ class ActionComponent: GKComponent {
     
     
     // MARK: Initializers
-    
     init(node: SKSpriteNode) {
         actions = []
         self.node = node

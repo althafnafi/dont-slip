@@ -14,7 +14,6 @@ class Penguin: GKEntity {
     var ground : SKSpriteNode?
     
     // MARK: Initializers
-
     init(imageName: String, accelerometerManager: AccelerometerManager?, groundNode: SKSpriteNode?) {
         self.ground = nil
         
@@ -49,6 +48,43 @@ class Penguin: GKEntity {
             addComponent(PlayerControlComponent(accelManager: accelManager, spriteComponent: spriteComponent))
         }
     }
+    
+    init(imageName: String, accelerometerManager: AccelerometerManager?, groundNode: SKSpriteNode?, mass: CGFloat) {
+        self.ground = nil
+        
+        guard let groundGuarded = groundNode else {
+            print("init Penguin: component error (defining ground)")
+            super.init()
+            return
+        }
+        
+        self.ground = groundGuarded
+        super.init()
+        
+        // 1. Add sprite
+        let spriteComponent = SpriteComponent(node: getGreenBox())
+        // Set position of penguin
+        if let groundY = ground?.position.y,
+           let groundH = ground?.size.height {
+            
+            let nodeSize = spriteComponent.node.size
+            let yPos = groundY + groundH / 2 + nodeSize.height / 2
+            
+            spriteComponent.setPos(pos: CGPoint(x: groundH, y: yPos))
+        }
+        addComponent(spriteComponent)
+        
+        // 2. Add physics
+        let physicsBody = getGreenBoxPhysicsBody()
+        addComponent(PhysicsComponent(node: spriteComponent.node, body: physicsBody, mass: mass))
+        
+        if let accelManager = accelerometerManager {
+            // 3. Add control for players
+            addComponent(PlayerControlComponent(accelManager: accelManager, spriteComponent: spriteComponent))
+        }
+        
+    }
+    
        
     // Update functions (called every frame)
     override func update(deltaTime seconds: TimeInterval) {

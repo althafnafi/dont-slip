@@ -13,7 +13,7 @@
 		A40284FA2C1AFBEC00B6CC8D /* ActionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */; };
 		A40284FC2C1B005100B6CC8D /* +TouchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284FB2C1B005100B6CC8D /* +TouchHandler.swift */; };
 		A40284FE2C1B01E300B6CC8D /* +CollisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */; };
-		A40285062C1B12C100B6CC8D /* +SpawnHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285052C1B12C100B6CC8D /* +SpawnHandler.swift */; };
+		A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */; };
 		A40285082C1B155000B6CC8D /* PositionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285072C1B155000B6CC8D /* PositionComponent.swift */; };
 		A402850A2C1B166E00B6CC8D /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285092C1B166E00B6CC8D /* Coin.swift */; };
 		A40285102C1B285700B6CC8D /* +ScoreCoinHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */; };
@@ -34,6 +34,7 @@
 		A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8B62C1A98D9003165D5 /* Obstacle.swift */; };
 		A47CD8BB2C1AA9FA003165D5 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */; };
 		A47CD8BE2C1ABB64003165D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */; };
+		A488FEF52C227B580068C07B /* +HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488FEF42C227B580068C07B /* +HomeScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +44,7 @@
 		A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionComponent.swift; sourceTree = "<group>"; };
 		A40284FB2C1B005100B6CC8D /* +TouchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+TouchHandler.swift"; sourceTree = "<group>"; };
 		A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollisionHandler.swift"; sourceTree = "<group>"; };
-		A40285052C1B12C100B6CC8D /* +SpawnHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+SpawnHandler.swift"; sourceTree = "<group>"; };
+		A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+RandomSpawnHandler.swift"; sourceTree = "<group>"; };
 		A40285072C1B155000B6CC8D /* PositionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionComponent.swift; sourceTree = "<group>"; };
 		A40285092C1B166E00B6CC8D /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ScoreCoinHandler.swift"; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		A47CD8B62C1A98D9003165D5 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
 		A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		A488FEF42C227B580068C07B /* +HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+HomeScreen.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,7 @@
 			children = (
 				A40284FB2C1B005100B6CC8D /* +TouchHandler.swift */,
 				A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */,
-				A40285052C1B12C100B6CC8D /* +SpawnHandler.swift */,
+				A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */,
 				A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */,
 			);
 			path = "Handler Extensions";
@@ -169,6 +171,7 @@
 		A47CD8B92C1AA840003165D5 /* GameScene */ = {
 			isa = PBXGroup;
 			children = (
+				A488FEF32C227B4A0068C07B /* Modality */,
 				A40284FF2C1B01E900B6CC8D /* Handler Extensions */,
 				A47CD8952C16E595003165D5 /* GameScene.swift */,
 				A47CD8912C16E595003165D5 /* GameScene.sks */,
@@ -182,6 +185,14 @@
 				A47CD8932C16E595003165D5 /* Actions.sks */,
 			);
 			path = Actions;
+			sourceTree = "<group>";
+		};
+		A488FEF32C227B4A0068C07B /* Modality */ = {
+			isa = PBXGroup;
+			children = (
+				A488FEF42C227B580068C07B /* +HomeScreen.swift */,
+			);
+			path = Modality;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +272,7 @@
 				A40284FC2C1B005100B6CC8D /* +TouchHandler.swift in Sources */,
 				A47CD8AD2C1A924D003165D5 /* EntityManager.swift in Sources */,
 				A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */,
-				A40285062C1B12C100B6CC8D /* +SpawnHandler.swift in Sources */,
+				A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */,
 				A47CD8A82C1A9041003165D5 /* Penguin.swift in Sources */,
 				A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */,
 				A47CD8982C16E595003165D5 /* GameViewController.swift in Sources */,
@@ -277,6 +288,7 @@
 				A47CD8AB2C1A9087003165D5 /* SpriteComponent.swift in Sources */,
 				A47CD8B52C1A9771003165D5 /* PlayerControlComponent.swift in Sources */,
 				A40285102C1B285700B6CC8D /* +ScoreCoinHandler.swift in Sources */,
+				A488FEF52C227B580068C07B /* +HomeScreen.swift in Sources */,
 				99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */,
 				A47CD8B32C1A9669003165D5 /* PowerUp.swift in Sources */,
 			);

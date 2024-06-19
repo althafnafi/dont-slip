@@ -52,6 +52,7 @@ extension GameScene {
         
         // Define coin parameters
         let coinType = CoinType.normal
+        
         let randomXPos = CGFloat.random(in: -icebergWidth / 2.5...icebergWidth/2.5)
         let randomYPos = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
         let spawnPos = CGPoint(x: randomXPos, y: randomYPos)
