@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+
 		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
+
+		8105C6922C2286D100701330 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C6912C2286D100701330 /* StartScene.swift */; };
+
 		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
 		A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F12C1AF33E00B6CC8D /* Iceberg.swift */; };
 		A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */; };
@@ -39,8 +43,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+
 		165736B92C2286A50099A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
+		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		99280C372C17705C00E5B76A /* AccelerometerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
 		A40284F12C1AF33E00B6CC8D /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoringTorqueComponent.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 				A47CD8992C16E595003165D5 /* Main.storyboard */,
 				A47CD89E2C16E597003165D5 /* LaunchScreen.storyboard */,
 				A47CD89C2C16E597003165D5 /* Assets.xcassets */,
+				8105C6912C2286D100701330 /* StartScene.swift */,
 			);
 			path = "dont-slip";
 			sourceTree = "<group>";
@@ -281,6 +288,7 @@
 				A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */,
 				A47CD8A82C1A9041003165D5 /* Penguin.swift in Sources */,
 				A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */,
+				8105C6922C2286D100701330 /* StartScene.swift in Sources */,
 				A47CD8982C16E595003165D5 /* GameViewController.swift in Sources */,
 				A40285122C1BC0D600B6CC8D /* SpringComponent.swift in Sources */,
 				A40284FA2C1AFBEC00B6CC8D /* ActionComponent.swift in Sources */,
