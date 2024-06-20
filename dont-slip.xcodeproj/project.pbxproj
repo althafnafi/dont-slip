@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
+		8105C6922C2286D100701330 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C6912C2286D100701330 /* StartScene.swift */; };
+		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
+		A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F12C1AF33E00B6CC8D /* Iceberg.swift */; };
+		A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */; };
+		A40284FA2C1AFBEC00B6CC8D /* ActionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */; };
+		A40284FC2C1B005100B6CC8D /* +TouchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284FB2C1B005100B6CC8D /* +TouchHandler.swift */; };
+		A40284FE2C1B01E300B6CC8D /* +CollisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */; };
+		A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */; };
+		A40285082C1B155000B6CC8D /* PositionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285072C1B155000B6CC8D /* PositionComponent.swift */; };
+		A402850A2C1B166E00B6CC8D /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285092C1B166E00B6CC8D /* Coin.swift */; };
+		A40285102C1B285700B6CC8D /* +ScoreCoinHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */; };
+		A40285122C1BC0D600B6CC8D /* SpringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40285112C1BC0D600B6CC8D /* SpringComponent.swift */; };
 		A47CD8902C16E595003165D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD88F2C16E595003165D5 /* AppDelegate.swift */; };
 		A47CD8922C16E595003165D5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A47CD8912C16E595003165D5 /* GameScene.sks */; };
 		A47CD8942C16E595003165D5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A47CD8932C16E595003165D5 /* Actions.sks */; };
@@ -15,9 +28,32 @@
 		A47CD89B2C16E595003165D5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A47CD89A2C16E595003165D5 /* Base */; };
 		A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A47CD89C2C16E597003165D5 /* Assets.xcassets */; };
 		A47CD8A02C16E597003165D5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A47CD89F2C16E597003165D5 /* Base */; };
+		A47CD8A82C1A9041003165D5 /* Penguin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8A72C1A9041003165D5 /* Penguin.swift */; };
+		A47CD8AB2C1A9087003165D5 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8AA2C1A9087003165D5 /* SpriteComponent.swift */; };
+		A47CD8AD2C1A924D003165D5 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8AC2C1A924D003165D5 /* EntityManager.swift */; };
+		A47CD8B32C1A9669003165D5 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8B22C1A9669003165D5 /* PowerUp.swift */; };
+		A47CD8B52C1A9771003165D5 /* PlayerControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8B42C1A9771003165D5 /* PlayerControlComponent.swift */; };
+		A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8B62C1A98D9003165D5 /* Obstacle.swift */; };
+		A47CD8BB2C1AA9FA003165D5 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */; };
+		A47CD8BE2C1ABB64003165D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */; };
+		A488FEF52C227B580068C07B /* EndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488FEF42C227B580068C07B /* EndScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		165736B92C2286A50099A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
+		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
+		99280C372C17705C00E5B76A /* AccelerometerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
+		A40284F12C1AF33E00B6CC8D /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
+		A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoringTorqueComponent.swift; sourceTree = "<group>"; };
+		A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionComponent.swift; sourceTree = "<group>"; };
+		A40284FB2C1B005100B6CC8D /* +TouchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+TouchHandler.swift"; sourceTree = "<group>"; };
+		A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollisionHandler.swift"; sourceTree = "<group>"; };
+		A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+RandomSpawnHandler.swift"; sourceTree = "<group>"; };
+		A40285072C1B155000B6CC8D /* PositionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionComponent.swift; sourceTree = "<group>"; };
+		A40285092C1B166E00B6CC8D /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ScoreCoinHandler.swift"; sourceTree = "<group>"; };
+		A40285112C1BC0D600B6CC8D /* SpringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringComponent.swift; sourceTree = "<group>"; };
 		A47CD88C2C16E595003165D5 /* dont-slip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dont-slip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47CD88F2C16E595003165D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A47CD8912C16E595003165D5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -27,6 +63,15 @@
 		A47CD89A2C16E595003165D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A47CD89C2C16E597003165D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A47CD89F2C16E597003165D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A47CD8A72C1A9041003165D5 /* Penguin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Penguin.swift; sourceTree = "<group>"; };
+		A47CD8AA2C1A9087003165D5 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		A47CD8AC2C1A924D003165D5 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		A47CD8B22C1A9669003165D5 /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
+		A47CD8B42C1A9771003165D5 /* PlayerControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlComponent.swift; sourceTree = "<group>"; };
+		A47CD8B62C1A98D9003165D5 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
+		A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		A488FEF42C227B580068C07B /* EndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,9 +85,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A40284FF2C1B01E900B6CC8D /* Handler Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A40284FB2C1B005100B6CC8D /* +TouchHandler.swift */,
+				A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */,
+				A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */,
+				A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */,
+			);
+			path = "Handler Extensions";
+			sourceTree = "<group>";
+		};
+		A40285132C1BC71C00B6CC8D /* Iceberg Physics */ = {
+			isa = PBXGroup;
+			children = (
+				A40285112C1BC0D600B6CC8D /* SpringComponent.swift */,
+				A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */,
+			);
+			path = "Iceberg Physics";
+			sourceTree = "<group>";
+		};
 		A47CD8832C16E595003165D5 = {
 			isa = PBXGroup;
 			children = (
+				165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */,
 				A47CD88E2C16E595003165D5 /* dont-slip */,
 				A47CD88D2C16E595003165D5 /* Products */,
 			);
@@ -59,16 +125,82 @@
 		A47CD88E2C16E595003165D5 /* dont-slip */ = {
 			isa = PBXGroup;
 			children = (
-				A47CD88F2C16E595003165D5 /* AppDelegate.swift */,
-				A47CD8912C16E595003165D5 /* GameScene.sks */,
-				A47CD8932C16E595003165D5 /* Actions.sks */,
-				A47CD8952C16E595003165D5 /* GameScene.swift */,
+				165736B92C2286A50099A5A0 /* Info.plist */,
+				A47CD8B92C1AA840003165D5 /* Scene */,
+				A47CD8BC2C1AB750003165D5 /* Actions */,
+				A47CD8A62C1A9038003165D5 /* Entities */,
+				A47CD8A92C1A9067003165D5 /* Components */,
+				A47CD8B82C1A9F74003165D5 /* Managers */,
 				A47CD8972C16E595003165D5 /* GameViewController.swift */,
+				A47CD88F2C16E595003165D5 /* AppDelegate.swift */,
 				A47CD8992C16E595003165D5 /* Main.storyboard */,
-				A47CD89C2C16E597003165D5 /* Assets.xcassets */,
 				A47CD89E2C16E597003165D5 /* LaunchScreen.storyboard */,
+				A47CD89C2C16E597003165D5 /* Assets.xcassets */,
 			);
 			path = "dont-slip";
+			sourceTree = "<group>";
+		};
+		A47CD8A62C1A9038003165D5 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A47CD8AC2C1A924D003165D5 /* EntityManager.swift */,
+				A47CD8A72C1A9041003165D5 /* Penguin.swift */,
+				A47CD8B62C1A98D9003165D5 /* Obstacle.swift */,
+				A40284F12C1AF33E00B6CC8D /* Iceberg.swift */,
+				A47CD8B22C1A9669003165D5 /* PowerUp.swift */,
+				A40285092C1B166E00B6CC8D /* Coin.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A47CD8A92C1A9067003165D5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A47CD8AA2C1A9087003165D5 /* SpriteComponent.swift */,
+				A47CD8B42C1A9771003165D5 /* PlayerControlComponent.swift */,
+				A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */,
+				A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */,
+				A40285072C1B155000B6CC8D /* PositionComponent.swift */,
+				A40285132C1BC71C00B6CC8D /* Iceberg Physics */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A47CD8B82C1A9F74003165D5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				99280C372C17705C00E5B76A /* AccelerometerManager.swift */,
+				A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A47CD8B92C1AA840003165D5 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				A488FEF32C227B4A0068C07B /* Modality */,
+				A40284FF2C1B01E900B6CC8D /* Handler Extensions */,
+				A47CD8952C16E595003165D5 /* GameScene.swift */,
+				8105C6912C2286D100701330 /* StartScene.swift */,
+				A47CD8912C16E595003165D5 /* GameScene.sks */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		A47CD8BC2C1AB750003165D5 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				A47CD8932C16E595003165D5 /* Actions.sks */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		A488FEF32C227B4A0068C07B /* Modality */ = {
+			isa = PBXGroup;
+			children = (
+				A488FEF42C227B580068C07B /* EndScreen.swift */,
+			);
+			path = Modality;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A47CD8922C16E595003165D5 /* GameScene.sks in Resources */,
+				165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */,
 				A47CD89B2C16E595003165D5 /* Base in Resources */,
 				A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */,
 				A47CD8942C16E595003165D5 /* Actions.sks in Resources */,
@@ -145,8 +278,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				A47CD8962C16E595003165D5 /* GameScene.swift in Sources */,
+				A40284FC2C1B005100B6CC8D /* +TouchHandler.swift in Sources */,
+				A47CD8AD2C1A924D003165D5 /* EntityManager.swift in Sources */,
+				A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */,
+				A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */,
+				A47CD8A82C1A9041003165D5 /* Penguin.swift in Sources */,
+				A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */,
+				8105C6922C2286D100701330 /* StartScene.swift in Sources */,
 				A47CD8982C16E595003165D5 /* GameViewController.swift in Sources */,
+				A40285122C1BC0D600B6CC8D /* SpringComponent.swift in Sources */,
+				A40284FA2C1AFBEC00B6CC8D /* ActionComponent.swift in Sources */,
+				A40284FE2C1B01E300B6CC8D /* +CollisionHandler.swift in Sources */,
+				A47CD8BE2C1ABB64003165D5 /* SoundManager.swift in Sources */,
+				A402850A2C1B166E00B6CC8D /* Coin.swift in Sources */,
+				A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */,
+				A40285082C1B155000B6CC8D /* PositionComponent.swift in Sources */,
 				A47CD8902C16E595003165D5 /* AppDelegate.swift in Sources */,
+				A47CD8BB2C1AA9FA003165D5 /* PhysicsComponent.swift in Sources */,
+				A47CD8AB2C1A9087003165D5 /* SpriteComponent.swift in Sources */,
+				A47CD8B52C1A9771003165D5 /* PlayerControlComponent.swift in Sources */,
+				A40285102C1B285700B6CC8D /* +ScoreCoinHandler.swift in Sources */,
+				A488FEF52C227B580068C07B /* EndScreen.swift in Sources */,
+				99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */,
+				A47CD8B32C1A9669003165D5 /* PowerUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,14 +452,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTWBVW7W5F;
+				DEVELOPMENT_TEAM = TL3VJLYVF8;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,14 +481,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTWBVW7W5F;
+				DEVELOPMENT_TEAM = TL3VJLYVF8;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
