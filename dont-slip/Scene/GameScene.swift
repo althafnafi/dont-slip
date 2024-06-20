@@ -83,10 +83,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinContainer: SKSpriteNode!
     var highScoreContainer: SKSpriteNode!
     var totalCoinContainer: SKSpriteNode!
-
+    
+    var blueModalBackground: SKSpriteNode!
+        
     var gameOverScoreLabel: SKLabelNode!
     var gameOverCoinsLabel: SKLabelNode!
-    var gameOverLabel: SKLabelNode!
+    var gameOverLabel: SKSpriteNode!
     var restartButton: SKSpriteNode!
     var homeButton: SKSpriteNode!
     var scoreGameOverLabel: SKLabelNode!
@@ -95,6 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinGameOverLabel: SKLabelNode!
     var totalLabel: SKLabelNode!
     var totalCoinsGameOverLabel: SKLabelNode!
+    var coinImgOver: SKSpriteNode!
+    var coinImgOver2: SKSpriteNode!
 
     override func sceneDidLoad() {
         // Setup physicsWorld bases
