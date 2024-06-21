@@ -43,7 +43,7 @@ class Obstacle: GKEntity {
         
         // 1. Add sprite/texture component
         // TODO: Ganti jadi make gambar
-        let spriteComponent = SpriteComponent(node: SKSpriteNode(color: .red, size: CGSize(width: 30, height: 30)))
+        let spriteComponent = SpriteComponent(node: getBoxNode())
 //        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: type.imageName))
         spriteComponent.setPos(pos: spawnPos)
         addComponent(spriteComponent)
@@ -79,5 +79,15 @@ class Obstacle: GKEntity {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func getBoxNode() -> SKSpriteNode {
+        let boxTexture = SKTexture(imageNamed: "box")
+        let boxNode = SKSpriteNode(texture: boxTexture)
+        
+        // Optionally set the size if needed
+        boxNode.size = CGSize(width: 50, height: 50)
+        
+        return boxNode
     }
 }

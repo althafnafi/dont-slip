@@ -34,8 +34,8 @@ class Coin: GKEntity {
         // Add sprite/texture component
         
         // TODO: Ganti jadi make gambar
-        let coin = SKSpriteNode(color: .yellow, size: CGSize(width: 20, height: 20))
-        let spriteComponent = SpriteComponent(node: coin)
+       // let coin = SKSpriteNode(color: .yellow, size: CGSize(width: 20, height: 20))
+        let spriteComponent = SpriteComponent(node: getCoinNode())
 //        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: type.imageName))
         spriteComponent.setPos(pos: spawnPos)
         addComponent(spriteComponent)
@@ -65,5 +65,15 @@ class Coin: GKEntity {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func getCoinNode() -> SKSpriteNode {
+        let coinTexture = SKTexture(imageNamed: "Coin")
+        let coinNode = SKSpriteNode(texture: coinTexture)
+        
+        // Optionally set the size if needed
+         coinNode.size = CGSize(width: 50, height: 50)
+        
+        return coinNode
     }
 }

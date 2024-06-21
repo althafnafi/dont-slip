@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164113412C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 164113402C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf */; };
+		164113432C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 164113422C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf */; };
+		164113452C23D57700E18731 /* AlegreyaSansSC-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 164113442C23D57700E18731 /* AlegreyaSansSC-Medium.ttf */; };
 		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
 		8105C6922C2286D100701330 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C6912C2286D100701330 /* StartScene.swift */; };
 		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		164113402C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-Bold.ttf"; sourceTree = "<group>"; };
+		164113422C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-ExtraBold.ttf"; sourceTree = "<group>"; };
+		164113442C23D57700E18731 /* AlegreyaSansSC-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-Medium.ttf"; sourceTree = "<group>"; };
 		165736B92C2286A50099A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
 		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
@@ -108,6 +114,9 @@
 		A47CD8832C16E595003165D5 = {
 			isa = PBXGroup;
 			children = (
+				164113402C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf */,
+				164113422C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf */,
+				164113442C23D57700E18731 /* AlegreyaSansSC-Medium.ttf */,
 				165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */,
 				A47CD88E2C16E595003165D5 /* dont-slip */,
 				A47CD88D2C16E595003165D5 /* Products */,
@@ -263,10 +272,13 @@
 			files = (
 				A47CD8922C16E595003165D5 /* GameScene.sks in Resources */,
 				165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */,
+				164113412C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf in Resources */,
 				A47CD89B2C16E595003165D5 /* Base in Resources */,
 				A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */,
 				A47CD8942C16E595003165D5 /* Actions.sks in Resources */,
 				A47CD8A02C16E597003165D5 /* Base in Resources */,
+				164113452C23D57700E18731 /* AlegreyaSansSC-Medium.ttf in Resources */,
+				164113432C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +464,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TL3VJLYVF8;
+				DEVELOPMENT_TEAM = 96FXBFR33T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -481,7 +493,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TL3VJLYVF8;
+				DEVELOPMENT_TEAM = 96FXBFR33T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
