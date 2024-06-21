@@ -40,6 +40,8 @@
 		A47CD8BB2C1AA9FA003165D5 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */; };
 		A47CD8BE2C1ABB64003165D5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */; };
 		A488FEF52C227B580068C07B /* EndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488FEF42C227B580068C07B /* EndScreen.swift */; };
+		A4A14E5C2C25139600CB4457 /* +DifficultyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A14E5B2C25139600CB4457 /* +DifficultyHandler.swift */; };
+		A4A14E5E2C2513B700CB4457 /* +Waves.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A14E5D2C2513B700CB4457 /* +Waves.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
 		A47CD8BD2C1ABB64003165D5 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		A488FEF42C227B580068C07B /* EndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreen.swift; sourceTree = "<group>"; };
+		A4A14E5B2C25139600CB4457 /* +DifficultyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DifficultyHandler.swift"; sourceTree = "<group>"; };
+		A4A14E5D2C2513B700CB4457 /* +Waves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Waves.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				A40284FD2C1B01E300B6CC8D /* +CollisionHandler.swift */,
 				A40285052C1B12C100B6CC8D /* +RandomSpawnHandler.swift */,
 				A402850F2C1B285700B6CC8D /* +ScoreCoinHandler.swift */,
+				A4A14E5B2C25139600CB4457 /* +DifficultyHandler.swift */,
+				A4A14E5D2C2513B700CB4457 /* +Waves.swift */,
 			);
 			path = "Handler Extensions";
 			sourceTree = "<group>";
@@ -289,10 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A14E5E2C2513B700CB4457 /* +Waves.swift in Sources */,
 				A47CD8962C16E595003165D5 /* GameScene.swift in Sources */,
 				A40284FC2C1B005100B6CC8D /* +TouchHandler.swift in Sources */,
 				A47CD8AD2C1A924D003165D5 /* EntityManager.swift in Sources */,
 				A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */,
+				A4A14E5C2C25139600CB4457 /* +DifficultyHandler.swift in Sources */,
 				A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */,
 				A47CD8A82C1A9041003165D5 /* Penguin.swift in Sources */,
 				A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */,
@@ -462,9 +470,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96FXBFR33T;
+				DEVELOPMENT_TEAM = YTWBVW7W5F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -480,6 +489,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "crteam.dont-slip";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -491,9 +501,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96FXBFR33T;
+				DEVELOPMENT_TEAM = YTWBVW7W5F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -509,6 +520,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "crteam.dont-slip";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

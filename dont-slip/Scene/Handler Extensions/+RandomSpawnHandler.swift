@@ -34,16 +34,14 @@ extension GameScene {
         let spawnPos = CGPoint(x: randomXPos, y: yPos)
         
         // Make the Obstacle entity
-        let obstacle = Obstacle(type: obstacleType, spawnPos: spawnPos, entityManager: entityManager)
+        let obstacle = Obstacle(type: obstacleType, spawnPos: spawnPos, entityManager: entityManager, massMultiplier: obstacleMassMultiplier)
         // Add obstacle to entity manager
         entityManager.add(obstacle)
-        // Reduce the spawn interval to increase difficulty over time
-        obstacleSpawnInterval = max(spawnInterval * 0.70, 0.5)
+        
     }
     
     
     // MARK: Coins
-    
     // Function to spawn a coin (gold box)
     func spawnCoin() {
         if gameOver || currentActiveCoins >= 2 {

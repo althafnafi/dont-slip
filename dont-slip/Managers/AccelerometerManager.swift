@@ -46,7 +46,7 @@ class AccelerometerManager {
     
     func getAdjustedAccelData() -> CMAcceleration? {
         guard let accel = acceleration else {
-            print("getAdjustedAccelData: error getting acceleration")
+//            print("getAdjustedAccelData: error getting acceleration")
             return nil
             
         }

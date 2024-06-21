@@ -53,12 +53,12 @@ class PlayerControlComponent: GKComponent {
     func moveBasedOnAccelerometer() {
         
         guard let penguinBody = spriteComponent.node.physicsBody else {
-            print("movePenguin: errror defining penguinBody")
+//            print("movePenguin: errror defining penguinBody")
             return
         }
         
         guard let adjustedAccel = accelManager.getAdjustedAccelData() else {
-            print("movePenguin: error getting adjusted accel data")
+//            print("movePenguin: error getting adjusted accel data")
             return
         }
         

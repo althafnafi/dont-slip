@@ -37,7 +37,7 @@ class Obstacle: GKEntity {
     
     // MARK: Initializers
     
-    init(type: ObstacleType, spawnPos: CGPoint, entityManager: EntityManager) {
+    init(type: ObstacleType, spawnPos: CGPoint, entityManager: EntityManager, massMultiplier: Double = 1.0) {
         self.type = type
         super.init()
         
@@ -50,7 +50,7 @@ class Obstacle: GKEntity {
         
         // 2. Add physics component
         // based on obstacle type
-        addComponent(PhysicsComponent(node: spriteComponent.node, body: getObstaclePhysics(size: spriteComponent.node.size), mass: type.obstacleMass))
+        addComponent(PhysicsComponent(node: spriteComponent.node, body: getObstaclePhysics(size: spriteComponent.node.size), mass: type.obstacleMass * massMultiplier))
     }
 
     private func getObstaclePhysics(size: CGSize) -> SKPhysicsBody {

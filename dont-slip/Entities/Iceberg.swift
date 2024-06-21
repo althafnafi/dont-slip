@@ -58,10 +58,14 @@ class Iceberg: GKEntity {
             print("Error setting friction: outside of range")
             return
         }
-//        
-//        for e in entityManager.entities {
-//            if 
-//        }
+        
+        guard let spriteComponent = self.component(ofType: SpriteComponent.self) else {
+            print("setFriction: can't get spriteComponent")
+            return
+        }
+        
+        spriteComponent.node.physicsBody?.friction = friction
+        
     }
     
     
