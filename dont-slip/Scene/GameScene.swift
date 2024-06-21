@@ -99,6 +99,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var totalCoinsGameOverLabel: SKLabelNode!
     var coinImgOver: SKSpriteNode!
     var coinImgOver2: SKSpriteNode!
+    
+    var icebergStateSystem: IcebergSystem!
 
     override func sceneDidLoad() {
         // Setup physicsWorld bases
@@ -124,12 +126,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         /* Iceberg setup */
         // Define the iceberg entity
-        let iceberg = Iceberg(imageName: "iceberg", entityManager: entityManager)
+        let iceberg = Iceberg(nodeName: "iceberg_100", entityManager: entityManager, state: IcebergStateComponent())
+        icebergStateSystem = IcebergSystem(entityManager: entityManager)
+
         // Add with entity manager
         entityManager.add(iceberg)
 
         /* Penguin: Pinjing Setup */
-        let penguin = Penguin(
+        let penguin = Penguin (
             imageName: "penguin",
             accelerometerManager: accelerometerManager,
             groundNode: iceberg.component(ofType: SpriteComponent.self)?.node,
@@ -215,6 +219,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         // Update entities inside the entity manager
         entityManager.update(deltaTime: dt)
+        
+        // Update the IcebergStateSystem
+        icebergStateSystem.update(deltaTime: dt)  // Add this line
 
         // Update accelerometer
         accelerometerManager?.startAccelerometerUpdates()

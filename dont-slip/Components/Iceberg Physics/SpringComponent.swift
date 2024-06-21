@@ -20,7 +20,6 @@ class SpringComponent: GKComponent {
         self.entityManager = entityManager
         
         super.init()
-        
     }
     
     func getSpringJoint() -> SKPhysicsJointSpring {

@@ -10,17 +10,19 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-
 class PhysicsComponent: GKComponent {
     // MARK: Properties
+    var node : SKSpriteNode!
     
     // MARK: Initializers
     init(node: SKSpriteNode, body: SKPhysicsBody) {
+        self.node = node
         node.physicsBody = body
         super.init()
     }
     
     init(node: SKSpriteNode, body: SKPhysicsBody, mass: CGFloat) {
+        self.node = node
         body.mass = mass
         node.physicsBody = body
         super.init()
@@ -29,6 +31,10 @@ class PhysicsComponent: GKComponent {
     init(node: SKNode, body: SKPhysicsBody) {
         node.physicsBody = body
         super.init()
+    }
+    
+    func updatePhysics(newBody: SKPhysicsBody) {
+        node.physicsBody = newBody
     }
     
     required init?(coder: NSCoder) {

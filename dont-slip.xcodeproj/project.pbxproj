@@ -13,6 +13,11 @@
 		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
 		8105C6922C2286D100701330 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C6912C2286D100701330 /* StartScene.swift */; };
 		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
+		9979A9652C24671A00F68B8E /* IcebergStateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A9642C24670C00F68B8E /* IcebergStateComponent.swift */; };
+		9979A9672C24683900F68B8E /* IcebergSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A9662C24683200F68B8E /* IcebergSystem.swift */; };
+		9979A96A2C24703E00F68B8E /* IcebergTransitionShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9979A9692C24703300F68B8E /* IcebergTransitionShader.metal */; };
+		9979A96D2C24730200F68B8E /* ShaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9979A96C2C2472FD00F68B8E /* ShaderComponent.swift */; };
+		9979A9732C2479AC00F68B8E /* IcebergTransitionShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9979A9722C2479A200F68B8E /* IcebergTransitionShader.fsh */; };
 		A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F12C1AF33E00B6CC8D /* Iceberg.swift */; };
 		A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */; };
 		A40284FA2C1AFBEC00B6CC8D /* ActionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */; };
@@ -50,6 +55,11 @@
 		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
 		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		99280C372C17705C00E5B76A /* AccelerometerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
+		9979A9642C24670C00F68B8E /* IcebergStateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcebergStateComponent.swift; sourceTree = "<group>"; };
+		9979A9662C24683200F68B8E /* IcebergSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcebergSystem.swift; sourceTree = "<group>"; };
+		9979A9692C24703300F68B8E /* IcebergTransitionShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = IcebergTransitionShader.metal; sourceTree = "<group>"; };
+		9979A96C2C2472FD00F68B8E /* ShaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderComponent.swift; sourceTree = "<group>"; };
+		9979A9722C2479A200F68B8E /* IcebergTransitionShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = IcebergTransitionShader.fsh; sourceTree = "<group>"; };
 		A40284F12C1AF33E00B6CC8D /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoringTorqueComponent.swift; sourceTree = "<group>"; };
 		A40284F92C1AFBEC00B6CC8D /* ActionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionComponent.swift; sourceTree = "<group>"; };
@@ -91,6 +101,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9979A9632C24653100F68B8E /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+				9979A9662C24683200F68B8E /* IcebergSystem.swift */,
+			);
+			path = Systems;
+			sourceTree = "<group>";
+		};
+		9979A9682C24702900F68B8E /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				9979A9722C2479A200F68B8E /* IcebergTransitionShader.fsh */,
+				9979A9692C24703300F68B8E /* IcebergTransitionShader.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		A40284FF2C1B01E900B6CC8D /* Handler Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,9 +161,11 @@
 		A47CD88E2C16E595003165D5 /* dont-slip */ = {
 			isa = PBXGroup;
 			children = (
+				9979A9682C24702900F68B8E /* Shaders */,
 				165736B92C2286A50099A5A0 /* Info.plist */,
 				A47CD8B92C1AA840003165D5 /* Scene */,
 				A47CD8BC2C1AB750003165D5 /* Actions */,
+				9979A9632C24653100F68B8E /* Systems */,
 				A47CD8A62C1A9038003165D5 /* Entities */,
 				A47CD8A92C1A9067003165D5 /* Components */,
 				A47CD8B82C1A9F74003165D5 /* Managers */,
@@ -165,6 +194,8 @@
 		A47CD8A92C1A9067003165D5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9979A96C2C2472FD00F68B8E /* ShaderComponent.swift */,
+				9979A9642C24670C00F68B8E /* IcebergStateComponent.swift */,
 				A47CD8AA2C1A9087003165D5 /* SpriteComponent.swift */,
 				A47CD8B42C1A9771003165D5 /* PlayerControlComponent.swift */,
 				A47CD8BA2C1AA9FA003165D5 /* PhysicsComponent.swift */,
@@ -273,6 +304,7 @@
 				A47CD8922C16E595003165D5 /* GameScene.sks in Resources */,
 				165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */,
 				164113412C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf in Resources */,
+				9979A9732C2479AC00F68B8E /* IcebergTransitionShader.fsh in Resources */,
 				A47CD89B2C16E595003165D5 /* Base in Resources */,
 				A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */,
 				A47CD8942C16E595003165D5 /* Actions.sks in Resources */,
@@ -293,6 +325,7 @@
 				A40284FC2C1B005100B6CC8D /* +TouchHandler.swift in Sources */,
 				A47CD8AD2C1A924D003165D5 /* EntityManager.swift in Sources */,
 				A47CD8B72C1A98D9003165D5 /* Obstacle.swift in Sources */,
+				9979A9652C24671A00F68B8E /* IcebergStateComponent.swift in Sources */,
 				A40285062C1B12C100B6CC8D /* +RandomSpawnHandler.swift in Sources */,
 				A47CD8A82C1A9041003165D5 /* Penguin.swift in Sources */,
 				A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */,
@@ -305,9 +338,12 @@
 				A402850A2C1B166E00B6CC8D /* Coin.swift in Sources */,
 				A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */,
 				A40285082C1B155000B6CC8D /* PositionComponent.swift in Sources */,
+				9979A96A2C24703E00F68B8E /* IcebergTransitionShader.metal in Sources */,
+				9979A96D2C24730200F68B8E /* ShaderComponent.swift in Sources */,
 				A47CD8902C16E595003165D5 /* AppDelegate.swift in Sources */,
 				A47CD8BB2C1AA9FA003165D5 /* PhysicsComponent.swift in Sources */,
 				A47CD8AB2C1A9087003165D5 /* SpriteComponent.swift in Sources */,
+				9979A9672C24683900F68B8E /* IcebergSystem.swift in Sources */,
 				A47CD8B52C1A9771003165D5 /* PlayerControlComponent.swift in Sources */,
 				A40285102C1B285700B6CC8D /* +ScoreCoinHandler.swift in Sources */,
 				A488FEF52C227B580068C07B /* EndScreen.swift in Sources */,
@@ -464,7 +500,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96FXBFR33T;
+				DEVELOPMENT_TEAM = 5V847CY3JM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -493,7 +529,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96FXBFR33T;
+				DEVELOPMENT_TEAM = 5V847CY3JM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
