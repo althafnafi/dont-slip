@@ -50,6 +50,7 @@
 		164113442C23D57700E18731 /* AlegreyaSansSC-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSansSC-Medium.ttf"; sourceTree = "<group>"; };
 		165736B92C2286A50099A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
+		4464DA212C273EB400A7759F /* dont-slip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dont-slip.entitlements"; sourceTree = "<group>"; };
 		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		99280C372C17705C00E5B76A /* AccelerometerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
 		A40284F12C1AF33E00B6CC8D /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		A47CD88E2C16E595003165D5 /* dont-slip */ = {
 			isa = PBXGroup;
 			children = (
+				4464DA212C273EB400A7759F /* dont-slip.entitlements */,
 				165736B92C2286A50099A5A0 /* Info.plist */,
 				A47CD8B92C1AA840003165D5 /* Scene */,
 				A47CD8BC2C1AB750003165D5 /* Actions */,
@@ -470,10 +472,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "dont-slip/dont-slip.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTWBVW7W5F;
+				DEVELOPMENT_TEAM = 87N548UZ24;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -501,10 +504,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "dont-slip/dont-slip.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTWBVW7W5F;
+				DEVELOPMENT_TEAM = 87N548UZ24;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
