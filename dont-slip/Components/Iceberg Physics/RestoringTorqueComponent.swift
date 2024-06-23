@@ -13,7 +13,7 @@ import SpriteKit
 class RestoringTorqueComponent: GKComponent {
     
     // MARK: Properties
-    let node: SKSpriteNode
+    var node: SKSpriteNode
     let restoringMult: CGFloat
     let dampingMult: CGFloat
     let animationDuration: TimeInterval

@@ -2,12 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UISupportedInterfaceOrientations</key>
+	<key>CFBundleURLTypes</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<dict/>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict/>
@@ -17,10 +14,6 @@
 		<string>AlegreyaSansSC-ExtraBold.ttf</string>
 		<string>AlegreyaSansSC-Bold.ttf</string>
 		<string>AlegreyaSansSC-Medium.ttf</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict/>
 	</array>
 </dict>
 </plist>
