@@ -15,7 +15,6 @@ class Penguin: GKEntity {
     
     // MARK: Initializers
     init(imageName: String, accelerometerManager: AccelerometerManager?, groundNode: SKSpriteNode?) {
-        
         guard let groundGuarded = groundNode else {
             print("init Penguin: component error (defining ground)")
             super.init()
@@ -23,6 +22,7 @@ class Penguin: GKEntity {
         }
         
         self.ground = groundGuarded
+        
         super.init()
         
         // 1. Add sprite
@@ -34,7 +34,8 @@ class Penguin: GKEntity {
             let nodeSize = spriteComponent.node.size
             let yPos = groundY + groundH / 2 + nodeSize.height / 2
             
-            spriteComponent.setPos(pos: CGPoint(x: 0, y: yPos))
+            
+            spriteComponent.setPos(pos: CGPoint(x: groundH, y: yPos))
         }
         addComponent(spriteComponent)
         
@@ -69,7 +70,7 @@ class Penguin: GKEntity {
             let nodeSize = spriteComponent.node.size
             let yPos = groundY + groundH / 2 + nodeSize.height / 2
             
-            spriteComponent.setPos(pos: CGPoint(x: groundH, y: yPos))
+            spriteComponent.setPos(pos: CGPoint(x: 0, y: yPos))
         }
         addComponent(spriteComponent)
 
@@ -122,9 +123,6 @@ class Penguin: GKEntity {
     private func getPenguinNode() -> SKSpriteNode {
         let penguinTexture = SKTexture(imageNamed: "penguin")
         let penguinNode = SKSpriteNode(texture: penguinTexture)
-        
-        // Optionally set the size if needed
-        // penguinNode.size = CGSize(width: 30, height: 30)
         
         return penguinNode
     }
