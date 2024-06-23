@@ -258,7 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addBackgroundImage() {
-        let background = SKSpriteNode(imageNamed: "bg")
+        let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         background.zPosition = -1 // Ensure the background is behind other nodes
         background.size = self.size // Scale the background to fit the screen size
