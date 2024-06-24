@@ -84,7 +84,21 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
             }
         }
     }
-    
+
+    func showLeaderboard() {
+        if GKLocalPlayer.local.isAuthenticated {
+            if let viewController = self.view?.window?.rootViewController {
+                let gcViewController = GKGameCenterViewController(leaderboardID: "pinguinsurvival", playerScope: .global, timeScope: .allTime)
+                gcViewController.gameCenterDelegate = self
+                viewController.present(gcViewController, animated: true, completion: nil)
+                print("Showing leaderboard")
+            } else {
+                print("Root view controller is nil")
+            }
+        } else {
+            print("User is not authenticated to access Game Center")
+        }
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -120,17 +134,6 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
                 showLeaderboard()
             }
 
-        }
-    }
-    
-    func showLeaderboard() {
-        if GKLocalPlayer.local.isAuthenticated {
-            let viewController = self.view?.window?.rootViewController
-            let gcViewController = GKGameCenterViewController(leaderboardID: "your.leaderboard.id", playerScope: .global, timeScope: .allTime)
-            gcViewController.gameCenterDelegate = self
-            viewController?.present(gcViewController, animated: true, completion: nil)
-        } else {
-            print("User is not authenticated to access Game Center")
         }
     }
 
