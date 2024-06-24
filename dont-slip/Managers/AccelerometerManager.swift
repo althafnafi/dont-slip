@@ -13,10 +13,12 @@ import CoreMotion
 class AccelerometerManager {
     private var motionManager: CMMotionManager
     private var sensitivity: CGFloat
+    private var node: SKSpriteNode?
     
     var acceleration: CMAcceleration? // Store the latest accelerometer data
     
-    init(sensitivity: CGFloat = 250.0) {
+    init(node: SKSpriteNode?, sensitivity: CGFloat = 250.0) {
+        self.node = node
         self.sensitivity = sensitivity
         self.motionManager = CMMotionManager()
     }
@@ -46,7 +48,7 @@ class AccelerometerManager {
     
     func getAdjustedAccelData() -> CMAcceleration? {
         guard let accel = acceleration else {
-//            print("getAdjustedAccelData: error getting acceleration")
+            print("getAdjustedAccelData: error getting acceleration")
             return nil
             
         }
@@ -77,6 +79,12 @@ class AccelerometerManager {
         
         let updatedAcceleration = CMAcceleration(x: -data.acceleration.y, y: data.acceleration.x, z: data.acceleration.z)
         self.acceleration = updatedAcceleration
+        
+        // tambahin ini biar bisa dorong tipis2
+        if let penguinNode = node {
+            penguinNode.physicsBody?.applyForce(CGVector(dx: CGFloat(updatedAcceleration.x) * sensitivity, dy: CGFloat(updatedAcceleration.x) * sensitivity * 1.5))
+        }
+        
     }
 
 }

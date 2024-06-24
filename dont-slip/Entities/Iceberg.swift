@@ -14,36 +14,29 @@ import GameplayKit
 class Iceberg: GKEntity {
     
     // MARK: Properties
-    var percentage: Int = 100
     var entityManager: EntityManager
 
-    init(nodeName: String, entityManager: EntityManager, state : IcebergStateComponent) {
+    init(nodeName: String, entityManager: EntityManager, state : IcebergStateComponent, rotation: CGFloat = 0.0) {
         self.entityManager = entityManager
         super.init()
         
-        // TODO: Remove this later
-        //        let icebergNode = SKSpriteNode(color: .white, size: CGSize(width: UIScreen.main.bounds.width * 0.9, height: 35))
-        //        let spriteComponent = SpriteComponent(node: icebergNode)
-
         let icebergNode = SKSpriteNode(imageNamed: nodeName)
-        let spriteComponent = SpriteComponent(node: icebergNode)
 
         // 1. Add sprite component
-//        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
+        let spriteComponent = SpriteComponent(node: icebergNode)
         spriteComponent.setPos(pos: CGPoint(x: 0, y: 0))
+        spriteComponent.node.zRotation = rotation
         addComponent(spriteComponent)
         
         // 2. Add physics
         let size = spriteComponent.node.size
-        
-        print("Ukuran pas init : \(size)")
         let physicsBody = Iceberg.getPhysicsBody(size: size)
         addComponent(PhysicsComponent(node: spriteComponent.node, body: physicsBody))
         
         // 3. Add restoring torque physics
         addComponent(RestoringTorqueComponent(
             node: spriteComponent.node,
-            restoringMult: 10,
+            restoringMult: 15,
             dampingMult: 0.5,
             animationDuration: 0.1)
         )
@@ -55,11 +48,6 @@ class Iceberg: GKEntity {
         // 5. Add IcebergStateComponent
         addComponent(state)
         addComponent(ShaderComponent(node: icebergNode))
-        
-    }
-    
-    func resetIceberg() -> Void {
-        percentage = 100
     }
     
     func setFriction(friction: CGFloat) {
@@ -82,14 +70,10 @@ class Iceberg: GKEntity {
         
         // MARK: For Iceberg
         
-        let physicsBodySize = CGSize(width: size.width, height: 35)
+        let physicsBodySize = CGSize(width: size.width, height: 50)
         let center = CGPoint(x: 0, y: size.height / 2)
 
         let pBody = SKPhysicsBody(rectangleOf: physicsBodySize, center: center)
-
-            // Calculate the offset to position the physics body at the top of the node
-//        let offset = CGPoint(x: 0, y: (size.height - physicsBodySize.height) / 2)
-//        pBody.centerOfMassOffset = offset
         
         pBody.isDynamic = true
         pBody.affectedByGravity = true

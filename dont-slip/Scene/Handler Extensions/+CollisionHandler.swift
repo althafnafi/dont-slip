@@ -38,6 +38,21 @@ extension GameScene {
                 updatePointsLabel()
             }
         }
+        
+        // check if pining contact with the fuel
+        if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == CollisionMask.iceFuel.rawValue) ||
+            (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == CollisionMask.iceFuel.rawValue) {
+            
+            if icebergStateSystem.getGotFuel() {
+                print("Dah dpt fuel kok")
+                return
+            }
+            
+            if let fuel = contact.bodyA.node == greenCube ? contact.bodyB.node : contact.bodyA.node {
+                icebergStateSystem.setGotFuel(isGotFuel: true)
+                fuel.removeFromParent() // Remove the coin from the scene
+            } 
+        }
     }
 
     func didEnd(_ contact: SKPhysicsContact) {
