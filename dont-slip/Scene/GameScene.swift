@@ -55,6 +55,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinsLabel: SKLabelNode!
     var coinsCollected: Int = 0
     var currentActiveCoins: Int = 0
+    var isLeftCoinActive = false
+    var isRightCoinActive = false
+    
+    // Might change in the middle of the game
+    var icebergWidth = UIScreen.main.bounds.width * 0.8
     
     // Points
     internal var pointsLabel: SKLabelNode! // Label to display points

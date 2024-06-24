@@ -62,26 +62,62 @@ extension GameScene {
     // MARK: Coins
     // Function to spawn a coin (gold box)
     func spawnCoin() {
-        if gameOver || currentActiveCoins >= 2 {
-            return // Stop spawning new objects
+        //        if gameOver || currentActiveCoins >= 2 {
+        //            return // Stop spawning new objects
+        //        }
+                
+        if gameOver || (isLeftCoinActive && isRightCoinActive) {
+            return
         }
         
+        if !isLeftCoinActive {
+            // Define coin parameters
+            let coinType = CoinType.normal
+            
+            let randomXPos = CGFloat.random(in: -icebergWidth * 0.4...(-icebergWidth * 0.05))
+            let randomYPos = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
+            let spawnPos = CGPoint(x: randomXPos, y: randomYPos)
+                    
+            // Make the Coin entity
+            let coin = Coin(type: coinType, spawnPos: spawnPos, entityManager: entityManager)
+                    
+            // Add obstacle to entity manager
+            entityManager.add(coin)
+                    
+            isLeftCoinActive = true
+        }
+                
+        if !isRightCoinActive {
+            // Define coin parameters
+            let coinType = CoinType.normal
+                    
+            let randomXPos = CGFloat.random(in: icebergWidth * 0.05...icebergWidth*0.4)
+            let randomYPos = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
+            let spawnPos = CGPoint(x: randomXPos, y: randomYPos)
+                    
+            // Make the Coin entity
+            let coin = Coin(type: coinType, spawnPos: spawnPos, entityManager: entityManager)
+                    
+            // Add obstacle to entity manager
+            entityManager.add(coin)
+                    
+            isRightCoinActive = true
+        }
+                
         // Define coin parameters
-        let coinType = CoinType.normal
-        
-        let icebergWidth = icebergStateSystem.currentIcebergWdith
-        
-        let randomXPos = CGFloat.random(in: -icebergWidth / 2.5...icebergWidth/2.5)
-        let randomYPos = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
-        let spawnPos = CGPoint(x: randomXPos, y: randomYPos)
-        
-        // Make the Coin entity
-        let coin = Coin(type: coinType, spawnPos: spawnPos, entityManager: entityManager)
-        
-        // Add obstacle to entity manager
-        entityManager.add(coin)
-        
-        currentActiveCoins += 1
+        //        let coinType = CoinType.normal
+        //
+        //        let randomXPos = CGFloat.random(in: -icebergWidth / 2.5...icebergWidth/2.5)
+        //        let randomYPos = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
+        //        let spawnPos = CGPoint(x: randomXPos, y: randomYPos)
+        //
+        //        // Make the Coin entity
+        //        let coin = Coin(type: coinType, spawnPos: spawnPos, entityManager: entityManager)
+        //
+        //        // Add obstacle to entity manager
+        //        entityManager.add(coin)
+        //
+        //        currentActiveCoins += 1
         
         // TODO: Add breathing animation
         // Add "breathing" animation

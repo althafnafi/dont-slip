@@ -11,6 +11,17 @@ import SpriteKit
 
 extension GameScene {
     
+    func isLeftCoin(coin: SKNode) -> Bool {
+        // icebergWidth * 0.05...icebergWidth*0.4
+        let coinPos = coin.position
+        if coinPos.x > icebergWidth * 0.05, coinPos.x < icebergWidth * 0.4 {
+            return false
+        }
+    
+        
+        return true
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         // Will only be triggered if any of below returns a non-zero
         // bodyA.category AND bodyB.contact
@@ -33,7 +44,13 @@ extension GameScene {
             if let coin = contact.bodyA.node == greenCube ? contact.bodyB.node : contact.bodyA.node {
                 run(coinSound)
                 coin.removeFromParent() // Remove the coin from the scene
-                currentActiveCoins -= 1
+                if isLeftCoin(coin: coin) {
+                    isLeftCoinActive = false
+                }
+                
+                if isLeftCoin(coin: coin) {
+                    isRightCoinActive = false
+                }
                 coinsCollected += 1
                 updatePointsLabel()
             }
