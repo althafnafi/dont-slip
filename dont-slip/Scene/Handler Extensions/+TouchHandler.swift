@@ -18,6 +18,7 @@ extension GameScene {
     func jumpTouchHandler() {
         // Make the penguin jump
         if isPenguinOnGround, penguinControls != nil {
+            run(jumpSound)
             print("[Penguin] jump!")
             penguinControls?.jump()
         }
@@ -38,13 +39,11 @@ extension GameScene {
                 let nodes = self.nodes(at: location)
                 if nodes.contains(where: { $0.name == "restartButton" }) {
                     resetTimers()
-                    startTime = curTime
                     restartGame()
                     return
                 }
                 if nodes.contains(where: { $0.name == "homeButton" }) {
                     resetTimers()
-                    startTime = curTime
             
                     if let view = self.view {
                         

@@ -14,43 +14,40 @@ import GameplayKit
 class Iceberg: GKEntity {
     
     // MARK: Properties
-    var percentage: Int = 100
     var entityManager: EntityManager
 
-    init(imageName: String, entityManager: EntityManager) {
+    init(nodeName: String, entityManager: EntityManager, state : IcebergStateComponent, rotation: CGFloat = 0.0) {
         self.entityManager = entityManager
         super.init()
         
-        // TODO: Remove this later
-        let icebergNode = SKSpriteNode(color: .white, size: CGSize(width: UIScreen.main.bounds.width * 0.9, height: 35))
-        let spriteComponent = SpriteComponent(node: icebergNode)
+        let icebergNode = SKSpriteNode(imageNamed: nodeName)
 
         // 1. Add sprite component
-//        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
+        let spriteComponent = SpriteComponent(node: icebergNode)
         spriteComponent.setPos(pos: CGPoint(x: 0, y: 0))
+        spriteComponent.node.zRotation = rotation
         addComponent(spriteComponent)
         
         // 2. Add physics
         let size = spriteComponent.node.size
-        let physicsBody = getPhysicsBody(size: size)
+        let physicsBody = Iceberg.getPhysicsBody(size: size)
         addComponent(PhysicsComponent(node: spriteComponent.node, body: physicsBody))
         
         // 3. Add restoring torque physics
         addComponent(RestoringTorqueComponent(
             node: spriteComponent.node,
-            restoringMult: 10,
+            restoringMult: 15,
             dampingMult: 0.5,
             animationDuration: 0.1)
         )
         
         // 4. Attach SpringComponent (for physics)
-        let anchorNode: SKNode = getAnchorNode()
+        let anchorNode: SKNode = Iceberg.getAnchorNode()
         addComponent(SpringComponent(anchorNode: anchorNode, objectNode: spriteComponent.node, entityManager: entityManager))
         
-    }
-    
-    func resetIceberg() -> Void {
-        percentage = 100
+        // 5. Add IcebergStateComponent
+        addComponent(state)
+        addComponent(ShaderComponent(node: icebergNode))
     }
     
     func setFriction(friction: CGFloat) {
@@ -58,17 +55,25 @@ class Iceberg: GKEntity {
             print("Error setting friction: outside of range")
             return
         }
-//        
-//        for e in entityManager.entities {
-//            if 
-//        }
+        
+        guard let spriteComponent = self.component(ofType: SpriteComponent.self) else {
+            print("setFriction: can't get spriteComponent")
+            return
+        }
+        
+        spriteComponent.node.physicsBody?.friction = friction
+        
     }
     
     
-    private func getPhysicsBody(size: CGSize, restitution: CGFloat = 0.2, friction: CGFloat = 0) -> SKPhysicsBody {
+    static func getPhysicsBody(size: CGSize, restitution: CGFloat = 0.2, friction: CGFloat = 0) -> SKPhysicsBody {
         
         // MARK: For Iceberg
-        let pBody = SKPhysicsBody(rectangleOf: size)
+        
+        let physicsBodySize = CGSize(width: size.width, height: 50)
+        let center = CGPoint(x: 0, y: size.height / 2)
+
+        let pBody = SKPhysicsBody(rectangleOf: physicsBodySize, center: center)
         
         pBody.isDynamic = true
         pBody.affectedByGravity = true
@@ -85,7 +90,7 @@ class Iceberg: GKEntity {
         
     }
     
-    private func getAnchorNode() -> SKNode {
+    static func getAnchorNode() -> SKNode {
         let anchorNode = SKNode()
             
         anchorNode.position = CGPoint(x: 0, y: 0)
