@@ -12,22 +12,29 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
         authenticateUser()
         
         // Set up background image
-        let background = SKSpriteNode(imageNamed: "bg.png")
+        let background = SKSpriteNode(imageNamed: "background.png")
         background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         background.zPosition = -1
         background.size = self.size
         addChild(background)
         
+        // Set up label
+        let label = SKSpriteNode(imageNamed: "label.png")
+        label.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 100)
+        label.zPosition = 1
+        addChild(label)
+    
+        
         // Set up penguin image
         let penguin = SKSpriteNode(imageNamed: "penguin.png")
-        penguin.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 50)
+        penguin.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 20)
         penguin.zPosition = 1
         addChild(penguin)
         startTilting(node: penguin)
         
         // Set up iceberg image
-        let iceberg = SKSpriteNode(imageNamed: "Iceberg.png")
-        iceberg.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 100)
+        let iceberg = SKSpriteNode(imageNamed: "iceberg_100.png")
+        iceberg.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 180)
         iceberg.zPosition = 0 // Behind waveNode1
         addChild(iceberg)
         startTilting(node: iceberg)
@@ -36,18 +43,25 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
         createEndlessWaves()
         
         // Set up start button
-        let startButton = SKSpriteNode(imageNamed: "StartButton.png")
-        startButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 100)
+        let startButton = SKSpriteNode(imageNamed: "startButton1.png")
+        startButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)
         startButton.name = "startButton"
         startButton.zPosition = 3
         addChild(startButton)
         
         // Set up leaderboard button
-         let leaderboardButton = SKSpriteNode(imageNamed: "StartButton.png")
-         leaderboardButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 150)
+         let leaderboardButton = SKSpriteNode(imageNamed: "leaderboard.png")
+         leaderboardButton.position = CGPoint(x: self.frame.maxX - 100, y: self.frame.midY - 70)
          leaderboardButton.name = "leaderboardButton"
          leaderboardButton.zPosition = 5
          addChild(leaderboardButton)
+        
+        // Set up cosmetics button
+         let cosButton = SKSpriteNode(imageNamed: "cosmetics.png")
+         cosButton.position = CGPoint(x: self.frame.maxX - 100, y: self.frame.midY - 150)
+         cosButton.name = "cosButton"
+         cosButton.zPosition = 5
+         addChild(cosButton)
         
         
     }
@@ -70,7 +84,21 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
             }
         }
     }
-    
+
+    func showLeaderboard() {
+        if GKLocalPlayer.local.isAuthenticated {
+            if let viewController = self.view?.window?.rootViewController {
+                let gcViewController = GKGameCenterViewController(leaderboardID: "pinguinsurvival", playerScope: .global, timeScope: .allTime)
+                gcViewController.gameCenterDelegate = self
+                viewController.present(gcViewController, animated: true, completion: nil)
+                print("Showing leaderboard")
+            } else {
+                print("Root view controller is nil")
+            }
+        } else {
+            print("User is not authenticated to access Game Center")
+        }
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -108,17 +136,6 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
 
         }
     }
-    
-    func showLeaderboard() {
-        if GKLocalPlayer.local.isAuthenticated {
-            let viewController = self.view?.window?.rootViewController
-            let gcViewController = GKGameCenterViewController(leaderboardID: "your.leaderboard.id", playerScope: .global, timeScope: .allTime)
-            gcViewController.gameCenterDelegate = self
-            viewController?.present(gcViewController, animated: true, completion: nil)
-        } else {
-            print("User is not authenticated to access Game Center")
-        }
-    }
 
     
     func createEndlessWaves() {
@@ -153,9 +170,9 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
         waveNode3.path = wavePath
         
         // Position the waves slightly below each other
-        waveNode1.position = CGPoint(x: 0, y: -50)
-        waveNode2.position = CGPoint(x: 0, y: -60)
-        waveNode3.position = CGPoint(x: 0, y: -70)
+        waveNode1.position = CGPoint(x: 0, y: -100)
+        waveNode2.position = CGPoint(x: 0, y: -110)
+        waveNode3.position = CGPoint(x: 0, y: -120)
         
         let moveDuration1: TimeInterval = 5
         let moveDuration2: TimeInterval = 10

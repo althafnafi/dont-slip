@@ -44,9 +44,9 @@ extension GameScene {
         waveNode3.path = wavePath
         
         // Position the waves slightly below each other
-        waveNode1.position = CGPoint(x: -670, y: -400)
-        waveNode2.position = CGPoint(x: -670, y: -410)
-        waveNode3.position = CGPoint(x: -670, y: -420)
+        waveNode1.position = CGPoint(x: -670, y: -600)
+        waveNode2.position = CGPoint(x: -670, y: -610)
+        waveNode3.position = CGPoint(x: -670, y: -620)
         
         let moveDuration1: TimeInterval = 5
         let moveDuration2: TimeInterval = 10

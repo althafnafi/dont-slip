@@ -201,17 +201,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if score > highScore {
                 highScore = score
                 saveHighScore()
-                reportScoreToGameCenter(score: highScore) // Tambahkan ini untuk mengirim skor ke Game Center
             }
             // showRestartButton()
             showGameOverModal()
             coinsCollected = 0
+            
+            reportScoreToGameCenter(score: score)
         }
     }
 
     func reportScoreToGameCenter(score: Int) {
         if GKLocalPlayer.local.isAuthenticated {
-            let leaderboardID = "ligapinguinc7ada" // Ganti dengan ID leaderboard Anda
+            let leaderboardID = "pinguinsurvival" // Ganti dengan ID leaderboard Anda
             GKLeaderboard.submitScore(score, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardID]) { error in
                 if let error = error {
                     print("Error reporting score to Game Center: \(error.localizedDescription)")
@@ -267,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addBackgroundImage() {
-        let background = SKSpriteNode(imageNamed: "bg")
+        let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         background.zPosition = -1 // Ensure the background is behind other nodes
         background.size = self.size // Scale the background to fit the screen size

@@ -43,9 +43,9 @@ extension GameScene {
     
     func setupPointsLabel() {
         pointsLabel = SKLabelNode(text: "Coins: \(self.coinsCollected)")
-        pointsLabel.fontSize = 48
-        pointsLabel.fontColor = .black
-        pointsLabel.fontName = "Arial-MTBold"
+        pointsLabel.fontSize = 58
+        pointsLabel.fontColor = .white
+        pointsLabel.fontName = "AlegreyaSansSC-Medium"
         pointsLabel.horizontalAlignmentMode = .center
         pointsLabel.verticalAlignmentMode = .top
         pointsLabel.position = CGPoint(x: 400, y: self.size.height / 2 - 100)
@@ -68,9 +68,9 @@ extension GameScene {
     func setupScoreLabels() {
         // Setup Score Label
         scoreLabel = SKLabelNode(text: "\(score)")
-        scoreLabel.fontSize = 48
-        scoreLabel.fontColor = .black
-        scoreLabel.fontName = "Arial-MTBold"
+        scoreLabel.fontSize = 58
+        scoreLabel.fontColor = .white
+        scoreLabel.fontName = "AlegreyaSansSC-Medium"
         scoreLabel.horizontalAlignmentMode = .center
         scoreLabel.verticalAlignmentMode = .top
         scoreLabel.position = CGPoint(x: 0, y: self.size.height / 2 - 100)
@@ -91,6 +91,7 @@ extension GameScene {
     
     func updatePointsLabel() {
         pointsLabel.text = "Coins: \(self.coinsCollected)"
+    
         
     }
     
