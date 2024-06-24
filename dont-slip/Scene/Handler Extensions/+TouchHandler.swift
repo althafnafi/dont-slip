@@ -18,6 +18,7 @@ extension GameScene {
     func jumpTouchHandler() {
         // Make the penguin jump
         if isPenguinOnGround, penguinControls != nil {
+            run(jumpSound)
             print("[Penguin] jump!")
             penguinControls?.jump()
         }

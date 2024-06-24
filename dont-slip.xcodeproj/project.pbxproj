@@ -12,6 +12,11 @@
 		164113452C23D57700E18731 /* AlegreyaSansSC-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 164113442C23D57700E18731 /* AlegreyaSansSC-Medium.ttf */; };
 		165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */; };
 		8105C6922C2286D100701330 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C6912C2286D100701330 /* StartScene.swift */; };
+		9921D9AC2C29316400009681 /* coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9921D9A92C29316400009681 /* coin.mp3 */; };
+		9921D9AD2C29316400009681 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9921D9AA2C29316400009681 /* jump.wav */; };
+		9921D9AE2C29316400009681 /* splash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9921D9AB2C29316400009681 /* splash.mp3 */; };
+		9921D9B12C293CBC00009681 /* icefuel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9921D9B02C293CBC00009681 /* icefuel.mp3 */; };
+		9921D9B32C293E8C00009681 /* bg.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9921D9B22C293E8C00009681 /* bg.mp3 */; };
 		99280C382C17705C00E5B76A /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99280C372C17705C00E5B76A /* AccelerometerManager.swift */; };
 		A40284F22C1AF33E00B6CC8D /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F12C1AF33E00B6CC8D /* Iceberg.swift */; };
 		A40284F82C1AFA6200B6CC8D /* RestoringTorqueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */; };
@@ -44,8 +49,7 @@
 		A4A14E5E2C2513B700CB4457 /* +Waves.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A14E5D2C2513B700CB4457 /* +Waves.swift */; };
 		A4A14E602C27E1FD00CB4457 /* IcebergStateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A14E5F2C27E1FD00CB4457 /* IcebergStateComponent.swift */; };
 		A4A14E622C27E23F00CB4457 /* ShaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A14E612C27E23F00CB4457 /* ShaderComponent.swift */; };
-		A4A14E652C27E36300CB4457 /* IcebegrTransitionShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = A4A14E642C27E36300CB4457 /* IcebegrTransitionShader.fsh */; };
-		A4A14E672C27E37C00CB4457 /* IcebergTransitionShader.metal in Resources */ = {isa = PBXBuildFile; fileRef = A4A14E662C27E37C00CB4457 /* IcebergTransitionShader.metal */; };
+		A4A14E652C27E36300CB4457 /* IcebergTransitionShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = A4A14E642C27E36300CB4457 /* IcebergTransitionShader.fsh */; };
 		A4A14E6A2C27E3B200CB4457 /* IcebergSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A14E692C27E3B200CB4457 /* IcebergSystem.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,11 @@
 		165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Madness Hyperactive.otf"; sourceTree = "<group>"; };
 		4464DA212C273EB400A7759F /* dont-slip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dont-slip.entitlements"; sourceTree = "<group>"; };
 		8105C6912C2286D100701330 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
+		9921D9A92C29316400009681 /* coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = coin.mp3; sourceTree = "<group>"; };
+		9921D9AA2C29316400009681 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
+		9921D9AB2C29316400009681 /* splash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splash.mp3; sourceTree = "<group>"; };
+		9921D9B02C293CBC00009681 /* icefuel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = icefuel.mp3; sourceTree = "<group>"; };
+		9921D9B22C293E8C00009681 /* bg.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg.mp3; sourceTree = "<group>"; };
 		99280C372C17705C00E5B76A /* AccelerometerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
 		A40284F12C1AF33E00B6CC8D /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		A40284F72C1AFA6200B6CC8D /* RestoringTorqueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoringTorqueComponent.swift; sourceTree = "<group>"; };
@@ -90,8 +99,7 @@
 		A4A14E5D2C2513B700CB4457 /* +Waves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Waves.swift"; sourceTree = "<group>"; };
 		A4A14E5F2C27E1FD00CB4457 /* IcebergStateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcebergStateComponent.swift; sourceTree = "<group>"; };
 		A4A14E612C27E23F00CB4457 /* ShaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderComponent.swift; sourceTree = "<group>"; };
-		A4A14E642C27E36300CB4457 /* IcebegrTransitionShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = IcebegrTransitionShader.fsh; sourceTree = "<group>"; };
-		A4A14E662C27E37C00CB4457 /* IcebergTransitionShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = IcebergTransitionShader.metal; sourceTree = "<group>"; };
+		A4A14E642C27E36300CB4457 /* IcebergTransitionShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = IcebergTransitionShader.fsh; sourceTree = "<group>"; };
 		A4A14E692C27E3B200CB4457 /* IcebergSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcebergSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +114,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9921D9AF2C29316B00009681 /* SoundAssets */ = {
+			isa = PBXGroup;
+			children = (
+				9921D9B22C293E8C00009681 /* bg.mp3 */,
+				9921D9B02C293CBC00009681 /* icefuel.mp3 */,
+				9921D9A92C29316400009681 /* coin.mp3 */,
+				9921D9AA2C29316400009681 /* jump.wav */,
+				9921D9AB2C29316400009681 /* splash.mp3 */,
+			);
+			path = SoundAssets;
+			sourceTree = "<group>";
+		};
 		A40284FF2C1B01E900B6CC8D /* Handler Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +155,7 @@
 				164113422C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf */,
 				164113442C23D57700E18731 /* AlegreyaSansSC-Medium.ttf */,
 				165736BA2C2286D50099A5A0 /* Madness Hyperactive.otf */,
+				9921D9AF2C29316B00009681 /* SoundAssets */,
 				A47CD88E2C16E595003165D5 /* dont-slip */,
 				A47CD88D2C16E595003165D5 /* Products */,
 			);
@@ -237,8 +258,7 @@
 		A4A14E632C27E35000CB4457 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				A4A14E642C27E36300CB4457 /* IcebegrTransitionShader.fsh */,
-				A4A14E662C27E37C00CB4457 /* IcebergTransitionShader.metal */,
+				A4A14E642C27E36300CB4457 /* IcebergTransitionShader.fsh */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -312,13 +332,17 @@
 				A47CD8922C16E595003165D5 /* GameScene.sks in Resources */,
 				165736BB2C2286D50099A5A0 /* Madness Hyperactive.otf in Resources */,
 				164113412C23D55F00E18731 /* AlegreyaSansSC-Bold.ttf in Resources */,
-				A4A14E652C27E36300CB4457 /* IcebegrTransitionShader.fsh in Resources */,
+				A4A14E652C27E36300CB4457 /* IcebergTransitionShader.fsh in Resources */,
 				A47CD89B2C16E595003165D5 /* Base in Resources */,
-				A4A14E672C27E37C00CB4457 /* IcebergTransitionShader.metal in Resources */,
+				9921D9B32C293E8C00009681 /* bg.mp3 in Resources */,
 				A47CD89D2C16E597003165D5 /* Assets.xcassets in Resources */,
 				A47CD8942C16E595003165D5 /* Actions.sks in Resources */,
 				A47CD8A02C16E597003165D5 /* Base in Resources */,
 				164113452C23D57700E18731 /* AlegreyaSansSC-Medium.ttf in Resources */,
+				9921D9AC2C29316400009681 /* coin.mp3 in Resources */,
+				9921D9AD2C29316400009681 /* jump.wav in Resources */,
+				9921D9AE2C29316400009681 /* splash.mp3 in Resources */,
+				9921D9B12C293CBC00009681 /* icefuel.mp3 in Resources */,
 				164113432C23D56A00E18731 /* AlegreyaSansSC-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,7 +536,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 87N548UZ24;
+				DEVELOPMENT_TEAM = 5V847CY3JM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -520,14 +544,15 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "crteam.dont-slip";
+				PRODUCT_BUNDLE_IDENTIFIER = "crteam.dont-slip.t1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -545,7 +570,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 87N548UZ24;
+				DEVELOPMENT_TEAM = 5V847CY3JM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "dont-slip/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -553,14 +578,15 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "crteam.dont-slip";
+				PRODUCT_BUNDLE_IDENTIFIER = "crteam.dont-slip.t1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
