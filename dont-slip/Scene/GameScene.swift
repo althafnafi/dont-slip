@@ -107,6 +107,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var icebergStateSystem: IcebergSystem!
     
+    // Load Audio
+    let coinSound = SKAction.playSoundFileNamed("coin.mp3", waitForCompletion: false)
+    let splashSound = SKAction.playSoundFileNamed("splash.mp3", waitForCompletion: false)
+    let jumpSound = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
+    let iceSound = SKAction.playSoundFileNamed("icefuel.mp3", waitForCompletion: false)
+    let backgroundSound = SKAudioNode(fileNamed: "bg.mp3")
+    
     override func sceneDidLoad() {
         // Setup physicsWorld bases
         self.physicsWorld.contactDelegate = self
@@ -124,6 +131,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createEndlessWaves() // Create the wave animations
         difficultyUpdater()
 //        showIceFuelPowerUp()
+
+        self.addChild(backgroundSound)
     }
     
     // MARK: Setting up entities
@@ -189,6 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkGameOver() {
         guard let greenCube = greenCube else { return }
         if greenCube.position.y < -self.size.height / 2 { // Check if cube is below the visible screen
+            run(splashSound)
             gameOver = true
             totalCoins += coinsCollected
             saveCoins()

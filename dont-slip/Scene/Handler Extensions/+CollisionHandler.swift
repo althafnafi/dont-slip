@@ -31,7 +31,7 @@ extension GameScene {
         if (contact.bodyA.node == greenCube && contact.bodyB.categoryBitMask == CollisionMask.coin.rawValue) ||
             (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == CollisionMask.coin.rawValue) {
             if let coin = contact.bodyA.node == greenCube ? contact.bodyB.node : contact.bodyA.node {
-                
+                run(coinSound)
                 coin.removeFromParent() // Remove the coin from the scene
                 currentActiveCoins -= 1
                 coinsCollected += 1
@@ -45,10 +45,12 @@ extension GameScene {
             
             if icebergStateSystem.getGotFuel() {
                 print("Dah dpt fuel kok")
+                icebergStateSystem.isGotFuel = false
                 return
             }
             
             if let fuel = contact.bodyA.node == greenCube ? contact.bodyB.node : contact.bodyA.node {
+                run(iceSound)
                 icebergStateSystem.setGotFuel(isGotFuel: true)
                 fuel.removeFromParent() // Remove the coin from the scene
             } 

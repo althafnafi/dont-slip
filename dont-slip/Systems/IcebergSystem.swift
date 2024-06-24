@@ -38,6 +38,7 @@ class IcebergSystem {
                 currentIcebergWdith = spriteComponent.node.size.width
                 
                 if isGotFuel {
+                    print("penambahan iceberg di skip")
                     stateComponent.timeSinceLastChange = 0
                     // Logic to increase the size of the iceberg when getting fuel
                     if stateComponent.currentStateIndex > 0 {
@@ -50,6 +51,7 @@ class IcebergSystem {
                 if stateComponent.timeSinceLastChange >= timeLimit {
                     stateComponent.timeSinceLastChange = 0
                     
+                    print("mau cair")
                     if stateComponent.currentStateIndex < stateComponent.states.count - 1 {
                         print("Cair esnya")
                         stateComponent.currentStateIndex += 1
