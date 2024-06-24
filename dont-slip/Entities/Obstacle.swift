@@ -22,7 +22,7 @@ enum ObstacleType : UInt8, CaseIterable {
     
     var obstacleMass: CGFloat {
         switch self {
-        case .box: return 0.08
+        case .box: return 0.01
         case .barrel: return 0.08
         }
     }
@@ -42,7 +42,6 @@ class Obstacle: GKEntity {
         super.init()
         
         // 1. Add sprite/texture component
-        // TODO: Ganti jadi make gambar
         let spriteComponent = SpriteComponent(node: getBoxNode())
 //        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: type.imageName))
         spriteComponent.setPos(pos: spawnPos)

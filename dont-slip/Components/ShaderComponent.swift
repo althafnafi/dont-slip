@@ -9,25 +9,25 @@ import Foundation
 import GameplayKit
 
 class ShaderComponent: GKComponent {
-    //    var node: SKSpriteNode?
-    var currentShader: SKShader?
-
+    var node: SKSpriteNode?
+    
     init(node: SKSpriteNode) {
-        //        self.node = node
-        self.currentShader = nil
+        self.node = node
         super.init()
     }
-
-    func applyShader(node: SKSpriteNode, shader: SKShader) {
-        node.shader = shader
-        currentShader = shader
+    
+    func applyShader(shader: SKShader) {
+        if let node = self.node {
+            node.shader = shader
+        }
     }
-
-    func removeShader(node : SKSpriteNode) {
-        node.shader = nil
-        currentShader = nil
+    
+    func removeShader() {
+        if let node = self.node {
+            node.shader = nil
+        }
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

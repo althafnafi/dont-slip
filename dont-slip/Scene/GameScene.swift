@@ -8,10 +8,11 @@ enum CollisionMask: UInt32 {
     case ball = 2
     case coin = 4
     case object = 8
+    case iceFuel = 16
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
+
     /*
      USED
      */
@@ -26,6 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spawnInterval: TimeInterval = 2.0
     var obstacleSpawnInterval: TimeInterval = 2.0 // 2 - 0.5
     var coinSpawnInterval: TimeInterval = 2.0
+    var iceFuelInterval: TimeInterval = 2
     
     var lastSpawnTime: TimeInterval = 0
     private var lastUpdateTime: TimeInterval = 0
@@ -36,8 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var gravMult: CGFloat = 1
     
     // Might change in the middle of the game
-    var icebergWidth = UIScreen.main.bounds.width * 0.8
-    var penguinMass: CGFloat = 0.04
+    var penguinMass: CGFloat = 0.1
     
     var accelSensitivity: CGFloat = 300
     var icebergFrictionLevel: Double = 0.0 // 0  - 0.5
@@ -46,6 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // States (booleans)
     var isPenguinOnGround = false // Flag to track if the green cube is on the ground
     var gameOver: Bool = false
+    var isPenguinGotFuel = false
     
     // Sound/Music
     
@@ -111,16 +113,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         addBackgroundImage()
         // Setup accelerometer
-        self.accelerometerManager = AccelerometerManager(sensitivity: accelSensitivity)
+        
+        setupEntities()
         
         loadHighScore() // Load high score
         loadCoins()
-        setupEntities()
         setupPointsLabel()
         setupScoreLabels() // Setup score labels
         startScoreTimer() // Start the score timer
         createEndlessWaves() // Create the wave animations
         difficultyUpdater()
+        showIceFuelPowerUp()
     }
     
     // MARK: Setting up entities
@@ -148,7 +151,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             mass: penguinMass
         )
         
-        print(penguin.component(ofType: SpriteComponent.self)?.node.physicsBody?.mass ?? "?")
+        let penguinNode = penguin.component(ofType: SpriteComponent.self)?.node
+//        print(penguin.component(ofType: SpriteComponent.self)?.node.physicsBody?.mass ?? "?")
+        
+        self.accelerometerManager = AccelerometerManager(node: penguinNode, sensitivity: accelSensitivity)
         
         if let spriteComponent = penguin.component(ofType: SpriteComponent.self) {
             self.greenCube = spriteComponent.node
@@ -165,6 +171,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Coins Setup */
         // Randomly spawns COINS
         randomlySpawnObjects(spawnerFunction: spawnCoin, interval: coinSpawnInterval)
+        
+        randomlySpawnObjects(spawnerFunction: spawnIceFuel, interval: iceFuelInterval)
     }
     
     func getPenguinControls() -> PlayerControlComponent? {
@@ -221,6 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         score = 0
         gameOver = false
+        isPenguinGotFuel = false
         
         sceneDidLoad() // Reinitialize the scene setup
     }

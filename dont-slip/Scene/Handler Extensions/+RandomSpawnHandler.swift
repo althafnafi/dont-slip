@@ -29,15 +29,33 @@ extension GameScene {
         }
         // Define obstacle parameters
         let obstacleType = ObstacleType.allCases[Int.random(in: 0 ..< ObstacleType.allCases.count)]
-        let randomXPos = CGFloat.random(in: -320...icebergWidth)
+        
+        let icebergWidth = icebergStateSystem.currentIcebergWdith
+        
+        let randomXPos = CGFloat.random(in: -icebergWidth / 2...icebergWidth/2)
+        
+        let yPos = CGFloat(self.size.height)
+        let spawnPos = CGPoint(x: randomXPos, y: yPos)
+        // Make the Obstacle entity
+        let obstacle = Obstacle(type: obstacleType, spawnPos: spawnPos, entityManager: entityManager, massMultiplier: obstacleMassMultiplier)
+        entityManager.add(obstacle)
+        // Add obstacle to entity manager
+    }
+    
+    func spawnIceFuel() {
+        if gameOver {
+            return  // Stop spawning new objects
+        }
+        
+        let icebergWidth = icebergStateSystem.currentIcebergWdith
+        
+        let randomXPos = CGFloat.random(in: -icebergWidth / 2...icebergWidth/2)
+        
         let yPos = CGFloat(self.size.height)
         let spawnPos = CGPoint(x: randomXPos, y: yPos)
         
-        // Make the Obstacle entity
-        let obstacle = Obstacle(type: obstacleType, spawnPos: spawnPos, entityManager: entityManager, massMultiplier: obstacleMassMultiplier)
-        // Add obstacle to entity manager
-        entityManager.add(obstacle)
-        
+        let iceFuel = PowerUp(type: .iceFuel, spawnPos: spawnPos, entityManager: entityManager)
+        entityManager.add(iceFuel)
     }
     
     
@@ -50,6 +68,8 @@ extension GameScene {
         
         // Define coin parameters
         let coinType = CoinType.normal
+        
+        let icebergWidth = icebergStateSystem.currentIcebergWdith
         
         let randomXPos = CGFloat.random(in: -icebergWidth / 2.5...icebergWidth/2.5)
         let randomYPos = CGFloat.random(in: self.size.height / 2 * 0.3...self.size.height / 2 * 0.4)
