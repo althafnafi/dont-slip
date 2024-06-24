@@ -93,3 +93,5 @@ GoogleService-Info.plist
 # Project specific
 #
 SpriteKitGame.xcodeproj/project.xcworkspace
+.DS_Store
+*.xcuserstate
