@@ -88,7 +88,7 @@ class StartScene: SKScene, GKGameCenterControllerDelegate {
     func showLeaderboard() {
         if GKLocalPlayer.local.isAuthenticated {
             if let viewController = self.view?.window?.rootViewController {
-                let gcViewController = GKGameCenterViewController(leaderboardID: "pinguinsurvival", playerScope: .global, timeScope: .allTime)
+                let gcViewController = GKGameCenterViewController(leaderboardID: "dontslip", playerScope: .global, timeScope: .allTime)
                 gcViewController.gameCenterDelegate = self
                 viewController.present(gcViewController, animated: true, completion: nil)
                 print("Showing leaderboard")
