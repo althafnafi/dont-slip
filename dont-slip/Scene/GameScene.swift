@@ -123,7 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startScoreTimer() // Start the score timer
         createEndlessWaves() // Create the wave animations
         difficultyUpdater()
-        showIceFuelPowerUp()
+//        showIceFuelPowerUp()
     }
     
     // MARK: Setting up entities
