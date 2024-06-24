@@ -1,17 +1,11 @@
-//
-//  GameScene.swift
-//  nyoba-mini2
-//
-//  Created by Althaf Nafi Anwar on 10/06/24.
-//
-
 import SpriteKit
+import GameKit
 import GameplayKit
 
-enum CollisionMask : UInt32 {
+enum CollisionMask: UInt32 {
     case none = 0
     case ground = 1
-    case ball   = 2
+    case ball = 2
     case coin = 4
     case object = 8
 }
@@ -26,16 +20,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var entityManager: EntityManager!
     var penguinEntity: Penguin?
     var penguinControls: PlayerControlComponent?
+    var icebergEntity: Iceberg?
     
     // Time-stuff
     var spawnInterval: TimeInterval = 2.0
-    var obstacleSpawnInterval: TimeInterval = 2.0
+    var obstacleSpawnInterval: TimeInterval = 2.0 // 2 - 0.5
     var coinSpawnInterval: TimeInterval = 2.0
     
     var lastSpawnTime: TimeInterval = 0
-    var curTime : TimeInterval = 0
-    private var lastUpdateTime : TimeInterval = 0
-    var startTime : TimeInterval = 0
+    private var lastUpdateTime: TimeInterval = 0
     
     // Constants
     private let restoringTorqueMult: CGFloat = 10.0
@@ -45,7 +38,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Might change in the middle of the game
     var icebergWidth = UIScreen.main.bounds.width * 0.8
     var penguinMass: CGFloat = 0.04
+    
     var accelSensitivity: CGFloat = 300
+    var icebergFrictionLevel: Double = 0.0 // 0  - 0.5
+    var obstacleMassMultiplier: Double = 1.0 // 1 - 2
     
     // States (booleans)
     var isPenguinOnGround = false // Flag to track if the green cube is on the ground
@@ -54,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Sound/Music
     
     // Coins
-    var coinsLabel : SKLabelNode!
+    var coinsLabel: SKLabelNode!
     var coinsCollected: Int = 0
     var currentActiveCoins: Int = 0
     
@@ -65,7 +61,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Accelerometer
     private var accelerometerManager: AccelerometerManager?
     
-
     /*
      NEED TO EDIT
      */
@@ -75,10 +70,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var highScore: Int = 0
     var scoreLabel: SKLabelNode!
     var highScoreLabel: SKLabelNode!
-
+    
     var totalCoins: Int = 0
     var totalCoinsLabel: SKLabelNode!
-
+    
     var greenCube: SKSpriteNode? // the cube (penguin)
     
     // Modality game over
@@ -91,10 +86,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinContainer: SKSpriteNode!
     var highScoreContainer: SKSpriteNode!
     var totalCoinContainer: SKSpriteNode!
-        
+    
+    var blueModalBackground: SKSpriteNode!
+    
     var gameOverScoreLabel: SKLabelNode!
     var gameOverCoinsLabel: SKLabelNode!
-    var gameOverLabel: SKLabelNode!
+    var gameOverLabel: SKSpriteNode!
     var restartButton: SKSpriteNode!
     var homeButton: SKSpriteNode!
     var scoreGameOverLabel: SKLabelNode!
@@ -103,31 +100,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinGameOverLabel: SKLabelNode!
     var totalLabel: SKLabelNode!
     var totalCoinsGameOverLabel: SKLabelNode!
+    var coinImgOver: SKSpriteNode!
+    var coinImgOver2: SKSpriteNode!
+    
+    var icebergStateSystem: IcebergSystem!
     
     override func sceneDidLoad() {
         // Setup physicsWorld bases
         self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
-        
+        addBackgroundImage()
         // Setup accelerometer
         self.accelerometerManager = AccelerometerManager(sensitivity: accelSensitivity)
         
-//        setupEntities()
-        
         loadHighScore() // Load high score
-        
         loadCoins()
-        
-        setupPointsLabel()
-        
-        setupScoreLabels() // Setup score labels
-        
-        startScoreTimer() // Start the score timer
-        
-//        spawnGround()
         setupEntities()
-        
-
+        setupPointsLabel()
+        setupScoreLabels() // Setup score labels
+        startScoreTimer() // Start the score timer
+        createEndlessWaves() // Create the wave animations
+        difficultyUpdater()
     }
     
     // MARK: Setting up entities
@@ -137,9 +130,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         /* Iceberg setup */
         // Define the iceberg entity
-        let iceberg = Iceberg(imageName: "iceberg",  entityManager: entityManager)
+        
+        
+        let iceberg = Iceberg(nodeName: "iceberg_100", entityManager: entityManager, state: IcebergStateComponent())
+        
+        icebergStateSystem = IcebergSystem(entityManager: entityManager)
+        
         // Add with entity manager
         entityManager.add(iceberg)
+        icebergEntity = iceberg
         
         /* Penguin: Pinjing Setup */
         let penguin = Penguin(
@@ -166,12 +165,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Coins Setup */
         // Randomly spawns COINS
         randomlySpawnObjects(spawnerFunction: spawnCoin, interval: coinSpawnInterval)
-        
     }
     
     func getPenguinControls() -> PlayerControlComponent? {
-        if  let _ = penguinEntity?.component(ofType: SpriteComponent.self),
-            let penguinControls = penguinEntity?.component(ofType: PlayerControlComponent.self) {
+        if let _ = penguinEntity?.component(ofType: SpriteComponent.self),
+           let penguinControls = penguinEntity?.component(ofType: PlayerControlComponent.self) {
             print("getPenguinControls: got penguin controls :0")
             return penguinControls
         }
@@ -180,7 +178,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return nil
     }
     
-
     func checkGameOver() {
         guard let greenCube = greenCube else { return }
         if greenCube.position.y < -self.size.height / 2 { // Check if cube is below the visible screen
@@ -200,6 +197,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // showRestartButton()
             showGameOverModal()
             coinsCollected = 0
+            
+            reportScoreToGameCenter(score: score)
+        }
+    }
+
+    func reportScoreToGameCenter(score: Int) {
+        if GKLocalPlayer.local.isAuthenticated {
+            let leaderboardID = "pinguinsurvival" // Ganti dengan ID leaderboard Anda
+            GKLeaderboard.submitScore(score, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardID]) { error in
+                if let error = error {
+                    print("Error reporting score to Game Center: \(error.localizedDescription)")
+                } else {
+                    print("Score successfully reported to Game Center")
+                }
+            }
         }
     }
     
@@ -214,7 +226,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        curTime = currentTime
         // Check game over state before running update logic
         if gameOver {
             return
@@ -231,6 +242,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Update entities inside the entity manager
         entityManager.update(deltaTime: dt)
         
+        // Update the IcebergStateSystem
+        icebergStateSystem.update(deltaTime: dt)
+        
         // Update accelerometer
         accelerometerManager?.startAccelerometerUpdates()
         
@@ -238,9 +252,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         checkGameOver()
     }
     
-   func resetTimers() {
-       spawnInterval = 2.0
-       obstacleSpawnInterval = 2.0
-       coinSpawnInterval = 2.0
-       }
+    func resetTimers() {
+        spawnInterval = 2.0
+        obstacleSpawnInterval = 2.0
+        coinSpawnInterval = 2.0
+    }
+    
+    func addBackgroundImage() {
+        let background = SKSpriteNode(imageNamed: "background")
+        background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        background.zPosition = -1 // Ensure the background is behind other nodes
+        background.size = self.size // Scale the background to fit the screen size
+        self.addChild(background)
+    }
 }

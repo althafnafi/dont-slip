@@ -15,7 +15,6 @@ class Penguin: GKEntity {
     
     // MARK: Initializers
     init(imageName: String, accelerometerManager: AccelerometerManager?, groundNode: SKSpriteNode?) {
-        self.ground = nil
         
         guard let groundGuarded = groundNode else {
             print("init Penguin: component error (defining ground)")
@@ -27,7 +26,7 @@ class Penguin: GKEntity {
         super.init()
         
         // 1. Add sprite
-        let spriteComponent = SpriteComponent(node: getGreenBox())
+        let spriteComponent = SpriteComponent(node: getPenguinNode())
         // Set position of penguin
         if let groundY = ground?.position.y,
             let groundH = ground?.size.height {
@@ -35,7 +34,7 @@ class Penguin: GKEntity {
             let nodeSize = spriteComponent.node.size
             let yPos = groundY + groundH / 2 + nodeSize.height / 2
             
-            spriteComponent.setPos(pos: CGPoint(x: groundH, y: yPos))
+            spriteComponent.setPos(pos: CGPoint(x: 0, y: yPos))
         }
         addComponent(spriteComponent)
         
@@ -62,10 +61,10 @@ class Penguin: GKEntity {
         super.init()
         
         // 1. Add sprite
-        let spriteComponent = SpriteComponent(node: getGreenBox())
+        let spriteComponent = SpriteComponent(node: getPenguinNode())
         // Set position of penguin
         if let groundY = ground?.position.y,
-           let groundH = ground?.size.height {
+            let groundH = ground?.size.height {
             
             let nodeSize = spriteComponent.node.size
             let yPos = groundY + groundH / 2 + nodeSize.height / 2
@@ -73,11 +72,11 @@ class Penguin: GKEntity {
             spriteComponent.setPos(pos: CGPoint(x: groundH, y: yPos))
         }
         addComponent(spriteComponent)
-        
+
         // 2. Add physics
         let physicsBody = getGreenBoxPhysicsBody()
-        addComponent(PhysicsComponent(node: spriteComponent.node, body: physicsBody, mass: mass))
-        
+        addComponent(PhysicsComponent(node: spriteComponent.node, body: physicsBody))
+
         if let accelManager = accelerometerManager {
             // 3. Add control for players
             addComponent(PlayerControlComponent(accelManager: accelManager, spriteComponent: spriteComponent))
@@ -120,11 +119,14 @@ class Penguin: GKEntity {
         return pBody
     }
     
-    private func getGreenBox() -> SKSpriteNode {
-        let cubeSize = CGSize(width: 30, height: 30)
-        let greenCube = SKSpriteNode(color: .green, size: cubeSize)
+    private func getPenguinNode() -> SKSpriteNode {
+        let penguinTexture = SKTexture(imageNamed: "penguin")
+        let penguinNode = SKSpriteNode(texture: penguinTexture)
         
-        return greenCube
+        // Optionally set the size if needed
+        // penguinNode.size = CGSize(width: 30, height: 30)
+        
+        return penguinNode
     }
     
     required init?(coder aDecoder: NSCoder) {
