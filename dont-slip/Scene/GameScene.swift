@@ -204,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func reportScoreToGameCenter(score: Int) {
         if GKLocalPlayer.local.isAuthenticated {
-            let leaderboardID = "pinguinsurvival" // Ganti dengan ID leaderboard Anda
+            let leaderboardID = "dontslip" // Ganti dengan ID leaderboard Anda
             GKLeaderboard.submitScore(score, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardID]) { error in
                 if let error = error {
                     print("Error reporting score to Game Center: \(error.localizedDescription)")
