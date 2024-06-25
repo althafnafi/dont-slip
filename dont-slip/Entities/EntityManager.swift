@@ -24,13 +24,11 @@ class EntityManager {
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
             scene.addChild(spriteNode)
         }
-        
         if let springComponent = entity.component(ofType: SpringComponent.self) {
             scene.addChild(springComponent.anchorNode)
             scene.physicsWorld.add(springComponent.getSpringJoint())
         }
     }
-    
     
     func remove(_ entity: GKEntity) {
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
@@ -44,6 +42,13 @@ class EntityManager {
         // Update entities
         for e in entities {
             e.update(deltaTime: deltaTime)
+            
+            // remove node if outside screen
+            if let spriteNode = e.component(ofType: SpriteComponent.self)?.node {
+                if spriteNode.position.y < -((scene.size.height / 2) + 50) {
+                    remove(e)
+                }
+            }
         }
         
         

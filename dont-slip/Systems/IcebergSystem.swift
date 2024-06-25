@@ -14,7 +14,7 @@ class IcebergSystem {
     var isGotFuel: Bool = false
     var entityManager: EntityManager
     var currentIcebergWdith: CGFloat = 0
-    let timeLimit: Double = 5
+    var timeLimit: Double = 5
     
     init(entityManager: EntityManager) {
         self.entityManager = entityManager
@@ -26,6 +26,10 @@ class IcebergSystem {
     
     func setGotFuel(isGotFuel: Bool) {
         self.isGotFuel = isGotFuel
+    }
+    
+    func setTimeLimit(timeLimit: Double) {
+        self.timeLimit = timeLimit
     }
     
     func update(deltaTime: TimeInterval) {
@@ -47,7 +51,7 @@ class IcebergSystem {
                         isGotFuel = false
                     }
                 }
-                
+                print("lastChange: \(stateComponent.timeSinceLastChange), \(timeLimit)")
                 if stateComponent.timeSinceLastChange >= timeLimit {
                     stateComponent.timeSinceLastChange = 0
                     

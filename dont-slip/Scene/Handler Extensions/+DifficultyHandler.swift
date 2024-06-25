@@ -21,16 +21,20 @@ extension GameScene {
      
      */
     func difficultyUpdater() {
-        let intervalSec = 30.0
-        let maxDifficultyAtSec = 300.0
+        let intervalSec = 15.0
+        let maxDifficultyAtSec = 180.0
         
-        let frictionMin = 0.0
-        let spawnIntervalMin = 0.5
-        let massMultMax = 2.0
+        let frictionMin = 0.0 // 0.5 - 0.0 // TODO: Masih ngasal
+        let spawnIntervalMin = 0.5 // 2.0 - 0.5
+        let massMultMax = 2.0 // 1.0 - 2.0
+        let iceFuelIntervalMax = 5.0 // 2.0 - 4.0
+        let icebergMeltIntervalMin = 4.0 // 8.0 - 4.0
         
-        let frictionInc: Double = (frictionMin - self.icebergFrictionLevel) / (maxDifficultyAtSec / intervalSec)
-        let spawnIntervalInc: Double = (spawnIntervalMin - self.obstacleSpawnInterval) / (maxDifficultyAtSec / intervalSec)
-        let massMultInc: Double = (massMultMax - self.obstacleMassMultiplier) / (maxDifficultyAtSec / intervalSec)
+        let frictionInc: Double = (frictionMin - self.defaultIcebergFrictionLevel) / (maxDifficultyAtSec / intervalSec)
+        let spawnIntervalInc: Double = (spawnIntervalMin - self.defaultSpawnInterval) / (maxDifficultyAtSec / intervalSec)
+        let massMultInc: Double = (massMultMax - self.defaultObstacleMassMultiplier) / (maxDifficultyAtSec / intervalSec)
+        let iceFuelIntervalInc: Double = (iceFuelIntervalMax - self.defaultIceFuelInterval) / (maxDifficultyAtSec / intervalSec)
+        let icebergMeltIntervalInc: Double = (icebergMeltIntervalMin - self.defaultIcebergMeltInterval) / (maxDifficultyAtSec /  intervalSec)
         
         let wait = SKAction.wait(forDuration: 20.0)
         let incrementScore = SKAction.run { [weak self] in
@@ -39,23 +43,24 @@ extension GameScene {
                 print("iceberg not found")
                 return
             }
-            
-            // TODO: Rapihin
+           
             // Update slipperiness of iceberg
             iceberg.setFriction(friction: self?.icebergFrictionLevel ?? 1)
-            self?.icebergFrictionLevel = max(((self?.icebergFrictionLevel ?? 1) + frictionInc), frictionMin)
+            self?.icebergFrictionLevel = max(((self?.icebergFrictionLevel ?? frictionMin) + frictionInc), frictionMin)
             
             // Update obstacle spawning rate
-            self?.obstacleSpawnInterval = max(((self?.obstacleSpawnInterval ?? 0.5) + spawnIntervalInc), spawnIntervalMin)
+            self?.obstacleSpawnInterval = max(((self?.obstacleSpawnInterval ?? spawnIntervalMin) + spawnIntervalInc), spawnIntervalMin)
             
             // Update obstacles to be heavier
-            self?.obstacleMassMultiplier = Double(min(((self?.obstacleMassMultiplier ?? 2.0) + massMultInc), massMultMax))
+            self?.obstacleMassMultiplier = Double(min(((self?.obstacleMassMultiplier ?? massMultMax) + massMultInc), massMultMax))
             
-//            print("frictionLevel: \(String(describing: self?.icebergFrictionLevel))")
-//            print("spawnInterval: \(String(describing: self?.spawnInterval))")
-//            print("massMultiplier: \(String(describing: self?.obstacleMassMultiplier))")
+            // Increase fuel interval (need to wait a bit long for the next fuel)
+            self?.iceFuelInterval = min(((self?.iceFuelInterval ?? iceFuelIntervalMax) + iceFuelIntervalInc), iceFuelIntervalMax)
             
+            // Decrease melt intervals
+            self?.icebergMeltInterval = max(((self?.icebergMeltInterval ?? icebergMeltIntervalMin) + icebergMeltIntervalInc), icebergMeltIntervalMin)
         }
+        
         let sequence = SKAction.sequence([wait, incrementScore])
         let repeatForever = SKAction.repeatForever(sequence)
         run(repeatForever, withKey: "difficultyUpdate")

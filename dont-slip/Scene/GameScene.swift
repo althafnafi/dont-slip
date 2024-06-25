@@ -23,11 +23,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var penguinControls: PlayerControlComponent?
     var icebergEntity: Iceberg?
     
+    // Const (GANTI YANG DISINI)
+    let defaultSpawnInterval: TimeInterval = 2.0
+    let defaultObstacleSpawnInterval: TimeInterval = 2.0
+    let defaultCoinSpawnInterval: TimeInterval = 2.0
+    let defaultIcebergMeltInterval: TimeInterval = 8.0
+    let defaultIceFuelInterval: TimeInterval = 2.0
+    var defaultIcebergFrictionLevel: Double = 0.0 // 0  - 0.5
+    var defaultObstacleMassMultiplier: Double = 1.0 // 1 - 2
+    
     // Time-stuff
     var spawnInterval: TimeInterval = 2.0
-    var obstacleSpawnInterval: TimeInterval = 2.0 // 2 - 0.5
+    var obstacleSpawnInterval: TimeInterval = 2.0
     var coinSpawnInterval: TimeInterval = 2.0
-    var iceFuelInterval: TimeInterval = 2
+    var icebergMeltInterval: TimeInterval = 11
+    var iceFuelInterval: TimeInterval = 3
     
     var lastSpawnTime: TimeInterval = 0
     private var lastUpdateTime: TimeInterval = 0
@@ -128,6 +138,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         setupEntities()
         
+        defaultChangingVar()
+        
         loadHighScore() // Load high score
         loadCoins()
         setupPointsLabel()
@@ -200,6 +212,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return nil
     }
     
+    func defaultChangingVar() {
+        spawnInterval = defaultSpawnInterval
+        obstacleSpawnInterval = defaultObstacleSpawnInterval
+        coinSpawnInterval = defaultCoinSpawnInterval
+        icebergMeltInterval = defaultIcebergMeltInterval
+        iceFuelInterval = defaultIceFuelInterval
+        icebergFrictionLevel = defaultIcebergFrictionLevel
+        obstacleMassMultiplier = defaultObstacleMassMultiplier
+    }
+    
     func checkGameOver() {
         guard let greenCube = greenCube else { return }
         if greenCube.position.y < -self.size.height / 2 { // Check if cube is below the visible screen
@@ -208,6 +230,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             totalCoins += coinsCollected
             saveCoins()
             currentActiveCoins = 0
+            
+            defaultChangingVar()
 
             // Stop the score timer
             removeAction(forKey: "scoreTimer")
@@ -268,7 +292,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
            let penguinNode = penguinEntity?.component(ofType: SpriteComponent.self)?.node
         {
             penguinNode.physicsBody?.allowsRotation = false
-            print("A:\n\(penguinNode.zRotation)")
+//            print("A:\n\(penguinNode.zRotation)")
         }
         
         if isPenguinOnGround,
@@ -277,13 +301,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             penguinNode.physicsBody?.allowsRotation = true
             penguinNode.zRotation = icebergNode.zRotation
-            print("A:\n\(penguinNode.zRotation) V \(icebergNode.zRotation)")
+//            print("A:\n\(penguinNode.zRotation) V \(icebergNode.zRotation)")
         }
         
         // Update entities inside the entity manager
         entityManager.update(deltaTime: dt)
         
         // Update the IcebergStateSystem
+        icebergStateSystem.setTimeLimit(timeLimit: icebergMeltInterval)
         icebergStateSystem.update(deltaTime: dt)
         
         // Update accelerometer
