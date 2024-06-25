@@ -24,7 +24,7 @@ class Iceberg: GKEntity {
 
         // 1. Add sprite component
         let spriteComponent = SpriteComponent(node: icebergNode)
-        spriteComponent.setPos(pos: CGPoint(x: 0, y: 0))
+        spriteComponent.setPos(pos: CGPoint(x: 0, y: -150))
         spriteComponent.node.zRotation = rotation
         addComponent(spriteComponent)
         
@@ -71,7 +71,7 @@ class Iceberg: GKEntity {
         // MARK: For Iceberg
         
         let physicsBodySize = CGSize(width: size.width, height: 50)
-        let center = CGPoint(x: 0, y: size.height / 2)
+        let center = CGPoint(x: 0, y: size.height / 2 - 35)
 
         let pBody = SKPhysicsBody(rectangleOf: physicsBodySize, center: center)
         

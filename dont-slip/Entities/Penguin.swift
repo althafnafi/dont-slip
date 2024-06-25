@@ -63,6 +63,7 @@ class Penguin: GKEntity {
         
         // 1. Add sprite
         let spriteComponent = SpriteComponent(node: getPenguinNode())
+        print(spriteComponent.node.size)
         // Set position of penguin
         if let groundY = ground?.position.y,
             let groundH = ground?.size.height {
@@ -104,13 +105,14 @@ class Penguin: GKEntity {
     // MARK: Green box functions
     private func getGreenBoxPhysicsBody() -> SKPhysicsBody {
         // Size, shape
-        let cubeSize = CGSize(width: 30, height: 30)
+        let cubeSize = CGSize(width: 105, height: 105)
         let pBody = SKPhysicsBody(rectangleOf: cubeSize)
         
         // Interactivity
         pBody.isDynamic = true
         pBody.affectedByGravity = true
         pBody.allowsRotation = false
+        pBody.mass = 0.5
         
         // BitMask
         pBody.collisionBitMask = CollisionMask.ground.rawValue | CollisionMask.object.rawValue

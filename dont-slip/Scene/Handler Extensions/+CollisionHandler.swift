@@ -62,7 +62,6 @@ extension GameScene {
             
             if icebergStateSystem.getGotFuel() {
                 print("Dah dpt fuel kok")
-                icebergStateSystem.isGotFuel = false
                 return
             }
             

@@ -103,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinContainer: SKSpriteNode!
     var highScoreContainer: SKSpriteNode!
     var totalCoinContainer: SKSpriteNode!
-    
+    var penguinNode: SKSpriteNode?
     var blueModalBackground: SKSpriteNode!
     
     var gameOverScoreLabel: SKLabelNode!
@@ -135,11 +135,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         addBackgroundImage()
         // Setup accelerometer
-        
+        accelerometerManager = AccelerometerManager(node: penguinNode, sensitivity: accelSensitivity)
         setupEntities()
-        
         defaultChangingVar()
-        
         loadHighScore() // Load high score
         loadCoins()
         setupPointsLabel()
@@ -177,10 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             mass: penguinMass
         )
         
-        let penguinNode = penguin.component(ofType: SpriteComponent.self)?.node
-//        print(penguin.component(ofType: SpriteComponent.self)?.node.physicsBody?.mass ?? "?")
-        
-        self.accelerometerManager = AccelerometerManager(node: penguinNode, sensitivity: accelSensitivity)
+        penguinNode = penguin.component(ofType: SpriteComponent.self)?.node
         
         if let spriteComponent = penguin.component(ofType: SpriteComponent.self) {
             self.greenCube = spriteComponent.node
