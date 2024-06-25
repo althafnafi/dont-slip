@@ -34,9 +34,9 @@ class Penguin: GKEntity {
             let nodeSize = spriteComponent.node.size
             let yPos = groundY + groundH / 2 + nodeSize.height / 2
             
-            
             spriteComponent.setPos(pos: CGPoint(x: groundH, y: yPos))
         }
+        
         addComponent(spriteComponent)
         
         // 2. Add physics
@@ -110,7 +110,7 @@ class Penguin: GKEntity {
         // Interactivity
         pBody.isDynamic = true
         pBody.affectedByGravity = true
-        pBody.allowsRotation = true
+        pBody.allowsRotation = false
         
         // BitMask
         pBody.collisionBitMask = CollisionMask.ground.rawValue | CollisionMask.object.rawValue
