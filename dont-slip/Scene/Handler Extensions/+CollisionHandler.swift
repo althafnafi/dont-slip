@@ -34,7 +34,7 @@ extension GameScene {
         if (contact.bodyA.node == greenCube && (contact.bodyB.categoryBitMask & groundOrObstacleMask != 0)) ||
             (contact.bodyB.node == greenCube && (contact.bodyA.categoryBitMask & groundOrObstacleMask != 0)) {
             
-            // print("[Penguin] on ground or obstacle")
+//            print("[Penguin] on ground or obstacle")
             isPenguinOnGround = true  // Assuming you will use this flag to control jump capability
         }
         
@@ -79,7 +79,7 @@ extension GameScene {
         if (contact.bodyA.node == greenCube && (contact.bodyB.categoryBitMask & groundOrObstacleMask != 0)) ||
            (contact.bodyB.node == greenCube && (contact.bodyA.categoryBitMask & groundOrObstacleMask != 0)) {
             
-            // print("[Penguin] not on ground or obstacle")
+//            print("[Penguin] not on ground or obstacle")
             isPenguinOnGround = false
         }
     }

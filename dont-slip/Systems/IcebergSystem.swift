@@ -49,7 +49,7 @@ class IcebergSystem {
                         isGotFuel = false
                     }
                 }
-                print("lastChange: \(stateComponent.timeSinceLastChange), \(timeLimit)")
+//                print("lastChange: \(stateComponent.timeSinceLastChange), \(timeLimit)")
                 if stateComponent.timeSinceLastChange >= timeLimit {
                     stateComponent.timeSinceLastChange = 0
                     

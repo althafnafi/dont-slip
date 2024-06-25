@@ -12,6 +12,8 @@ import GameplayKit
 class Penguin: GKEntity {
     // MARK: Properties
     var ground : SKSpriteNode?
+    var timeSinceLastChange: TimeInterval = 0
+    var canJump: Bool = false
     
     // MARK: Initializers
     init(imageName: String, accelerometerManager: AccelerometerManager?, groundNode: SKSpriteNode?) {
@@ -92,13 +94,21 @@ class Penguin: GKEntity {
         for component in components {
             component.update(deltaTime: seconds)
         }
+        
+//        timeSinceLastChange += seconds
+//        
+//        if timeSinceLastChange >= 5 {
+//            timeSinceLastChange = 0
+//            
+//            canJump = true
+//        } else {
+//            canJump = false
+//        }
     }
     
     // MARK: Penguin functions
     private func getPhysicsBody() -> SKPhysicsBody {
-        
         let pBody = SKPhysicsBody()
-        
         return pBody
     }
     
@@ -111,13 +121,15 @@ class Penguin: GKEntity {
         // Interactivity
         pBody.isDynamic = true
         pBody.affectedByGravity = true
-        pBody.allowsRotation = false
-        pBody.mass = 0.5
+        pBody.allowsRotation = true
+        pBody.mass = 0.04
         
         // BitMask
         pBody.collisionBitMask = CollisionMask.ground.rawValue | CollisionMask.object.rawValue
         pBody.categoryBitMask = CollisionMask.ball.rawValue
         pBody.contactTestBitMask = CollisionMask.coin.rawValue
+        
+        print(pBody.mass)
         
         return pBody
     }

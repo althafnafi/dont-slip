@@ -38,6 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinSpawnInterval: TimeInterval = 2.0
     var icebergMeltInterval: TimeInterval = 11
     var iceFuelInterval: TimeInterval = 3
+    var jumpCooldown: TimeInterval = 0.5
     
     var lastSpawnTime: TimeInterval = 0
     private var lastUpdateTime: TimeInterval = 0
@@ -282,22 +283,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = currentTime
         
-        // ngasal
-        if !isPenguinOnGround,
-           let penguinNode = penguinEntity?.component(ofType: SpriteComponent.self)?.node
-        {
-            penguinNode.physicsBody?.allowsRotation = false
-//            print("A:\n\(penguinNode.zRotation)")
-        }
-        
-        if isPenguinOnGround,
-           let icebergNode = icebergEntity?.component(ofType: SpriteComponent.self)?.node,
-           let penguinNode = penguinEntity?.component(ofType: SpriteComponent.self)?.node
-        {
-            penguinNode.physicsBody?.allowsRotation = true
-            penguinNode.zRotation = icebergNode.zRotation
-//            print("A:\n\(penguinNode.zRotation) V \(icebergNode.zRotation)")
-        }
+//        // ngasal
+//        if !isPenguinOnGround,
+//           let penguinNode = penguinEntity?.component(ofType: SpriteComponent.self)?.node
+//        {
+//            penguinNode.physicsBody?.allowsRotation = false
+////            print("A:\n\(penguinNode.zRotation)")
+//        }
+//        
+//        if isPenguinOnGround,
+//           let icebergNode = icebergEntity?.component(ofType: SpriteComponent.self)?.node,
+//           let penguinNode = penguinEntity?.component(ofType: SpriteComponent.self)?.node
+//        {
+//            penguinNode.physicsBody?.allowsRotation = true
+//            penguinNode.zRotation = icebergNode.zRotation
+////            print("A:\n\(penguinNode.zRotation) V \(icebergNode.zRotation)")
+//        }
         
         // Update entities inside the entity manager
         entityManager.update(deltaTime: dt)
