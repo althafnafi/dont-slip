@@ -54,6 +54,8 @@ extension GameScene {
         let yPos = CGFloat(self.size.height)
         let spawnPos = CGPoint(x: randomXPos, y: yPos)
         
+        print(iceFuelInterval)
+        
         let iceFuel = PowerUp(type: .iceFuel, spawnPos: spawnPos, entityManager: entityManager)
         entityManager.add(iceFuel)
     }

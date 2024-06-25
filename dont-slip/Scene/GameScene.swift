@@ -28,7 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let defaultObstacleSpawnInterval: TimeInterval = 2.0
     let defaultCoinSpawnInterval: TimeInterval = 2.0
     let defaultIcebergMeltInterval: TimeInterval = 8.0
-    let defaultIceFuelInterval: TimeInterval = 2.0
+    let defaultIceFuelInterval: TimeInterval = 4.0
     var defaultIcebergFrictionLevel: Double = 0.0 // 0  - 0.5
     var defaultObstacleMassMultiplier: Double = 1.0 // 1 - 2
     
@@ -57,6 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // States (booleans)
     var isPenguinOnGround = false // Flag to track if the green cube is on the ground
+//    var isPenguinNotOnGround = true
     var gameOver: Bool = false
     var isPenguinGotFuel = false
     
@@ -193,6 +194,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Coins Setup */
         // Randomly spawns COINS
         randomlySpawnObjects(spawnerFunction: spawnCoin, interval: coinSpawnInterval)
+        
         
         randomlySpawnObjects(spawnerFunction: spawnIceFuel, interval: iceFuelInterval)
     }

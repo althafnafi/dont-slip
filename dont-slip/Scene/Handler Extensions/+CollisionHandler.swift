@@ -61,7 +61,7 @@ extension GameScene {
             (contact.bodyB.node == greenCube && contact.bodyA.categoryBitMask == CollisionMask.iceFuel.rawValue) {
             
             if icebergStateSystem.getGotFuel() {
-                print("Dah dpt fuel kok")
+//                print("Dah dpt fuel kok")
                 return
             }
             
@@ -74,14 +74,15 @@ extension GameScene {
     }
 
     func didEnd(_ contact: SKPhysicsContact) {
+        
         // Check if the green cube (penguin) is no longer in contact with the ground or an obstacle
-        let groundOrObstacleMask = CollisionMask.ground.rawValue | CollisionMask.object.rawValue
-        if (contact.bodyA.node == greenCube && (contact.bodyB.categoryBitMask & groundOrObstacleMask != 0)) ||
-           (contact.bodyB.node == greenCube && (contact.bodyA.categoryBitMask & groundOrObstacleMask != 0)) {
-            
+//        let groundOrObstacleMask = CollisionMask.ground.rawValue | CollisionMask.object.rawValue
+//        if (contact.bodyA.node == greenCube && (contact.bodyB.categoryBitMask & groundOrObstacleMask != 0)) ||
+//           (contact.bodyB.node == greenCube && (contact.bodyA.categoryBitMask & groundOrObstacleMask != 0)) {
+//            
 //            print("[Penguin] not on ground or obstacle")
-            isPenguinOnGround = false
-        }
+//            isPenguinOnGround = false
+//        }
     }
     
     func logCollision(_ contact: SKPhysicsContact) {
