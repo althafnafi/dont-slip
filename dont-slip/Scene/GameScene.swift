@@ -25,19 +25,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Const (GANTI YANG DISINI)
     let defaultSpawnInterval: TimeInterval = 2.0
-    let defaultObstacleSpawnInterval: TimeInterval = 2.0
+    let defaultObstacleSpawnInterval: TimeInterval = 0.5
     let defaultCoinSpawnInterval: TimeInterval = 2.0
     let defaultIcebergMeltInterval: TimeInterval = 8.0
-    let defaultIceFuelInterval: TimeInterval = 4.0
+    let defaultIceFuelInterval: TimeInterval = 12.0
     var defaultIcebergFrictionLevel: Double = 0.0 // 0  - 0.5
     var defaultObstacleMassMultiplier: Double = 1.0 // 1 - 2
     
     // Time-stuff
     var spawnInterval: TimeInterval = 2.0
-    var obstacleSpawnInterval: TimeInterval = 2.0
+    var obstacleSpawnInterval: TimeInterval = 0.5
     var coinSpawnInterval: TimeInterval = 2.0
-    var icebergMeltInterval: TimeInterval = 11
-    var iceFuelInterval: TimeInterval = 3
+    var icebergMeltInterval: TimeInterval = 8.0
+    var iceFuelInterval: TimeInterval = 12
     var jumpCooldown: TimeInterval = 0.5
     
     var lastSpawnTime: TimeInterval = 0
