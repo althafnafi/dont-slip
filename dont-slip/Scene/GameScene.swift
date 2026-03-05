@@ -28,7 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let defaultObstacleSpawnInterval: TimeInterval = 0.5
     let defaultCoinSpawnInterval: TimeInterval = 2.0
     let defaultIcebergMeltInterval: TimeInterval = 8.0
-    let defaultIceFuelInterval: TimeInterval = 12.0
+    let defaultIceFuelInterval: TimeInterval = 10.0
     var defaultIcebergFrictionLevel: Double = 0.0 // 0  - 0.5
     var defaultObstacleMassMultiplier: Double = 1.0 // 1 - 2
     
@@ -37,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacleSpawnInterval: TimeInterval = 0.5
     var coinSpawnInterval: TimeInterval = 2.0
     var icebergMeltInterval: TimeInterval = 8.0
-    var iceFuelInterval: TimeInterval = 12
+    var iceFuelInterval: TimeInterval = 10
     var jumpCooldown: TimeInterval = 0.5
     
     var lastSpawnTime: TimeInterval = 0
